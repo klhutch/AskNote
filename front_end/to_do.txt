@@ -3,7 +3,5 @@
    - think about what structure our code will use
    - how to make all three tasks work 
    
-
-
 - should start thinking about the report
 :
