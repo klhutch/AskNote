@@ -11,6 +11,9 @@ package view;
  * @author tiffanychao
  */
 public class AsknoteView {
+    
+    
+    
     public void paint() {
         // do something here
     }  

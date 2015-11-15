@@ -4,6 +4,7 @@ package model;
  *
  * @author Maha Alkhairy
  */
+// A flashcard has two sides, each containing text
 public class FlashCard {
     String side1; 
     String side2; 
@@ -31,6 +32,13 @@ public class FlashCard {
     
     public void setSide2(String side2) { 
         this.side2 = side2; 
+    }
+    
+    // 
+    
+    public boolean equals(FlashCard card) {
+        return (this.side1.equals(card.side1) && this.side2.equals(card.side2)); 
+        
     }
     
     
