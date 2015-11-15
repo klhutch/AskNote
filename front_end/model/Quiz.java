@@ -24,14 +24,14 @@ public class Quiz {
     private User testee; 
     private User tester; 
     
-    Quiz(Deck deck, User testee, User tester) { 
+    public Quiz() { 
+        this(new Deck(), new User(), new User()); 
+    }
+    
+    public Quiz(Deck deck, User testee, User tester) { 
         this.deck = deck; 
         this.testee = testee; 
         this.tester = tester; 
-    }
-    
-    Quiz() { 
-        this(new Deck(), new User(), new User()); 
     }
     
     public void setDeck(Deck deck) { 

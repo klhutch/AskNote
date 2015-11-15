@@ -32,7 +32,6 @@ public class Deck {
         this("New Deck", new ArrayList<FlashCard>()); 
     }
     
-   
     // adds card to deck 
     public void add(FlashCard card) {
         cards.add(card); 

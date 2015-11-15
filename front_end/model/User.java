@@ -12,15 +12,15 @@ package model;
 // A user has a username and a user ID 
 public class User {
     String username; 
-    int userID; 
+    int userID;
     
-    User(String username, int userID) { 
-        this.username = username; 
-        this.userID = userID; 
+    public User() { 
+        this("", 0); 
     }
     
-    User() { 
-        this("", 0); 
+    public User(String username, int userID) { 
+        this.username = username; 
+        this.userID = userID; 
     }
     
     void setUsername(String username) { 

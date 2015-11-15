@@ -6,6 +6,7 @@ package model;
  */
 
 import java.util.List;
+import java.util.ArrayList;
 import java.util.Stack;
 
 public class AsknoteModel {
@@ -42,9 +43,9 @@ public class AsknoteModel {
     
     public AsknoteModel() { 
         // 0 is home page
-        this(new User(), 0 , new ArrayList<Deck>(), 
-                new ArrayList<Quiz>(), new ArrayList<String>(),
-                new Stack<int>(), new ArrayList<String>()); 
+        this(new User(), PageType.HOME, new ArrayList<>(), 
+                new ArrayList<>(), new ArrayList<>(),
+                new Stack<>(), new ArrayList<>()); 
     }
       
     // methods used
