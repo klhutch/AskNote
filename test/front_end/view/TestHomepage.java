@@ -6,7 +6,7 @@
 package front_end.view;
 
 import javax.swing.JFrame;
-import view.Homepage;
+import view.HomePagePanel;
 
 /**
  *
@@ -25,7 +25,7 @@ public class TestHomepage {
     // f.getContentPane().setBackground (Color.cyan); 
     f.setSize (500, 600);
     
-    f.getContentPane().add (new Homepage());
+    f.getContentPane().add (new HomePagePanel());
 
     // Show the frame. 
     f.setVisible (true);

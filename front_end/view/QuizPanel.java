@@ -12,8 +12,8 @@ import javax.swing.*;
  *
  * @author Maha Alkhairy
  */
-public class QuizChoose extends JPanel{
-    public QuizChoose() { 
+public class QuizPanel extends JPanel{
+    public QuizPanel() { 
         FlowLayout flow = new FlowLayout(); 
         flow.setAlignment(FlowLayout.CENTER);
         flow.setHgap(20);

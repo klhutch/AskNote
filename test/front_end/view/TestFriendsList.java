@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JFrame;
 import model.User;
-import view.FriendsList;
+import view.FriendsListPanel;
 
 /**
  *
@@ -67,7 +67,7 @@ public class TestFriendsList {
     frnds.add(jane); 
     ////
     
-    FriendsList flst = new FriendsList(frnds); 
+    FriendsListPanel flst = new FriendsListPanel(frnds); 
    
     f.getContentPane().add (flst);
 

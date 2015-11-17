@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JFrame;
 import model.Deck;
-import view.ChooseDeck;
+import view.ChooseDeckPanel;
 
 public class TestChooseDeck extends JFrame {
     
@@ -38,7 +38,7 @@ public class TestChooseDeck extends JFrame {
         decks.add(new Deck("Discrete Structs"));
         decks.add(new Deck("Music"));
         
-        ChooseDeck ed = new ChooseDeck(decks);
+        ChooseDeckPanel ed = new ChooseDeckPanel(decks);
         getContentPane().add(ed);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }

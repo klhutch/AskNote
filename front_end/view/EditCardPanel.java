@@ -11,9 +11,9 @@ import model.FlashCard;
 /**
  * Note: This JPanel should be added to a dialog box
  */
-public class EditCard extends JPanel {
+public class EditCardPanel extends JPanel {
     
-    public EditCard(FlashCard card) {
+    public EditCardPanel(FlashCard card) {
         
         // init jpanels for each side        
         JLabel side1Label = new JLabel("Side 1");

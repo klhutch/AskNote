@@ -6,53 +6,48 @@
 package view;
 
 import java.awt.BorderLayout;
-import java.awt.Component;
 import java.awt.GridLayout;
-import java.util.List;
-import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.SwingConstants;
 import model.Deck;
+import model.FlashCard;
 
 /**
  *
  * @author tiffanychao
  */
-public class ChooseDeck extends JPanel {
+public class EditDeckPanel extends JPanel {
     
-    public ChooseDeck(List<Deck> decks) {
+    public EditDeckPanel(Deck deck) {
         
         // init top level panel
         this.setLayout(new BorderLayout());
             
         // init leftmost deck panel
-        GridLayout gl1 = initGridLayout(decks.size());
+        GridLayout gl1 = initGridLayout(deck.getCards().size());
         
         JPanel deckPanel = new JPanel(); 
         deckPanel.setLayout(gl1);
         
         // add buttons to leftmost deck panel
-        for (int i = 0; i < decks.size(); i++) {
+        for (int i = 0; i < deck.getSize(); i++) {
             
-            JButton deckButton = new JButton(decks.get(i).getTitle());
-            deckButton.setAlignmentX(Component.CENTER_ALIGNMENT);
-            JLabel deckLabel = new JLabel("Deck " + String.valueOf(i + 1), SwingConstants.CENTER);
-            deckLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+            JButton cardButton = new JButton(getCardPreview(deck.getCard(i)));
+            JLabel cardLabel = new JLabel("Card " + String.valueOf(i + 1), SwingConstants.CENTER);
             
             JPanel buttonPanel = new JPanel();      
-            buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.PAGE_AXIS));
-            buttonPanel.add(deckButton);
-            buttonPanel.add(deckLabel);
+            buttonPanel.setLayout(new BorderLayout());
+            buttonPanel.add(cardButton, BorderLayout.CENTER);
+            buttonPanel.add(cardLabel, BorderLayout.SOUTH);
             
             deckPanel.add(buttonPanel);
         }
 
         JScrollPane scrollPanel = new JScrollPane(deckPanel);
-        scrollPanel.createHorizontalScrollBar();
-
+        
         // init rightmost options panel
         JPanel optionPanel = new JPanel();
         GridLayout gl2 = new GridLayout();
@@ -62,13 +57,16 @@ public class ChooseDeck extends JPanel {
         gl2.setVgap(20);
         optionPanel.setLayout(gl2);
         
-        JButton newButton = new JButton("Add Deck");
-        JButton deleteButton = new JButton("Delete Deck");
+        JButton newButton = new JButton("Add Card");
+        JButton deleteButton = new JButton("Delete Card");
         
         optionPanel.add(newButton);
         optionPanel.add(deleteButton);
         
         // validate
+        
+        // should be able to rename deck, change to textfield later?
+        this.add(new JLabel(deck.getTitle()), BorderLayout.NORTH);
         this.add(scrollPanel, BorderLayout.WEST);
         this.add(optionPanel, BorderLayout.EAST);
         this.validate();
@@ -81,12 +79,12 @@ public class ChooseDeck extends JPanel {
      * @param numCards number of cards
      * @return the grid layout
      */
-    private GridLayout initGridLayout(int numDecks) {
+    private GridLayout initGridLayout(int numCards) {
         GridLayout gl = new GridLayout();
         
         int cols = 4;
-        int remainder = numDecks % cols;
-        int rows = (numDecks - remainder) / cols;
+        int remainder = numCards % cols;
+        int rows = (numCards - remainder) / cols;
         
         gl.setColumns(cols);
         gl.setRows(rows + 1); // include remainder
@@ -94,4 +92,20 @@ public class ChooseDeck extends JPanel {
         gl.setHgap(20);
         return gl;       
     }
+    
+    /**
+     * get preview of flashcard content
+     * @param c the flashcard
+     * @return content preview
+     */
+    private String getCardPreview(FlashCard c) {
+        String content = c.getSide1();
+        if (content.length() <= 20) { // should this be a parameter?
+            // don't change content
+        } else {
+            content = content.substring(0, 20) + "...";
+        }
+        return content;
+    }
+    
 }

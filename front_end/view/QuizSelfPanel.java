@@ -15,8 +15,8 @@ import java.util.Random;
  *
  * @author Maha Alkhairy
  */
-public class QuizSelf extends JPanel{
-    public QuizSelf(Deck deck) { 
+public class QuizSelfPanel extends JPanel{
+    public QuizSelfPanel(Deck deck) { 
         FlowLayout flow = new FlowLayout(); 
         flow.setAlignment(FlowLayout.CENTER);
        

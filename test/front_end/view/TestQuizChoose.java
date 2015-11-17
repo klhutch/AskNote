@@ -6,8 +6,8 @@
 package front_end.view;
 
 import javax.swing.JFrame;
-import view.Login;
-import view.QuizChoose;
+import view.LoginPanel;
+import view.QuizPanel;
 
 /**
  *
@@ -26,7 +26,7 @@ public class TestQuizChoose {
     // f.getContentPane().setBackground (Color.cyan); 
     f.setSize (500, 600);
     
-    f.getContentPane().add (new QuizChoose());
+    f.getContentPane().add (new QuizPanel());
 
     // Show the frame. 
     f.setVisible (true);
