@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.Stack;
 
-public class AsknoteModel {
+public class AskNoteModel {
     User user; 
     PageType currentPage;
     List<Deck> decks; 
@@ -28,7 +28,7 @@ public class AsknoteModel {
      * @param pages
      * @param notifications
      */
-    public AsknoteModel(User user, PageType currentPage,
+    public AskNoteModel(User user, PageType currentPage,
             List<Deck> decks, List<Quiz> quizzes, List<User> friends,
             Stack<PageType> pages, List<String> notifications) {
         
@@ -41,7 +41,7 @@ public class AsknoteModel {
             this.notifications = notifications;         
     }
     
-    public AsknoteModel() { 
+    public AskNoteModel() { 
         // 0 is home page
         this(new User(), PageType.HOME, new ArrayList<>(), 
                 new ArrayList<>(), new ArrayList<>(),

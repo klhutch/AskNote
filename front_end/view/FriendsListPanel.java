@@ -16,6 +16,8 @@ import model.*;
  * @author Maha Alkhairy
  */
 public class FriendsListPanel extends JPanel {
+    
+    
     public FriendsListPanel(List<User> friends) { 
         GridLayout grid = new GridLayout(); 
         grid.setColumns(1);

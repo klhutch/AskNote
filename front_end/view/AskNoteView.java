@@ -13,9 +13,9 @@ import model.*;
  *
  * @author tiffanychao
  */
-public class AsknoteView {
+public class AskNoteView {
     
-    public AsknoteView() { 
+    public AskNoteView() { 
       
         
     }
