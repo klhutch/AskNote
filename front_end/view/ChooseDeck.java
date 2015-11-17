@@ -7,7 +7,6 @@ package view;
 
 import java.awt.BorderLayout;
 import java.awt.Component;
-import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.util.List;
 import javax.swing.BoxLayout;
@@ -17,7 +16,6 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.SwingConstants;
 import model.Deck;
-import model.FlashCard;
 
 /**
  *
@@ -41,7 +39,6 @@ public class ChooseDeck extends JPanel {
             
             JButton deckButton = new JButton(decks.get(i).getTitle());
             deckButton.setAlignmentX(Component.CENTER_ALIGNMENT);
-            deckButton.setPreferredSize(new Dimension(75, 50));
             JLabel deckLabel = new JLabel("Deck " + String.valueOf(i + 1), SwingConstants.CENTER);
             deckLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
             
