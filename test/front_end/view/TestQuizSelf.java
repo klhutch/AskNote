@@ -10,8 +10,8 @@ import java.util.List;
 import javax.swing.JFrame;
 import model.Deck;
 import model.FlashCard;
-import view.Login;
-import view.QuizSelf;
+import view.LoginPanel;
+import view.QuizSelfPanel;
 
 /**
  *
@@ -40,7 +40,7 @@ public class TestQuizSelf {
           
     Deck math = new Deck("math", cards); 
     
-    f.getContentPane().add (new QuizSelf(math));
+    f.getContentPane().add (new QuizSelfPanel(math));
 
     // Show the frame. 
     f.setVisible (true);

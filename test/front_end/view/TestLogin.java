@@ -24,7 +24,7 @@ public class TestLogin {
     // f.getContentPane().setBackground (Color.cyan); 
     f.setSize (500, 600);
     
-    f.getContentPane().add (new Login());
+    f.getContentPane().add (new LoginPanel());
 
     // Show the frame. 
     f.setVisible (true);

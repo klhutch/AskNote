@@ -12,9 +12,9 @@ import javax.swing.*;
  *
  * @author Maha Alkhairy
  */
-public class Homepage extends JPanel{
+public class HomePagePanel extends JPanel{
     // takes nothing in 
-    public Homepage() { 
+    public HomePagePanel() { 
         FlowLayout flow = new FlowLayout(); 
         flow.setAlignment(FlowLayout.CENTER);
         flow.setHgap(20);

@@ -12,8 +12,8 @@ import javax.swing.*;
  *
  * @author Maha Alkhairy
  */
-public class Login extends JPanel{
-    public Login() { 
+public class LoginPanel extends JPanel{
+    public LoginPanel() { 
         
         GridLayout grid = new GridLayout(); 
         grid.setColumns(2);

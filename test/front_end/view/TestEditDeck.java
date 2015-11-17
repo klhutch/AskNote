@@ -6,7 +6,7 @@ import java.util.List;
 import javax.swing.JFrame;
 import model.Deck;
 import model.FlashCard;
-import view.EditDeck;
+import view.EditDeckPanel;
 
 /**
  *
@@ -43,7 +43,7 @@ public class TestEditDeck extends JFrame {
         cards.add(f4);
         cards.add(f5);
         
-        EditDeck ed = new EditDeck(new Deck("Bio", cards));
+        EditDeckPanel ed = new EditDeckPanel(new Deck("Bio", cards));
         getContentPane().add(ed);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
