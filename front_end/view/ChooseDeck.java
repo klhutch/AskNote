@@ -38,20 +38,17 @@ public class ChooseDeck extends JPanel {
         for (int i = 0; i < decks.size(); i++) {
             
             JButton deckButton = new JButton(decks.get(i).getTitle());
-            deckButton.setAlignmentX(Component.CENTER_ALIGNMENT);
             JLabel deckLabel = new JLabel("Deck " + String.valueOf(i + 1), SwingConstants.CENTER);
-            deckLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
             
             JPanel buttonPanel = new JPanel();      
-            buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.PAGE_AXIS));
-            buttonPanel.add(deckButton);
-            buttonPanel.add(deckLabel);
+            buttonPanel.setLayout(new BorderLayout());
+            buttonPanel.add(deckButton, BorderLayout.CENTER);
+            buttonPanel.add(deckLabel, BorderLayout.SOUTH);
             
             deckPanel.add(buttonPanel);
         }
 
         JScrollPane scrollPanel = new JScrollPane(deckPanel);
-        scrollPanel.createHorizontalScrollBar();
 
         // init rightmost options panel
         JPanel optionPanel = new JPanel();

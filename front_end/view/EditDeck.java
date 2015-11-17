@@ -6,9 +6,7 @@
 package view;
 
 import java.awt.BorderLayout;
-import java.awt.Component;
 import java.awt.GridLayout;
-import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -38,21 +36,18 @@ public class EditDeck extends JPanel {
         for (int i = 0; i < deck.getSize(); i++) {
             
             JButton cardButton = new JButton(getCardPreview(deck.getCard(i)));
-            cardButton.setAlignmentX(Component.CENTER_ALIGNMENT);
             JLabel cardLabel = new JLabel("Card " + String.valueOf(i + 1), SwingConstants.CENTER);
-            cardLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
             
             JPanel buttonPanel = new JPanel();      
-            buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.PAGE_AXIS));
-            buttonPanel.add(cardButton);
-            buttonPanel.add(cardLabel);
+            buttonPanel.setLayout(new BorderLayout());
+            buttonPanel.add(cardButton, BorderLayout.CENTER);
+            buttonPanel.add(cardLabel, BorderLayout.SOUTH);
             
             deckPanel.add(buttonPanel);
         }
 
         JScrollPane scrollPanel = new JScrollPane(deckPanel);
-        scrollPanel.createHorizontalScrollBar();
-
+        
         // init rightmost options panel
         JPanel optionPanel = new JPanel();
         GridLayout gl2 = new GridLayout();
