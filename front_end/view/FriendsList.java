@@ -24,9 +24,7 @@ public class FriendsList extends JPanel {
         JPanel left = new JPanel(); 
         left.setLayout(grid);
         left.doLayout();
-        
              
-        
         GridLayout grid2 = new GridLayout(); 
         grid2.setColumns(2);
         grid2.setRows(-1); 
@@ -43,11 +41,9 @@ public class FriendsList extends JPanel {
         leftPane.setViewportView(left);
         
         leftPane.setAutoscrolls(true);
-        
-       
+             
         List<JCheckBox> frnds = new ArrayList<JCheckBox>(); 
-                       
-                
+                                    
         for (int i = 0; i < friends.size(); i++) { 
            String name =  friends.get(i).getUsername();
            JCheckBox frnd = new JCheckBox(name); 
@@ -57,29 +53,18 @@ public class FriendsList extends JPanel {
          for (int i = 0; i < frnds.size(); i++) {           
            left.add(frnds.get(i)); 
         }
-         
-         
-        JButton addFriend = new JButton("add friend");
-        JButton uncheck = new JButton("Uncheck"); 
-        JButton checkAll = new JButton("check all"); 
-        JButton delete = new JButton("delete"); 
+                 
+        JButton addFriend = new JButton("Add Friend");
+        JButton uncheck = new JButton("Uncheck All"); 
+        JButton checkAll = new JButton("Check All"); 
+        JButton delete = new JButton("Delete"); 
         
         right.add(addFriend); 
         right.add(uncheck); 
         right.add(checkAll); 
         right.add(delete); 
          
-       
-       
         this.add(leftPane);
-        
         this.add(right); 
-        
-        
-        
-        
-        
-    } 
-    
-    
+    }    
 }

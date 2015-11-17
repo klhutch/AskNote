@@ -35,6 +35,15 @@ public class Deck {
     public List<FlashCard> getCards() {
          return this.cards; 
     }
+    
+    public FlashCard getCard(int index) {
+        return getCards().get(index);
+    }
+    
+    public int getSize() {
+        return this.cards.size();
+    }
+    
     // adds card to deck 
     public void add(FlashCard card) {
         cards.add(card); 
@@ -51,19 +60,10 @@ public class Deck {
     public void setTitle(String title) { 
         this.title = title; 
     } 
-    
-    
-    
-    
-    // 
-    
+
     public boolean equals(Deck deck) { 
         return (this.title.equals(deck.title) && 
                 this.cards.containsAll(deck.cards)
-                && deck.cards.containsAll(this.cards)); 
-        
+                && deck.cards.containsAll(this.cards));        
     }
-    
-    
-    
 }
