@@ -23,19 +23,19 @@ public class User {
         this.userID = userID; 
     }
     
-    void setUsername(String username) { 
+    public void setUsername(String username) { 
          this.username = username; 
     }
     
-    void setUserID(int userID) { 
+    public void setUserID(int userID) { 
         this.userID = userID; 
     }
     
-    String getUsername() { 
+    public String getUsername() { 
         return this.username; 
     }
     
-    int getUserID() { 
+    public int getUserID() { 
         return this.userID; 
     }
     

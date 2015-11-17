@@ -1,0 +1,41 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package view;
+
+import java.awt.*;
+import java.io.IOException;
+import javax.imageio.ImageIO;
+import javax.swing.*;
+
+/**
+ *
+ * @author Maha Alkhairy
+ */
+public class Homepage extends JPanel{
+    // takes nothing in 
+    public Homepage() { 
+        FlowLayout flow = new FlowLayout(); 
+        flow.setAlignment(FlowLayout.CENTER);
+        flow.setHgap(20);
+        flow.setVgap(200);
+        this.setLayout(flow);
+        this.doLayout();
+        
+        JButton decks = new JButton("Decks"); 
+        JButton quiz = new JButton("Quiz"); 
+        JButton friends = new JButton("Friends");
+      
+        this.add(decks); 
+        this.add(quiz); 
+        this.add(friends);   
+        
+        }    
+    
+    
+    
+    
+    
+}

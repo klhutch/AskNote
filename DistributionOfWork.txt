@@ -14,8 +14,6 @@ Choose deck
 Register 
 
 
-
-
 --------- Kate -------------
 
 Tester page
@@ -42,6 +40,7 @@ A menu (the file – edit – view – account – help thing at the top of the 
 	o	Header panel has a back button
 	o	Header panel has a notification icon (button?)
 	o	Header panel has a page title
+	
 
 
 

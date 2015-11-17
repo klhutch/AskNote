@@ -1,5 +1,8 @@
 package view;
 
+import javax.swing.*;
+import model.*;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -12,9 +15,10 @@ package view;
  */
 public class AsknoteView {
     
+    public AsknoteView() { 
+      
+        
+    }
     
-    
-    public void paint() {
-        // do something here
-    }  
+   
 }

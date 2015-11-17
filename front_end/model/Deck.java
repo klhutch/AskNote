@@ -32,6 +32,9 @@ public class Deck {
         this("New Deck", new ArrayList<FlashCard>()); 
     }
     
+    public List<FlashCard> getCards() {
+         return this.cards; 
+    }
     // adds card to deck 
     public void add(FlashCard card) {
         cards.add(card); 
@@ -48,6 +51,8 @@ public class Deck {
     public void setTitle(String title) { 
         this.title = title; 
     } 
+    
+    
     
     
     // 

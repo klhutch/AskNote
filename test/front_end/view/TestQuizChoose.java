@@ -6,33 +6,31 @@
 package front_end.view;
 
 import javax.swing.JFrame;
-import view.*; 
-
+import view.Login;
+import view.QuizChoose;
 
 /**
  *
  * @author Maha Alkhairy
  */
-public class TestSwing4 {
-
-  public static void main (String[] argv)
-  {
+public class TestQuizChoose {
+    
+    public static void main (String[] argv) {
     // Create a frame 
     JFrame f = new JFrame ();
 
     // Set the title and other parameters. 
-    f.setTitle ("Hello World Test");
+    f.setTitle ("AskNote");
     f.setResizable (true);
     // Background is going to be Panel's background. 
     // f.getContentPane().setBackground (Color.cyan); 
-    f.setSize (500, 300);
-
-    // Add the panel using the default BorderLayout 
-    NewPanel panel = new NewPanel ();
-    f.getContentPane().add (panel);
+    f.setSize (500, 600);
+    
+    f.getContentPane().add (new QuizChoose());
 
     // Show the frame. 
     f.setVisible (true);
-  }
-
+     } 
+    
+    
 }
