@@ -30,11 +30,9 @@ public class FriendsList extends JPanel {
         grid2.setRows(-1); 
         
         this.setLayout(grid2);
-        this.doLayout();
         
         JPanel right = new JPanel(); 
         right.setLayout(grid); 
-        right.doLayout();
         
         
         JScrollPane leftPane = new JScrollPane(); 
@@ -66,5 +64,6 @@ public class FriendsList extends JPanel {
          
         this.add(leftPane);
         this.add(right); 
+        this.validate(); 
     }    
 }

@@ -20,15 +20,14 @@ public class Homepage extends JPanel{
         flow.setHgap(20);
         flow.setVgap(200);
         this.setLayout(flow);
-        this.doLayout();
         
         JButton decks = new JButton("Decks"); 
         JButton quiz = new JButton("Quiz"); 
         JButton friends = new JButton("Friends");
-      
+        JLabel hello = new JLabel("Welcome to AskNote");       
         this.add(decks); 
         this.add(quiz); 
         this.add(friends);   
-        
+        this.validate();
         }    
 }

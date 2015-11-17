@@ -16,6 +16,8 @@ import model.*;
 public class AsknoteView {
     
     public AsknoteView() { 
+        
+        
       
         
     }

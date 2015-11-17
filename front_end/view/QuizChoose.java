@@ -19,13 +19,14 @@ public class QuizChoose extends JPanel{
         flow.setHgap(20);
         flow.setVgap(200);
         this.setLayout(flow);
-        this.doLayout();
+        
         
         JButton self = new JButton("Quiz self"); 
         JButton friends = new JButton("Quiz with a friend"); 
       
         this.add(self); 
         this.add(friends); 
+        this.validate();
         } 
         
     }    

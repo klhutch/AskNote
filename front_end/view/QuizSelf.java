@@ -39,23 +39,22 @@ public class QuizSelf extends JPanel{
         JPanel bottomPanel = new JPanel(); 
        
         bottomPanel.setLayout(flow);
-        bottomPanel.doLayout();
         bottomPanel.add(back);
         bottomPanel.add(flip); 
         bottomPanel.add(forward); 
        
         
         
+        
         BorderLayout border = new BorderLayout(); 
         this.setLayout(border);
-        this.doLayout();
         
         this.add(bottomPanel, BorderLayout.SOUTH); 
         this.add(center, BorderLayout.CENTER); 
         this.add(new JPanel(), BorderLayout.EAST); 
         this.add(new JPanel(), BorderLayout.WEST); 
         this.add(new JPanel(), BorderLayout.NORTH); 
-        
+        this.validate();
        
     }
     
