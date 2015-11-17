@@ -37,9 +37,8 @@ public class FlashCard {
     // 
     
     public boolean equals(FlashCard card) {
-        return (this.side1.equals(card.side1) && this.side2.equals(card.side2)); 
+        return (this.side1.equals(card.side1) 
+                && this.side2.equals(card.side2)); 
         
-    }
-    
-    
+    }      
 }

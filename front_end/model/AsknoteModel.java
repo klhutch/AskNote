@@ -57,16 +57,20 @@ public class AsknoteModel {
     
     public Deck getDeck(String title) { 
         // should have based on the title or something 
-        return this.decks.get(0); 
+        for (int i = 0; i < decks.size(); i++) {
+            if (decks.get(i).getTitle().equals(title)) { 
+                return decks.get(i); 
+            }
+        } 
+        return new Deck(); 
     }
     
     public PageType getCurrentPage() {
-       /* if (pages.empty()) {
+        if (pages.empty()) {
             return PageType.HOME;
         } else {
             return pages.peek();
-        }*/ 
-        return this.currentPage; 
+        }
     }  
     
     public void goToLastPage() { 

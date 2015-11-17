@@ -2,12 +2,11 @@ package front_end.model;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Stack;
 import model.*;
 
 import org.junit.*;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.assertFalse;
-
+import static org.junit.Assert.*;
 /**
  *
  * @author Maha Alkhairy
@@ -53,10 +52,68 @@ public class TestModel {
     
         User jane = new User("Jane", 90); 
         User jeff = new User("Jeff", 89); 
+        User tom = new User("Tom", 90); 
     
         Quiz quizMath1 = new Quiz(math, jane, jeff);    
         Quiz quizMath2 = new Quiz(math, jane, jeff); 
+        Quiz quizMath3 = new Quiz(math, tom, jeff); 
+        
+        
     
         assertTrue(quizMath1.equals(quizMath2));   
+        assertFalse(quizMath2.equals(quizMath3)); 
     }
-} 
+    
+    
+    @Test
+    public void testUserEquals() { 
+        User jane = new User("Jane", 90); 
+        User janet = new User("Jane", 90); 
+        User jeff = new User("Jeff", 89); 
+    
+        assertTrue(jane.equals(janet)); 
+        assertFalse(jane.equals(jeff)); 
+    
+    }
+    
+    @Test 
+    public void testModel() { 
+        User user = new User("TestUser", 901); 
+        PageType currentPage = PageType.HOME; 
+        List<FlashCard> cards = new ArrayList<>(); 
+        
+        Deck math = new Deck("math", cards); 
+        Deck blue = new Deck("blue", new ArrayList<FlashCard>()); 
+        List<Deck> decks = new ArrayList<Deck>();
+        decks.add(math); 
+        decks.add(blue);
+        
+        User jane = new User("Jane", 90); 
+        User jeff = new User("Jeff", 89); 
+        User tom = new User("Tom", 90); 
+    
+        Quiz quizMath1 = new Quiz(math, user, jeff);  
+        Quiz quizMath2 = new Quiz(math, tom, user); 
+        List<Quiz> quizzes = new ArrayList<Quiz>(); 
+        quizzes.add(quizMath2); 
+        quizzes.add(quizMath1); 
+        List<User> friends = new ArrayList<User>(); 
+        friends.add(tom); 
+        friends.add(jeff); 
+        friends.add(jane); 
+        Stack<PageType> pages = new Stack<PageType>(); 
+        pages.add(PageType.QUIZ); 
+        pages.add(currentPage); 
+        List<String> notifications = new ArrayList<String>(); 
+        notifications.add("Jane wants to start a quiz with you using math"); 
+        
+        
+        AsknoteModel modelExample = new  AsknoteModel(user, currentPage,
+                decks, quizzes, friends, pages, notifications); 
+        
+        assertEquals(modelExample.getCurrentPage(), currentPage);
+        assertEquals(modelExample.getDeck("blue"), blue); 
+        
+    }
+    
+}

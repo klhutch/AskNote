@@ -1,0 +1,60 @@
+** each of these  shall have its own corresponding java class that extends JPanel ** 
+
+
+--------- Tiffany ---------
+Edit deck
+•	Takes in the deck
+
+Card editor
+•	A flashcard
+
+Choose deck
+•	List of decks
+
+Register 
+
+
+
+
+--------- Kate -------------
+
+Tester page
+•	Flashcard
+•	Testee’s response (a string)
+
+
+Testee page
+•	flashcard
+
+Select quiz
+•	List of quizzes
+•	List of friends
+
+Notifications
+•	List of notifications
+
+A menu (the file – edit – view – account – help thing at the top of the screen)
+
+-------- Farah -----------
+
+•	View has a header panel
+	o	Header panel has a home button
+	o	Header panel has a back button
+	o	Header panel has a notification icon (button?)
+	o	Header panel has a page title
+
+
+
+
+--------- Maha --------------
+Home page
+
+quiz self
+•	a deck
+
+Friends list
+•	List of friends
+
+Quiz (first page when you click quiz)
+	
+Login
