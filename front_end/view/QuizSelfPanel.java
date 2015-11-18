@@ -17,49 +17,6 @@ import java.util.Random;
  */
 
 
-class CardShownPanel extends JPanel { 
-    CardShownPanel (String sideText) { 
-        FlowLayout flow = new FlowLayout(); 
-        flow.setAlignment(FlowLayout.CENTER);
-        JLabel card = new JLabel(sideText); 
-        this.setBackground(Color.white);
-       
-        this.add(card, BorderLayout.CENTER); 
-        
-        
-        
-    }
-       
-}
-
-
-class ButtonPanel extends JPanel { 
-     ButtonPanel () { 
-        FlowLayout flow = new FlowLayout(); 
-        flow.setAlignment(FlowLayout.CENTER);
-        JButton back = new JButton("<"); 
-        JButton flip = new JButton("flip");
-        JButton forward = new JButton(">"); 
-        
-       
-        this.setLayout(flow);
-        this.add(back);
-        this.add(flip); 
-        this.add(forward); 
-     } 
-}
-
-class EndButtonPanel extends JPanel { 
-     EndButtonPanel () { 
-        FlowLayout flow = new FlowLayout(); 
-        flow.setAlignment(FlowLayout.CENTER);
-        JButton end = new JButton("end");
-        
-       
-        this.setLayout(flow);
-        this.add(end); 
-     } 
-}
 public class QuizSelfPanel extends JPanel{
       Deck deck; 
     public QuizSelfPanel(Deck deck) { 
@@ -88,6 +45,51 @@ public class QuizSelfPanel extends JPanel{
         this.validate();
        
     } 
+    
+    
+    class CardShownPanel extends JPanel { 
+        CardShownPanel (String sideText) { 
+            FlowLayout flow = new FlowLayout(); 
+            flow.setAlignment(FlowLayout.CENTER);
+            JLabel card = new JLabel(sideText); 
+            this.setBackground(Color.white);
+
+            this.add(card, BorderLayout.CENTER); 
+
+
+
+        }
+
+    }
+
+
+    class ButtonPanel extends JPanel { 
+         ButtonPanel () { 
+            FlowLayout flow = new FlowLayout(); 
+            flow.setAlignment(FlowLayout.CENTER);
+            JButton back = new JButton("<"); 
+            JButton flip = new JButton("flip");
+            JButton forward = new JButton(">"); 
+
+
+            this.setLayout(flow);
+            this.add(back);
+            this.add(flip); 
+            this.add(forward); 
+         } 
+    }
+
+    class EndButtonPanel extends JPanel { 
+         EndButtonPanel () { 
+            FlowLayout flow = new FlowLayout(); 
+            flow.setAlignment(FlowLayout.CENTER);
+            JButton end = new JButton("end");
+
+
+            this.setLayout(flow);
+            this.add(end); 
+         } 
+    }
 } 
     
 

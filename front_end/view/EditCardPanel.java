@@ -1,53 +1,75 @@
 package view;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import model.Flashcard;
+import javax.swing.border.LineBorder;
 
 /**
  * Note: This JPanel should be added to a JDialog
  */
 public class EditCardPanel extends JPanel {
+    SidePanel side1;
+    SidePanel side2;
     
     public EditCardPanel(Flashcard card) {
+    
+        this.setLayout(new BorderLayout());
         
-        // init jpanels for each side        
-        JLabel side1Label = new JLabel("Side 1");
-        JTextArea side1Text = new JTextArea(card.getSide1(), 8, 16);
-        JLabel side2Label = new JLabel("Side 2");
-        JTextArea side2Text = new JTextArea(card.getSide2(), 8, 16);
+        this.side1 = new SidePanel(card.getSide1(), "Side 1") ;
+        this.side2 = new SidePanel(card.getSide2(), "Side 2");
         
-        JPanel side1Panel = new JPanel();      
-        side1Panel.setLayout(new BorderLayout());
-        side1Panel.add(side1Label, BorderLayout.NORTH);
-        side1Panel.add(side1Text, BorderLayout.CENTER);
         
-        JPanel side2Panel = new JPanel();      
-        side2Panel.setLayout(new BorderLayout());
-        side2Panel.add(side2Label, BorderLayout.NORTH);
-        side2Panel.add(side2Text, BorderLayout.CENTER);
+        JButton correctButton = new JButton("Save");
+        JButton incorrectButton = new JButton("Delete Card");
         
-        JPanel cardPanel = new JPanel(new FlowLayout());
-        cardPanel.add(side1Panel);
-        cardPanel.add(side2Panel);
+        JPanel center = new JPanel();
+        center.setLayout(new GridLayout(1, 2));
         
-        // init save/cancel buttons
-        JButton saveButton = new JButton("Save");
-        JButton cancelButton = new JButton("Cancel");
+        center.add(side1);
+        center.add(side2);
         
-        JPanel buttonPanel = new JPanel();
-        buttonPanel.setLayout(new FlowLayout());
-        buttonPanel.add(saveButton);
-        buttonPanel.add(cancelButton);
+        JPanel south = new JPanel();
+        south.add(correctButton);
+        south.add(incorrectButton);
         
-        // top level panel
-        setLayout(new BorderLayout());
-        add(cardPanel, BorderLayout.CENTER);
-        add(buttonPanel, BorderLayout.SOUTH);
-        validate();
+        
+        this.add(center, BorderLayout.CENTER);
+        this.add(south, BorderLayout.SOUTH);    
+    }
+    
+    
+    
+    class SidePanel extends JPanel {
+        String text;
+        
+        SidePanel(String text, String side) {
+            this.text = text;
+            //this.setLayout(new BorderLayout());
+            JLabel title = new JLabel(side);
+            JTextArea responseArea = new JTextArea(text, 30, 40);
+            responseArea.setEnabled(true);
+            
+            responseArea.setAlignmentX(JTextArea.CENTER_ALIGNMENT);
+            responseArea.setAlignmentY(JTextArea.CENTER_ALIGNMENT);
+            
+            responseArea.setBorder(new LineBorder(Color.BLACK, 1));
+            
+            JPanel north = new JPanel();
+            north.add(title);
+            north.setPreferredSize(new Dimension(500, 30));
+            
+            this.add(north, BorderLayout.NORTH);
+            this.add(responseArea, BorderLayout.CENTER);
+        }
     }
 }

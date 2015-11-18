@@ -8,6 +8,7 @@ package front_end.view;
 import java.awt.EventQueue;
 import javax.swing.JDialog;
 import model.Flashcard;
+import javax.swing.JFrame;
 import view.EditCardPanel;
 
 /**
@@ -15,20 +16,21 @@ import view.EditCardPanel;
  * @author tiffanychao
  */
 public class TestEditCard extends JDialog {
-    public static void main (String[] argv) {
+    public static void main(String[] args) {
+        JFrame frame = new JFrame("AskNote");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setResizable(true);
+        frame.setSize(1000, 600);
         
-        EventQueue.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                new TestEditCard().setVisible(true);
-            }
-        });
+        Flashcard card = new Flashcard("I Solemnly Swear I am up to no good", 
+                                        "The Marauder's Map Password");
+        
+        EditCardPanel testPanel = new EditCardPanel(card);
+        
+        
+        frame.add(testPanel);
+        frame.setVisible(true);
+        
+        
     }
-
-    private TestEditCard() {
-        Flashcard c = new Flashcard("a", "is for alphabet");
-        EditCardPanel ed = new EditCardPanel(c);
-        getContentPane().add(ed);
-        setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-    }   
 }

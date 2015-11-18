@@ -5,11 +5,19 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
 import javax.swing.BoxLayout;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
 import javax.swing.SwingConstants;
+import javax.swing.border.LineBorder;
 import model.Deck;
 import model.Flashcard;
 
@@ -21,8 +29,7 @@ public class EditDeckPanel extends JPanel {
     Deck deck;
     
     public EditDeckPanel(Deck deck) {
-        this.deck = deck;
-        
+
         // init top level panel
         this.setLayout(new BorderLayout());
             
@@ -110,5 +117,5 @@ public class EditDeckPanel extends JPanel {
         }
         return content;
     }
-    
-}
+
+} 
