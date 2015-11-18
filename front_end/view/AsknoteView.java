@@ -88,11 +88,11 @@ public class AsknoteView extends JPanel implements ActionListener {
         System.out.println("Parent" + cmd);
         switch(model.getCurrentPage().getValue()) {
             case 0: 
-                if (cmd.equals("Decks")) {
+                if (cmd.equals("D")) {
                     model.pushPage(PageType.CHOOSE_DECK);
-                } else if (cmd.equals("Quiz")) {
+                } else if (cmd.equals("Q")) {
                     model.pushPage(PageType.QUIZ);
-                } else if (cmd.equals("Friends")) {
+                } else if (cmd.equals("F")) {
                     model.pushPage(PageType.FRIENDS_LIST);
                 }
                 updateView();

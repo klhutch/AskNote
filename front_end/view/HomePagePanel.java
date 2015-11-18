@@ -10,11 +10,13 @@ import java.awt.event.*;
 import java.util.List;
 import java.util.ArrayList; 
 import javax.swing.*;
+import model.Deck;
 
 public class HomePagePanel extends JPanel{
     // takes nothing in 
-    public HomePagePanel() {        
-
+    public HomePagePanel() {     
+         
+         
         // create layout managers
 //        FlowLayout titleFlow = new FlowLayout(); 
 //        titleFlow.setAlignment(FlowLayout.CENTER);
@@ -51,10 +53,20 @@ public class HomePagePanel extends JPanel{
           
          decksButton.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent evt) {;
+            public void actionPerformed(ActionEvent evt) {
+                
+                
+                HomePagePanel.this.setVisible(false);
+                
+                ChooseDeckPanel deckPanel = new ChooseDeckPanel(new ArrayList<Deck>()); 
+               
+                deckPanel.setVisible(true);
+                
                 System.out.println(evt.getActionCommand());
                 // should send event to parent asknoteview
                 getParent().dispatchEvent(evt);
+                
+                
             }
         });
         
@@ -62,6 +74,10 @@ public class HomePagePanel extends JPanel{
         quizButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent evt) {
+                
+                 
+                HomePagePanel.this.setVisible(false);
+                
                 System.out.println(evt.getActionCommand());
                 getParent().dispatchEvent(evt);
             }
@@ -70,6 +86,9 @@ public class HomePagePanel extends JPanel{
         friendsButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent evt) {
+                 
+                HomePagePanel.this.setVisible(false);
+                
                 System.out.println(evt.getActionCommand());
                 getParent().dispatchEvent(evt);
             }
