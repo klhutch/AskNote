@@ -5,7 +5,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 import javax.swing.*;
-import model.AsknoteModel;
+import model.AskNoteModel;
 import model.PageType;
 
 /*
@@ -19,12 +19,12 @@ import model.PageType;
  * @author tiffanychao
  */
 
-public class AsknoteView extends JPanel implements ActionListener {
+public class AskNoteView extends JPanel implements ActionListener {
     
-    private final AsknoteModel model = initModel();
+    private final AskNoteModel model = initModel();
     private JPanel currentView;
     
-    public AsknoteView(String title, List<String> notifications) { 
+    public AskNoteView(String title, List<String> notifications) { 
         
         JPanel header = new HeaderPanel(title, notifications.size()); 
         BorderLayout border = new BorderLayout(); 
@@ -41,9 +41,9 @@ public class AsknoteView extends JPanel implements ActionListener {
      * The next implementation of AskNote should get values for the model from a database
      * @return the model
      */
-    private AsknoteModel initModel() {
+    private AskNoteModel initModel() {
         // default
-        return new AsknoteModel();
+        return new AskNoteModel();
     }
     
     /** based on state of model, update current view **/

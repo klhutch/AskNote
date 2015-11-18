@@ -11,7 +11,7 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
-import model.Flashcard;
+import model.FlashCard;
 import javax.swing.border.LineBorder;
 
 /**
@@ -21,7 +21,7 @@ public class EditCardPanel extends JPanel {
     SidePanel side1;
     SidePanel side2;
     
-    public EditCardPanel(Flashcard card) {
+    public EditCardPanel(FlashCard card) {
     
         this.setLayout(new BorderLayout());
         

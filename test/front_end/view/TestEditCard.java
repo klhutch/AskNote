@@ -7,7 +7,7 @@ package front_end.view;
 
 import java.awt.EventQueue;
 import javax.swing.JDialog;
-import model.Flashcard;
+import model.FlashCard;
 import javax.swing.JFrame;
 import view.EditCardPanel;
 
@@ -22,7 +22,7 @@ public class TestEditCard extends JDialog {
         frame.setResizable(true);
         frame.setSize(1000, 600);
         
-        Flashcard card = new Flashcard("I Solemnly Swear I am up to no good", 
+        FlashCard card = new FlashCard("I Solemnly Swear I am up to no good", 
                                         "The Marauder's Map Password");
         
         EditCardPanel testPanel = new EditCardPanel(card);

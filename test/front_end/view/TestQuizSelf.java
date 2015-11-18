@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JFrame;
 import model.Deck;
-import model.Flashcard;
+import model.FlashCard;
 import view.LoginPanel;
 import view.QuizSelfPanel;
 
@@ -31,10 +31,10 @@ public class TestQuizSelf {
         // f.getContentPane().setBackground (Color.cyan); 
         frame.setSize (1000, 600);
 
-        Flashcard card1Math = new Flashcard("1 + 1", "2");
-        Flashcard card2Math = new Flashcard("2 + 1", "3");
-        Flashcard card3Math = new Flashcard("1 * 1", "1");
-        List<Flashcard> cards = new ArrayList<>();      
+        FlashCard card1Math = new FlashCard("1 + 1", "2");
+        FlashCard card2Math = new FlashCard("2 + 1", "3");
+        FlashCard card3Math = new FlashCard("1 * 1", "1");
+        List<FlashCard> cards = new ArrayList<>();      
         cards.add(card1Math); 
         cards.add(card2Math); 
         cards.add(card3Math);

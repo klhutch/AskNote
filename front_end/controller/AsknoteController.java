@@ -1,14 +1,14 @@
 package controller;
 
 import view.AsknoteView;
-import model.AsknoteModel;
+import model.AskNoteModel;
 
 public class AsknoteController {
     
-    AsknoteModel model;
+    AskNoteModel model;
     AsknoteView view;
     
-    public AsknoteController(AsknoteModel model, AsknoteView view) {
+    public AsknoteController(AskNoteModel model, AsknoteView view) {
         this.model = model;
         this.view = view;
     }

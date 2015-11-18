@@ -19,7 +19,7 @@ import javax.swing.JTextArea;
 import javax.swing.SwingConstants;
 import javax.swing.border.LineBorder;
 import model.Deck;
-import model.Flashcard;
+import model.FlashCard;
 
 /**
  *
@@ -108,7 +108,7 @@ public class EditDeckPanel extends JPanel {
      * @param c the flashcard
      * @return content preview
      */
-    private String getCardPreview(Flashcard c) {
+    private String getCardPreview(FlashCard c) {
         String content = c.getSide1();
         if (content.length() <= 20) { // should this be a parameter?
             // don't change content

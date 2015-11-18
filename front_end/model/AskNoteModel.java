@@ -9,12 +9,12 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.Stack;
 
-public class AsknoteModel {
+public class AskNoteModel {
     User user; 
     PageType currentPage;
     List<Deck> decks; 
     Deck activeDeck;
-    Flashcard activeFlashcard;
+    FlashCard activeFlashcard;
     List<Quiz> quizzes; 
     List<String> friends; 
     Stack<PageType> pages;
@@ -32,8 +32,8 @@ public class AsknoteModel {
      * @param pages
      * @param notifications
      */
-    public AsknoteModel(User user, PageType currentPage,
-            List<Deck> decks, Deck activeDeck, Flashcard activeFlashcard,
+    public AskNoteModel(User user, PageType currentPage,
+            List<Deck> decks, Deck activeDeck, FlashCard activeFlashcard,
             List<Quiz> quizzes, List<String> friends,
             Stack<PageType> pages, List<String> notifications) {
         
@@ -48,7 +48,7 @@ public class AsknoteModel {
             this.notifications = notifications; 
     }
     
-    public AsknoteModel() { 
+    public AskNoteModel() { 
         // 0 is home page
         this(new User(), PageType.HOME, new ArrayList<>(), null, null,
                 new ArrayList<>(), new ArrayList<>(),
@@ -76,7 +76,7 @@ public class AsknoteModel {
         return activeDeck;
     }
     
-    public Flashcard getActiveFlashcard() {
+    public FlashCard getActiveFlashcard() {
         return activeFlashcard;
     }
     

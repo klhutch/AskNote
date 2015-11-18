@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JFrame;
 import model.Deck;
-import model.Flashcard;
+import model.FlashCard;
 import view.EditDeckPanel;
 
 /**
@@ -29,13 +29,13 @@ public class TestEditDeck extends JFrame {
         setResizable(true);
         setSize (1000, 600);
         
-        Flashcard f1 = new Flashcard("photosynthesis", "");
-        Flashcard f2 = new Flashcard("Calvin Cycle", "");
-        Flashcard f3 = new Flashcard("Krebs Cycle", "");
-        Flashcard f4 = new Flashcard("plants produce oxygen", "");
-        Flashcard f5 = new Flashcard("glucose", "");
+        FlashCard f1 = new FlashCard("photosynthesis", "");
+        FlashCard f2 = new FlashCard("Calvin Cycle", "");
+        FlashCard f3 = new FlashCard("Krebs Cycle", "");
+        FlashCard f4 = new FlashCard("plants produce oxygen", "");
+        FlashCard f5 = new FlashCard("glucose", "");
         
-        List<Flashcard> cards = new ArrayList<>();
+        List<FlashCard> cards = new ArrayList<>();
         
         cards.add(f1);
         cards.add(f2);

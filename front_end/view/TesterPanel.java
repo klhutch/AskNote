@@ -15,7 +15,7 @@ import model.*;
 
 public class TesterPanel extends JPanel{
      
-    public TesterPanel(Flashcard card, String response, Boolean side1wasShown) {
+    public TesterPanel(FlashCard card, String response, Boolean side1wasShown) {
     
         this.setLayout(new BorderLayout());
         

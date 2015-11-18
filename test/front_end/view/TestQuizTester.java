@@ -6,7 +6,7 @@
 package front_end.view;
 
 import javax.swing.JFrame;
-import model.Flashcard;
+import model.FlashCard;
 import view.TesterPanel;
 
 /**
@@ -20,7 +20,7 @@ public class TestQuizTester {
         frame.setResizable(true);
         frame.setSize(1000, 600);
         
-        Flashcard card = new Flashcard("I Solemnly Swear I am up to no good", 
+        FlashCard card = new FlashCard("I Solemnly Swear I am up to no good", 
                                         "The Marauder's Map Password");
         
         TesterPanel testPanel = new TesterPanel(card, "An important password", true);
