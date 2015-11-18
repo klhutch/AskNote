@@ -50,17 +50,14 @@ public class TestModel {
    
         Deck math = new Deck("math", cards); 
     
-        User jane = new User("Jane", 90); 
-        User jeff = new User("Jeff", 89); 
-        User tom = new User("Tom", 90); 
-    
-        Quiz quizMath1 = new Quiz(math, jane, jeff);    
-        Quiz quizMath2 = new Quiz(math, jane, jeff); 
-        Quiz quizMath3 = new Quiz(math, tom, jeff); 
-        
         
     
-        assertTrue(quizMath1.equals(quizMath2));   
+       Quiz quizMath1 = new Quiz(math, "", true);  
+       Quiz quizMath3 = new Quiz(math, "", true); 
+       Quiz quizMath2 = new Quiz(math, "", false); 
+        
+    
+        assertTrue(quizMath1.equals(quizMath3));   
         assertFalse(quizMath2.equals(quizMath3)); 
     }
     
@@ -92,8 +89,8 @@ public class TestModel {
         User jeff = new User("Jeff", 89); 
         User tom = new User("Tom", 90); 
     
-        Quiz quizMath1 = new Quiz(math, user, jeff);  
-        Quiz quizMath2 = new Quiz(math, tom, user); 
+        Quiz quizMath1 = new Quiz(math, "", true);  
+        Quiz quizMath2 = new Quiz(math, "", false); 
         List<Quiz> quizzes = new ArrayList<Quiz>(); 
         quizzes.add(quizMath2); 
         quizzes.add(quizMath1); 
@@ -108,7 +105,7 @@ public class TestModel {
         notifications.add("Jane wants to start a quiz with you using math"); 
         
         
-        AskNoteModel modelExample = new  AskNoteModel(user, currentPage,
+        AsknoteModel modelExample = new  AsknoteModel(user, currentPage,
                 decks, quizzes, friends, pages, notifications); 
         
         assertEquals(modelExample.getCurrentPage(), currentPage);

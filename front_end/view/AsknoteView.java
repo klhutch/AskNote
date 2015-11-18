@@ -15,18 +15,11 @@ import model.*;
  *
  * @author tiffanychao
  */
-<<<<<<< HEAD:front_end/view/AsknoteView.java
 public class AsknoteView  extends JPanel{
     
     public AsknoteView(JPanel currentView, String title, List<String> notifications) { 
         JPanel header = new HeaderPanel(title, notifications.size()); 
-=======
-public class AskNoteView {
-    protected static AskNoteModel model = new AskNoteModel();
-    
-    public AskNoteView() { 
       
->>>>>>> 81116294f9e28c18943233eb9318677846228280:front_end/view/AskNoteView.java
         
         BorderLayout border = new BorderLayout(); 
         this.setLayout(border);
