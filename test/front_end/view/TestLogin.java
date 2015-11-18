@@ -23,7 +23,7 @@ public class TestLogin {
         frame.setResizable (true);
         // Background is going to be Panel's background. 
         // f.getContentPane().setBackground (Color.cyan); 
-        frame.setSize (500, 600);
+        frame.setSize (1000, 600);
 
         frame.getContentPane().add (new LoginPanel());
 

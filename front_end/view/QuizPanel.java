@@ -20,9 +20,9 @@ public class QuizPanel extends JPanel{
         flow.setVgap(200);
         this.setLayout(flow);
         
-        
-        JButton self = new JButton("Quiz self"); 
-        JButton friends = new JButton("Quiz with a friend"); 
+        JLabel quiz = new JLabel("Quiz"); 
+        JButton self = new JButton("Self"); 
+        JButton friends = new JButton("Friend"); 
       
         this.add(self); 
         this.add(friends); 

@@ -15,47 +15,79 @@ import java.util.Random;
  *
  * @author Maha Alkhairy
  */
-public class QuizSelfPanel extends JPanel{
-    public QuizSelfPanel(Deck deck) { 
+
+
+class CardShownPanel extends JPanel { 
+    CardShownPanel (String sideText) { 
         FlowLayout flow = new FlowLayout(); 
         flow.setAlignment(FlowLayout.CENTER);
+        JLabel card = new JLabel(sideText); 
+        this.setBackground(Color.white);
        
+        this.add(card, BorderLayout.CENTER); 
         
-        GridLayout grid = new GridLayout(); 
-        grid.setColumns(1);
-        grid.setRows(1);
         
+        
+    }
+       
+}
+
+
+class ButtonPanel extends JPanel { 
+     ButtonPanel () { 
+        FlowLayout flow = new FlowLayout(); 
+        flow.setAlignment(FlowLayout.CENTER);
         JButton back = new JButton("<"); 
         JButton flip = new JButton("flip");
         JButton forward = new JButton(">"); 
         
+       
+        this.setLayout(flow);
+        this.add(back);
+        this.add(flip); 
+        this.add(forward); 
+     } 
+}
+
+class EndButtonPanel extends JPanel { 
+     EndButtonPanel () { 
+        FlowLayout flow = new FlowLayout(); 
+        flow.setAlignment(FlowLayout.CENTER);
+        JButton end = new JButton("end");
         
-        JLabel card = new JLabel(deck.getCards().get(0).getSide2()); 
-        JPanel center = new JPanel(); 
-        center.setBackground(Color.white);
-        center.setLayout(grid);
-        center.add(card); 
+       
+        this.setLayout(flow);
+        this.add(end); 
+     } 
+}
+public class QuizSelfPanel extends JPanel{
+      Deck deck; 
+    public QuizSelfPanel(Deck deck) { 
+        this.deck = deck; 
+       
+        
+        CardShownPanel card = new CardShownPanel(deck.getCards().get(0).getSide1()); 
+        ButtonPanel buttons = new ButtonPanel(); 
+        EndButtonPanel end = new EndButtonPanel(); 
         
         JPanel bottomPanel = new JPanel(); 
-       
-        bottomPanel.setLayout(flow);
-        bottomPanel.add(back);
-        bottomPanel.add(flip); 
-        bottomPanel.add(forward); 
-       
+        bottomPanel.add(buttons); 
+        bottomPanel.add(end); 
+        
         
         
         
         BorderLayout border = new BorderLayout(); 
         this.setLayout(border);
         
-        this.add(bottomPanel, BorderLayout.SOUTH); 
-        this.add(center, BorderLayout.CENTER); 
+        this.add(buttons, BorderLayout.SOUTH); 
+        this.add(card, BorderLayout.CENTER); 
         this.add(new JPanel(), BorderLayout.EAST); 
         this.add(new JPanel(), BorderLayout.WEST); 
         this.add(new JPanel(), BorderLayout.NORTH); 
         this.validate();
        
-    }
+    } 
+} 
     
-}
+
