@@ -6,7 +6,6 @@
 package view;
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
-import java.util.ArrayList;
 import java.util.List;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
@@ -23,7 +22,7 @@ public class SelectQuizPanel extends JPanel {
     private QuizListPanel quizzesPanel;
     private QuizFriendPanel friendsPanel;
     
-    public SelectQuizPanel(ArrayList<Quiz> quizzes, ArrayList<String> friends) {
+    public SelectQuizPanel(List<Quiz> quizzes, List<String> friends) {
         this.quizzesPanel = new QuizListPanel(quizzes);
         this.friendsPanel = new QuizFriendPanel(friends);
         
@@ -43,7 +42,7 @@ public class SelectQuizPanel extends JPanel {
     class QuizListPanel extends JPanel {
         List<OneQuizPanel> activeQuizzes;
         
-        QuizListPanel(ArrayList<Quiz> quizzes) {
+        QuizListPanel(List<Quiz> quizzes) {
             this.setLayout(new BorderLayout());
             
             JPanel center = new JPanel();
@@ -101,7 +100,7 @@ public class SelectQuizPanel extends JPanel {
     class QuizFriendPanel extends JPanel {
         List<String> friends;
         
-        QuizFriendPanel(ArrayList<String> friends) {
+        QuizFriendPanel(List<String> friends) {
             this.friends = friends;
             
             this.setLayout(new BorderLayout());

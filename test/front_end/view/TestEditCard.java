@@ -7,7 +7,7 @@ package front_end.view;
 
 import java.awt.EventQueue;
 import javax.swing.JDialog;
-import model.FlashCard;
+import model.Flashcard;
 import view.EditCardPanel;
 
 /**
@@ -26,7 +26,7 @@ public class TestEditCard extends JDialog {
     }
 
     private TestEditCard() {
-        FlashCard c = new FlashCard("a", "is for alphabet");
+        Flashcard c = new Flashcard("a", "is for alphabet");
         EditCardPanel ed = new EditCardPanel(c);
         getContentPane().add(ed);
         setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);

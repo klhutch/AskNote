@@ -12,31 +12,31 @@ import java.util.ArrayList;
 public class Deck {
     // a unique title 
     private String title; 
-    private List<FlashCard> cards; 
+    private List<Flashcard> cards; 
        
-    public Deck(String title, List<FlashCard> cards) { 
+    public Deck(String title, List<Flashcard> cards) { 
         this.title = title; 
         this.cards = cards; 
     }
     
     public Deck(String title) { 
-        this(title,  new ArrayList<FlashCard>()); 
+        this(title,  new ArrayList<Flashcard>()); 
          
     }
     
-    public Deck(List<FlashCard> cards) { 
+    public Deck(List<Flashcard> cards) { 
         this("New Deck", cards); 
     }
     
     public Deck() { 
-        this("New Deck", new ArrayList<FlashCard>()); 
+        this("New Deck", new ArrayList<Flashcard>()); 
     }
     
-    public List<FlashCard> getCards() {
+    public List<Flashcard> getCards() {
          return this.cards; 
     }
     
-    public FlashCard getCard(int index) {
+    public Flashcard getCard(int index) {
         return getCards().get(index);
     }
     
@@ -45,11 +45,11 @@ public class Deck {
     }
     
     // adds card to deck 
-    public void add(FlashCard card) {
+    public void add(Flashcard card) {
         cards.add(card); 
     }
     
-    public void remove(FlashCard card) { 
+    public void remove(Flashcard card) { 
         cards.remove(card); 
     }
     

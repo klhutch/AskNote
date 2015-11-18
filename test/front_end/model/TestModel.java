@@ -13,14 +13,14 @@ import static org.junit.Assert.*;
  */
 public class TestModel {
     
-    FlashCard card1Math = new FlashCard("1 + 1", "2");
-    FlashCard card2Math = new FlashCard("2 + 1", "3");
-    FlashCard card3Math = new FlashCard("1 * 1", "1");
+    Flashcard card1Math = new Flashcard("1 + 1", "2");
+    Flashcard card2Math = new Flashcard("2 + 1", "3");
+    Flashcard card3Math = new Flashcard("1 * 1", "1");
     
     @Test
     public void testFlashcardEquals() {
         
-        FlashCard c = new FlashCard("1 + 1", "2");
+        Flashcard c = new Flashcard("1 + 1", "2");
         
         assertTrue(card1Math.equals(c));
         assertFalse(card1Math.equals(card2Math));      
@@ -29,7 +29,7 @@ public class TestModel {
     @Test
     public void testDeckEquals() {
         
-        List<FlashCard> cards = new ArrayList<>(); 
+        List<Flashcard> cards = new ArrayList<>(); 
         cards.add(card1Math); 
         cards.add(card2Math); 
         cards.add(card3Math);
@@ -43,7 +43,7 @@ public class TestModel {
     @Test
     public void testQuizEquals() { 
    
-        List<FlashCard> cards = new ArrayList<>(); 
+        List<Flashcard> cards = new ArrayList<>(); 
         cards.add(card1Math); 
         cards.add(card2Math); 
         cards.add(card3Math); 
@@ -77,10 +77,10 @@ public class TestModel {
     public void testModel() { 
         User user = new User("TestUser", 901); 
         PageType currentPage = PageType.HOME; 
-        List<FlashCard> cards = new ArrayList<>(); 
+        List<Flashcard> cards = new ArrayList<>(); 
         
         Deck math = new Deck("math", cards); 
-        Deck blue = new Deck("blue", new ArrayList<FlashCard>()); 
+        Deck blue = new Deck("blue", new ArrayList<Flashcard>()); 
         List<Deck> decks = new ArrayList<Deck>();
         decks.add(math); 
         decks.add(blue);

@@ -11,7 +11,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.SwingConstants;
 import model.Deck;
-import model.FlashCard;
+import model.Flashcard;
 
 /**
  *
@@ -101,7 +101,7 @@ public class EditDeckPanel extends JPanel {
      * @param c the flashcard
      * @return content preview
      */
-    private String getCardPreview(FlashCard c) {
+    private String getCardPreview(Flashcard c) {
         String content = c.getSide1();
         if (content.length() <= 20) { // should this be a parameter?
             // don't change content

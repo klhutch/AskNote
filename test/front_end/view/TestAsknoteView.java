@@ -8,7 +8,6 @@ package front_end.view;
 import java.util.ArrayList;
 import javax.swing.JFrame;
 import view.*;
-import view.HomePagePanel;
 
 /**
  *
@@ -25,7 +24,7 @@ public class TestAsknoteView {
     // Background is going to be Panel's background. 
     // f.getContentPane().setBackground (Color.cyan); 
     f.setSize (500, 600);
-    AsknoteView asknote = new AsknoteView(new HomePagePanel(), "Home", new ArrayList<String>());  
+    AsknoteView asknote = new AsknoteView("Home", new ArrayList<>());  
     
     f.getContentPane().add (asknote);
 

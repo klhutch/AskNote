@@ -1,16 +1,11 @@
 package controller;
 
-
 import view.AsknoteView;
 import model.AskNoteModel;
 
 
 // import javax.swing.event.MouseInputListener;
 
-/**
- *
- * @author tiffanychao
- */
 public class AsknoteController {
     
     AskNoteModel model;

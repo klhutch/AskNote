@@ -6,14 +6,14 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
-import model.FlashCard;
+import model.Flashcard;
 
 /**
  * Note: This JPanel should be added to a JDialog
  */
 public class EditCardPanel extends JPanel {
     
-    public EditCardPanel(FlashCard card) {
+    public EditCardPanel(Flashcard card) {
         
         // init jpanels for each side        
         JLabel side1Label = new JLabel("Side 1");

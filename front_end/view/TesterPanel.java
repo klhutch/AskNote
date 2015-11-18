@@ -16,34 +16,50 @@ import model.*;
  */
 public class TesterPanel extends JPanel{
     
-    public TesterPanel(FlashCard card, String str) {
-        JPanel cardsides = new JPanel();
+    public TesterPanel(Flashcard card, String str) {
+        
+        // init panels and layouts
+        setLayout(new BorderLayout());
+        
+        JPanel cards = new JPanel();
         JPanel response = new JPanel();
+        JPanel cardAndResponse = new JPanel(); // container for cards and response
+        cardAndResponse.setLayout(new GridLayout(1, 2));
+        
         JPanel buttons = new JPanel();
+        buttons.setLayout(new FlowLayout());
+        
+        // init components
         JButton flip = new JButton("flip");
         JButton correct = new JButton("correct");
-        JButton wrong = new JButton("wrong");
+        JButton incorrect = new JButton("incorrect");
+        
         JLabel resp = new JLabel(str);
-        JLabel car = new JLabel(card.getSide1());
+        JLabel side1 = new JLabel(card.getSide1());
         
-    
+        TitledBorder titleResponse = BorderFactory.createTitledBorder("Response");
+        titleResponse.setTitleJustification(TitledBorder.CENTER);
         
-        TitledBorder title = BorderFactory.createTitledBorder("Response");
-        title.setTitleJustification(TitledBorder.CENTER);
+        TitledBorder titleCard = BorderFactory.createTitledBorder("Card");
+        titleCard.setTitleJustification(TitledBorder.CENTER);
         
-        TitledBorder title2 = BorderFactory.createTitledBorder("Card");
-        title.setTitleJustification(TitledBorder.CENTER);
+        response.setBorder(titleResponse);
+        cards.setBorder(titleCard);
         
-        response.setBorder(title);
-        cardsides.setBorder(title2);
-        
+        // add components to this panel
         response.add(resp);
-        cardsides.add(car);
+        cards.add(side1);
         
         buttons.add(flip); 
         buttons.add(correct); 
-        buttons.add(wrong); 
+        buttons.add(incorrect); 
         
+        cardAndResponse.add(cards);
+        cardAndResponse.add(response);
         
+        this.add(cardAndResponse, BorderLayout.CENTER);
+        this.add(buttons, BorderLayout.SOUTH);
+        
+        validate();
     }
 } 
