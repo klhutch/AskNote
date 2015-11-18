@@ -18,7 +18,7 @@ import model.*;
 public class FriendsListPanel extends JPanel {
     
     
-    public FriendsListPanel(List<User> friends) { 
+    public FriendsListPanel(List<String> friends) { 
         GridLayout grid = new GridLayout(); 
         grid.setColumns(1);
         grid.setRows(-1);
@@ -32,11 +32,9 @@ public class FriendsListPanel extends JPanel {
         grid2.setRows(-1); 
         
         this.setLayout(grid2);
-        this.doLayout();
         
         JPanel right = new JPanel(); 
         right.setLayout(grid); 
-        right.doLayout();
         
         
         JScrollPane leftPane = new JScrollPane(); 
@@ -47,7 +45,7 @@ public class FriendsListPanel extends JPanel {
         List<JCheckBox> frnds = new ArrayList<JCheckBox>(); 
                                     
         for (int i = 0; i < friends.size(); i++) { 
-           String name =  friends.get(i).getUsername();
+           String name = friends.get(i); 
            JCheckBox frnd = new JCheckBox(name); 
            frnds.add(frnd); 
         }
@@ -68,5 +66,6 @@ public class FriendsListPanel extends JPanel {
          
         this.add(leftPane);
         this.add(right); 
+        this.validate(); 
     }    
 }

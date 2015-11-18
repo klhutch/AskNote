@@ -17,12 +17,12 @@ public class LoginPanel extends JPanel{
         
         GridLayout grid = new GridLayout(); 
         grid.setColumns(2);
-        grid.setRows(-1);
+        grid.setRows(3);
         grid.setVgap(90);
         grid.setHgap(20);
         
         this.setLayout(grid);
-        this.doLayout();
+        
         
         
         // components 
@@ -41,6 +41,7 @@ public class LoginPanel extends JPanel{
         this.add(passwordType); 
         this.add(new JPanel());
         this.add(signin); 
+        this.validate();
         
     }
     

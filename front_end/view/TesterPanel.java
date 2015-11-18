@@ -5,12 +5,45 @@
  */
 package view;
 
-import javax.swing.JPanel;
+import javax.swing.*;
+import java.awt.*;
+import javax.swing.border.TitledBorder;
+import model.*;
 
 /**
  *
- * @author normal
+ * @author Maha Alkhairy
  */
-public class TesterPanel extends JPanel {
+public class TesterPanel extends JPanel{
     
-}
+    public TesterPanel(FlashCard card, String str) {
+        JPanel cardsides = new JPanel();
+        JPanel response = new JPanel();
+        JPanel buttons = new JPanel();
+        JButton flip = new JButton("flip");
+        JButton correct = new JButton("correct");
+        JButton wrong = new JButton("wrong");
+        JLabel resp = new JLabel(str);
+        JLabel car = new JLabel(card.getSide1());
+        
+    
+        
+        TitledBorder title = BorderFactory.createTitledBorder("Response");
+        title.setTitleJustification(TitledBorder.CENTER);
+        
+        TitledBorder title2 = BorderFactory.createTitledBorder("Card");
+        title.setTitleJustification(TitledBorder.CENTER);
+        
+        response.setBorder(title);
+        cardsides.setBorder(title2);
+        
+        response.add(resp);
+        cardsides.add(car);
+        
+        buttons.add(flip); 
+        buttons.add(correct); 
+        buttons.add(wrong); 
+        
+        
+    }
+} 
