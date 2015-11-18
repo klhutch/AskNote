@@ -9,16 +9,11 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
-import model.PageType;
 
-/**
- *
- * @author Maha Alkhairy
- */
 public class HomePagePanel extends JPanel{
     // takes nothing in 
-    public HomePagePanel() {
-        
+    public HomePagePanel() {        
+
         // create layout managers
         FlowLayout titleFlow = new FlowLayout(); 
         titleFlow.setAlignment(FlowLayout.CENTER);
@@ -31,8 +26,6 @@ public class HomePagePanel extends JPanel{
         // create nested JPanels, set layout managers
         this.setLayout(new BorderLayout());
         
-        JPanel title = new JPanel(); 
-        title.setLayout(titleFlow);
         JPanel options = new JPanel(); 
         options.setLayout(optionsFlow);
         
@@ -68,28 +61,12 @@ public class HomePagePanel extends JPanel{
         
         JLabel hello = new JLabel("Welcome to AskNote");    
         
-        // add components to JPanels
-        title.add(hello); 
-        
         options.add(decks); 
         options.add(quiz); 
         options.add(friends);  
       
-        this.add(title, BorderLayout.NORTH);
         this.add(options, BorderLayout.CENTER);
     
-        this.validate();   
-        }
-    
-    public PageType deckButtonActionPerformed(ActionEvent evt) {
-        return PageType.CHOOSE_DECK;
-    }
-    
-    public PageType quizButtonActionPerformed(ActionEvent evt) {
-        return PageType.QUIZ;
-    }
-    
-    public PageType friendsButtonActionPerformed(ActionEvent evt) {
-        return PageType.FRIENDS_LIST;
+        this.validate(); 
     }
 }

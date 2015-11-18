@@ -23,14 +23,14 @@ public class TestSelectQuizPanel {
         frame.setTitle("AskNote");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setResizable(true);
-        frame.setSize(500, 600);
+        frame.setSize(1000, 600);
         
         String friend1 = "Marie";
         Deck deck1 = new Deck("English");
         Quiz quiz1 = new Quiz(deck1, friend1, false);
         
         String friend2 = "Alex";
-        Deck deck2 = new Deck(friend2);
+        Deck deck2 = new Deck("Nintendo");
         Quiz quiz2 = new Quiz(deck2, friend2, true);
         
         ArrayList<Quiz> quizzes = new ArrayList();

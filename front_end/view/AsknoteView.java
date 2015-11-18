@@ -72,7 +72,7 @@ public class AsknoteView extends JPanel implements ActionListener {
                 break;
             case 10: currentView = new SelectQuizPanel(model.getQuizzes(), model.getFriends());
                 break;
-            case 11: currentView = new TesterPanel(model.getActiveFlashcard(), ""); // change to model.getResponse
+            case 11: currentView = new TesterPanel(model.getActiveFlashcard(), "", true); // change to model.getResponse
                 break;
             case 12: currentView = new TesteePanel(""); // add boolean isSide1Visible to flashcard                         
         }

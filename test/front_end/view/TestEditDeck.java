@@ -27,7 +27,7 @@ public class TestEditDeck extends JFrame {
     private TestEditDeck() {
         setTitle("AskNote");
         setResizable(true);
-        setSize(500, 600);
+        setSize (1000, 600);
         
         Flashcard f1 = new Flashcard("photosynthesis", "");
         Flashcard f2 = new Flashcard("Calvin Cycle", "");

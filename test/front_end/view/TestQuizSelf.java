@@ -29,7 +29,7 @@ public class TestQuizSelf {
         frame.setResizable (true);
         // Background is going to be Panel's background. 
         // f.getContentPane().setBackground (Color.cyan); 
-        frame.setSize (500, 600);
+        frame.setSize (1000, 600);
 
         Flashcard card1Math = new Flashcard("1 + 1", "2");
         Flashcard card2Math = new Flashcard("2 + 1", "3");

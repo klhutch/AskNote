@@ -20,6 +20,7 @@ public class HeaderPanel extends JPanel {
     this.setLayout(flow);
     flow.setHgap(40); 
     
+    
     JLabel title = new JLabel(str);
     JButton home = new JButton("Home"); 
     JButton back = new JButton("Back");

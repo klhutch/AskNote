@@ -10,6 +10,7 @@ import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.util.List;
 import java.util.ArrayList;
+import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
@@ -77,6 +78,7 @@ public class SelectQuizPanel extends JPanel {
                     OneQuizPanel quizPanel = new OneQuizPanel(quiz);
                     activeQuizzes.add(quizPanel);
                     center.add(quizPanel);
+                    center.add(Box.createRigidArea(new Dimension(0,5)));
                 }
             }
             else {

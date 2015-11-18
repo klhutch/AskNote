@@ -15,6 +15,56 @@ import model.*;
  *
  * @author Maha Alkhairy
  */
+
+class OptionPanel  extends JPanel { 
+    OptionPanel(String button, String label) { 
+        FlowLayout flow = new FlowLayout(); 
+        flow.setAlignment(FlowLayout.LEADING);
+        JButton bttn = new JButton(button); 
+        JLabel lbl = new JLabel(label); 
+        
+        Font font = new Font("SanSarif", Font.BOLD, 20); 
+        
+        lbl.setFont(font);
+        bttn.setFont(font);
+        
+        flow.setHgap(25);
+        this.setMaximumSize(new Dimension(500, 100));
+               
+        this.setLayout(flow); 
+        this.add(bttn); 
+        this.add(lbl); 
+        this.validate();
+        
+    }
+}
+
+/**
+ *
+ * @author Maha Alkhairy
+ */
+class SelectionPanel extends JPanel{
+    // takes nothing in 
+    public SelectionPanel() {        
+       
+        OptionPanel add = new OptionPanel("  ", "Add Friend");     
+        OptionPanel checkAll = new OptionPanel("  ", "Check all"); 
+        OptionPanel uncheckAll = new OptionPanel("  ", "Uncheck all");
+        OptionPanel delete = new OptionPanel("  ", "Delete"); 
+        
+        BoxLayout box = new BoxLayout(this, BoxLayout.Y_AXIS); 
+        
+        
+        this.add(add);
+        this.add(checkAll); 
+        this.add(uncheckAll); 
+        this.add(delete); 
+        this.setLayout(box);
+        
+        this.validate();
+        }    
+}
+
 public class FriendsListPanel extends JPanel {
     
     
@@ -25,7 +75,6 @@ public class FriendsListPanel extends JPanel {
         
         JPanel left = new JPanel(); 
         left.setLayout(grid);
-        left.doLayout();
              
         GridLayout grid2 = new GridLayout(); 
         grid2.setColumns(2);
@@ -33,8 +82,7 @@ public class FriendsListPanel extends JPanel {
         
         this.setLayout(grid2);
         
-        JPanel right = new JPanel(); 
-        right.setLayout(grid); 
+        SelectionPanel right = new SelectionPanel(); 
         
         
         JScrollPane leftPane = new JScrollPane(); 
@@ -54,16 +102,8 @@ public class FriendsListPanel extends JPanel {
            left.add(frnds.get(i)); 
         }
                  
-        JButton addFriend = new JButton("Add Friend");
-        JButton uncheck = new JButton("Uncheck All"); 
-        JButton checkAll = new JButton("Check All"); 
-        JButton delete = new JButton("Delete"); 
         
-        right.add(addFriend); 
-        right.add(uncheck); 
-        right.add(checkAll); 
-        right.add(delete); 
-         
+        
         this.add(leftPane);
         this.add(right); 
         this.validate(); 
