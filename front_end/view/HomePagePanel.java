@@ -51,54 +51,11 @@ public class HomePagePanel extends JPanel{
         JButton friendsButton = friends.button; 
         
           
-         decksButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent evt) {
-                
-                
-                HomePagePanel.this.setVisible(false);
-                
-                ChooseDeckPanel deckPanel = new ChooseDeckPanel(new ArrayList<Deck>()); 
-               
-                deckPanel.setVisible(true);
-                
-                System.out.println(evt.getActionCommand());
-                // should send event to parent asknoteview
-                getParent().dispatchEvent(evt);
-                
-                
-            }
-        });
-        
-        
-        quizButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent evt) {
-                
-                 
-                HomePagePanel.this.setVisible(false);
-                
-                System.out.println(evt.getActionCommand());
-                getParent().dispatchEvent(evt);
-            }
-        });
-        
-        friendsButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent evt) {
-                 
-                HomePagePanel.this.setVisible(false);
-                
-                System.out.println(evt.getActionCommand());
-                getParent().dispatchEvent(evt);
-            }
-        });
-        
-         
-        
-       
+        decksButton.addActionListener(new DeckButtonListener());
+        quizButton.addActionListener(new QuizButtonListener());
+        friendsButton.addActionListener(new FriendButtonListener());  
     }
-}
+
 
     class InnerPanel extends JPanel { 
         JButton button; 
@@ -148,4 +105,32 @@ public class HomePagePanel extends JPanel{
             this.validate();
             }    
     }
+     
+    class DeckButtonListener implements ActionListener {
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        }
+    
+    }
+    
+    class QuizButtonListener implements ActionListener {
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        }
+    
+    }
+    
+    class FriendButtonListener implements ActionListener {
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        }
+    
+    }
+}
 

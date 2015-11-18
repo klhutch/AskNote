@@ -15,20 +15,17 @@ import view.*;
  */
 public class TestAskNoteView {
     public static void main (String[] argv) {
-    JFrame f = new JFrame ();
-    
+        JFrame frame = new JFrame (); 
+        frame.setTitle ("AskNote");
+        frame.setResizable (true);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setSize (1000, 600);
+        
+        AskNoteView asknote = AskNoteView.instance();      
+        frame.add(asknote);
 
-    // Set the title and other parameters. 
-    f.setTitle ("AskNote");
-    f.setResizable (true);
-    // Background is going to be Panel's background. 
-    // f.getContentPane().setBackground (Color.cyan); 
-    f.setSize (1000, 600);
-    AskNoteView asknote = new AskNoteView("Home", new ArrayList<>());      
-    f.getContentPane().add(asknote);
-
-    // Show the frame. 
-    f.setVisible (true);
+        // Show the frame. 
+        frame.setVisible (true);
     } 
     
 }

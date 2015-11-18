@@ -104,8 +104,8 @@ public class EditDeckPanel extends JPanel {
     }
     
     /**
-     * get preview of flashcard content
-     * @param c the flashcard
+     * get preview of flashCard content
+     * @param c the flashCard
      * @return content preview
      */
     private String getCardPreview(FlashCard c) {

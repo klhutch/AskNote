@@ -13,6 +13,7 @@ public class Deck {
     // a unique title 
     private String title; 
     private List<FlashCard> cards; 
+    private int currentCardIndex = 0;
        
     public Deck(String title, List<FlashCard> cards) { 
         this.title = title; 
@@ -60,6 +61,18 @@ public class Deck {
     public void setTitle(String title) { 
         this.title = title; 
     } 
+    
+    
+    public FlashCard getCurrentCard(){
+        if(cards.isEmpty()){
+            return null;
+        }
+        if(cards.size() > currentCardIndex + 1){
+            return this.getCard(currentCardIndex++);
+        }
+        return this.getCard(currentCardIndex);
+    }
+    
 
     public boolean equals(Deck deck) { 
         return (this.title.equals(deck.title) && 

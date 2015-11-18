@@ -9,21 +9,21 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JFrame;
 import model.Deck;
-import view.ChooseDeckPanel;
+import view.DeckPanel;
 
-public class TestChooseDeck extends JFrame {
+public class TestDeckView extends JFrame {
     
     public static void main (String[] argv) {
         
         EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
-                new TestChooseDeck().setVisible(true);
+                new TestDeckView().setVisible(true);
             }
         });
     }
 
-    private TestChooseDeck() {
+    private TestDeckView() {
         setTitle ("AskNote");
         setResizable(true);
         
@@ -37,7 +37,7 @@ public class TestChooseDeck extends JFrame {
         decks.add(new Deck("Discrete Structs"));
         decks.add(new Deck("Music"));
         
-        ChooseDeckPanel ed = new ChooseDeckPanel(decks);
+        DeckPanel ed = new DeckPanel(decks);
         getContentPane().add(ed);
         pack();
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

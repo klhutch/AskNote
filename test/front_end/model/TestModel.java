@@ -52,9 +52,9 @@ public class TestModel {
     
         
     
-       Quiz quizMath1 = new Quiz(math, "", true);  
-       Quiz quizMath3 = new Quiz(math, "", true); 
-       Quiz quizMath2 = new Quiz(math, "", false); 
+       Quiz quizMath1 = new Quiz(math, "", true, "");  
+       Quiz quizMath3 = new Quiz(math, "", true, ""); 
+       Quiz quizMath2 = new Quiz(math, "", false, ""); 
         
     
         assertTrue(quizMath1.equals(quizMath3));   
@@ -85,8 +85,8 @@ public class TestModel {
         decks.add(math); 
         decks.add(blue);
     
-        Quiz quizMath1 = new Quiz(math, "", true);  
-        Quiz quizMath2 = new Quiz(math, "", false); 
+        Quiz quizMath1 = new Quiz(math, "", true, "");  
+        Quiz quizMath2 = new Quiz(math, "", false, ""); 
         List<Quiz> quizzes = new ArrayList<>(); 
         quizzes.add(quizMath2); 
         quizzes.add(quizMath1); 
@@ -95,14 +95,21 @@ public class TestModel {
         friends.add("Jeff"); 
         friends.add("Jane"); 
         Stack<PageType> pages = new Stack<PageType>(); 
-        pages.add(PageType.QUIZ); 
-        pages.add(currentPage); 
+        
         List<String> notifications = new ArrayList<String>(); 
         notifications.add("Jane wants to start a quiz with you using math"); 
         
         
-        AskNoteModel modelExample = new  AskNoteModel(user, currentPage,
-                decks, null, null,  quizzes, friends, pages, notifications); 
+        AskNoteModel modelExample = AskNoteModel.instance();
+        modelExample.setUser(user);
+        modelExample.setCurrentPage(currentPage);
+        modelExample.setDecks(decks);
+        modelExample.setQuizzes(quizzes);
+        modelExample.setFriends(friends);
+        modelExample.setNotifications(notifications);
+        
+        modelExample.setCurrentPage(PageType.QUIZ); 
+        modelExample.setCurrentPage(currentPage); 
         
         assertEquals(modelExample.getCurrentPage(), currentPage);
         assertEquals(modelExample.getDeck("blue"), blue); 

@@ -21,9 +21,9 @@ import model.Deck;
  *
  * @author tiffanychao
  */
-public class ChooseDeckPanel extends JPanel {
+public class DeckPanel extends JPanel {
     
-    public ChooseDeckPanel(List<Deck> decks) {
+    public DeckPanel(List<Deck> decks) {
         
         // init top level panel
         this.setLayout(new BorderLayout());

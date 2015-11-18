@@ -19,110 +19,80 @@ import model.PageType;
  * @author tiffanychao
  */
 
-public class AskNoteView extends JPanel implements ActionListener {
+public class AskNoteView extends JPanel {
+    private static class AskNoteViewSingleton {
+        private static final AskNoteView SINGLETON = new AskNoteView();
+    }
+    public static AskNoteView instance() {
+        return AskNoteViewSingleton.SINGLETON;
+    }
     
-    private final AskNoteModel model = initModel();
-    private JPanel currentView;
+    private JPanel headerPanel;
+    private JPanel appPanel;
     
-    public AskNoteView(String title, List<String> notifications) { 
+    
+    private AskNoteView() { 
+        this.setLayout(new BorderLayout()); 
         
-        JPanel header = new HeaderPanel(title, notifications.size()); 
-        BorderLayout border = new BorderLayout(); 
-        this.setLayout(border);
-        updateView();
+        this.headerPanel = new HeaderPanel("Home",0);   
+        this.appPanel = new HomePagePanel();
         
-        this.add(header, BorderLayout.NORTH);
-        this.add(currentView, BorderLayout.CENTER);
+        this.add(headerPanel, BorderLayout.NORTH);
+        this.add(appPanel, BorderLayout.CENTER);
         
         this.validate();
     }
     
-    /** initialize the model.
-     * The next implementation of AskNote should get values for the model from a database
-     * @return the model
-     */
-    private AskNoteModel initModel() {
-        // default
-        return new AskNoteModel();
-    }
+    
     
     /** based on state of model, update current view **/
     public void updateView() {
-            
-        switch(model.getCurrentPage().getValue()) {
-            case 0: currentView = new HomePagePanel();
-                break;
-            case 1: currentView = new ChooseDeckPanel(model.getDecks());
-                break;
-            case 2: currentView = new QuizPanel();
-                break;
-            case 3: currentView = new HomePagePanel(); // CHANGE THIS ///////
-                break;
-            case 4: currentView = new HomePagePanel(); // CHANGE THIS ///////
-                break;
-            case 5: currentView = new EditDeckPanel(model.getActiveDeck());
-                break;
-            case 6: currentView = new FriendsListPanel(model.getFriends());
-                break;
-            case 7: currentView = new LoginPanel();
-                break;
-            case 8: currentView = new HomePagePanel(); // CHANGE THIS ///////
-                break;
-            case 9: currentView = new QuizSelfPanel(model.getActiveDeck());
-                break;
-            case 10: currentView = new SelectQuizPanel(model.getQuizzes(), model.getFriends());
-                break;
-            case 11: currentView = new TesterPanel(model.getActiveFlashcard(), "", true); // change to model.getResponse
-                break;
-            case 12: currentView = new TesteePanel(""); // add boolean isSide1Visible to flashcard                         
-        }
-    }
-    
-    /**
-     * need to get events from nested jpanels
-     * @param evt 
-     */
-    @Override
-    public void actionPerformed(ActionEvent evt) {
-        String cmd = evt.getActionCommand();
-        System.out.println("Parent" + cmd);
+        AskNoteModel model = AskNoteModel.instance();
+        
         switch(model.getCurrentPage().getValue()) {
             case 0: 
-                if (cmd.equals("D")) {
-                    model.pushPage(PageType.CHOOSE_DECK);
-                } else if (cmd.equals("Q")) {
-                    model.pushPage(PageType.QUIZ);
-                } else if (cmd.equals("F")) {
-                    model.pushPage(PageType.FRIENDS_LIST);
-                }
-                updateView();
-                System.out.println("updated view");
+                this.appPanel = new HomePagePanel();
                 break;
-            case 1:
+            case 1: 
+                this.appPanel = new DeckPanel(model.getDecks());
                 break;
-            case 2:
+            case 2: 
+                this.appPanel = new QuizPanel();
                 break;
-            case 3:
+            case 3: 
+                this.appPanel = new HomePagePanel(); // CHANGE THIS ///////
                 break;
-            case 4:
+            case 4: 
+                this.appPanel = new HomePagePanel(); // CHANGE THIS ///////
                 break;
-            case 5:
+            case 5: 
+                this.appPanel = new EditDeckPanel(model.getSelectedDeck());
                 break;
-            case 6:
+            case 6: 
+                this.appPanel = new FriendsListPanel(model.getFriends());
                 break;
-            case 7:
+            case 7: 
+                this.appPanel = new LoginPanel();
                 break;
-            case 8:
+            case 8: 
+                this.appPanel = new HomePagePanel(); // CHANGE THIS ///////
                 break;
-            case 9:
+            case 9: 
+                this.appPanel = new QuizSelfPanel(model.getSelectedDeck());
                 break;
-            case 10:
+            case 10: 
+                this.appPanel = new SelectQuizPanel(model.getQuizzes(), model.getFriends());
                 break;
-            case 11:
+            case 11: 
+                this.appPanel = new TesterPanel(model.getActiveQuiz().getCurrentCard(), model.getActiveQuiz().getResponse(), true);
                 break;
-            case 12:
-                break; 
+            case 12: 
+                this.appPanel = new TesteePanel(model.getActiveQuiz().getShownSide());                          
         }
-  }
+        
+        this.repaint();
+    }
+    
+    
 }
 
