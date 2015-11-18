@@ -8,9 +8,11 @@ import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JRadioButton;
 import model.Quiz;
 
 /**
@@ -48,8 +50,8 @@ public class SelectQuizPanel extends JPanel {
             GridLayout grid = new GridLayout(quizzes.size(), 1);
             center.setLayout(grid);
             
-            for (int i = 0; i < quizzes.size(); i++) {
-                activeQuizzes.add(new OneQuizPanel(quizzes.get(i)));
+            for (Quiz quiz : quizzes) {
+                activeQuizzes.add(new OneQuizPanel(quiz));
             }
             
             this.add(center, BorderLayout.CENTER);
@@ -71,6 +73,16 @@ public class SelectQuizPanel extends JPanel {
             JButton cont = new JButton("Continue");
             JButton end = new JButton("End");
             
+            JLabel friendName = new JLabel(quiz.getFriend());
+            JLabel deckTitle = new JLabel(quiz.getDeck().getTitle());
+            
+            JPanel buttonPanel = new JPanel();
+            buttonPanel.add(cont);
+            buttonPanel.add(end);
+            
+            this.add(friendName);
+            this.add(deckTitle);
+            this.add(buttonPanel);
             
         }
     
@@ -96,11 +108,14 @@ public class SelectQuizPanel extends JPanel {
             JButton confirm = new JButton("Confirm");
             
             JPanel friendList = new JPanel();
-            GridLayout grid = new GridLayout(friends.size(), 1);
+            GridLayout grid = new GridLayout(friends.size(), 2);
             friendList.setLayout(grid);
             
-            for (int i = 0; i < friends.size(); i++) {
-                
+            ButtonGroup selectFriend = new ButtonGroup();
+            
+            for (String friend : friends) {
+                JRadioButton friendSelection = new JRadioButton(friend);
+                selectFriend.add(friendSelection);
             }
             
             inner.add(friendList, BorderLayout.CENTER);
@@ -111,7 +126,7 @@ public class SelectQuizPanel extends JPanel {
             this.add(inner, BorderLayout.CENTER);
             
             JPanel top = new JPanel();
-            top.add(new JLabel("Current"));
+            top.add(new JLabel("New"));
             
             this.add(top, BorderLayout.NORTH);
             this.validate();

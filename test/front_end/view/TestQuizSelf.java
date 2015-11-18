@@ -20,30 +20,31 @@ import view.QuizSelfPanel;
 public class TestQuizSelf {
     
     public static void main (String[] argv) {
-    // Create a frame 
-    JFrame f = new JFrame ();
+        // Create a frame 
+        JFrame frame = new JFrame ();
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        
+        // Set the title and other parameters. 
+        frame.setTitle ("AskNote");
+        frame.setResizable (true);
+        // Background is going to be Panel's background. 
+        // f.getContentPane().setBackground (Color.cyan); 
+        frame.setSize (500, 600);
 
-    // Set the title and other parameters. 
-    f.setTitle ("AskNote");
-    f.setResizable (true);
-    // Background is going to be Panel's background. 
-    // f.getContentPane().setBackground (Color.cyan); 
-    f.setSize (500, 600);
-    
-    FlashCard card1Math = new FlashCard("1 + 1", "2");
-    FlashCard card2Math = new FlashCard("2 + 1", "3");
-    FlashCard card3Math = new FlashCard("1 * 1", "1");
-    List<FlashCard> cards = new ArrayList<>();      
-    cards.add(card1Math); 
-    cards.add(card2Math); 
-    cards.add(card3Math);
-          
-    Deck math = new Deck("math", cards); 
-    
-    f.getContentPane().add (new QuizSelfPanel(math));
+        FlashCard card1Math = new FlashCard("1 + 1", "2");
+        FlashCard card2Math = new FlashCard("2 + 1", "3");
+        FlashCard card3Math = new FlashCard("1 * 1", "1");
+        List<FlashCard> cards = new ArrayList<>();      
+        cards.add(card1Math); 
+        cards.add(card2Math); 
+        cards.add(card3Math);
 
-    // Show the frame. 
-    f.setVisible (true);
+        Deck math = new Deck("math", cards); 
+
+        frame.getContentPane().add (new QuizSelfPanel(math));
+
+        // Show the frame. 
+        frame.setVisible (true);
      } 
     
 }

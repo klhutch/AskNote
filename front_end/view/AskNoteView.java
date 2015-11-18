@@ -14,6 +14,7 @@ import model.*;
  * @author tiffanychao
  */
 public class AskNoteView {
+    protected static AskNoteModel model = new AskNoteModel();
     
     public AskNoteView() { 
       
