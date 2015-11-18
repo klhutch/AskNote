@@ -34,10 +34,8 @@ public class HomePagePanel extends JPanel{
         JButton friends = new JButton("Friends");
         JLabel hello = new JLabel("Welcome to AskNote");    
         
-        TitledBorder title = BorderFactory.createTitledBorder("title");
-        title.setTitleJustification(TitledBorder.CENTER);
+       
         JPanel top = new JPanel(); 
-        top.setBorder(title);
         top.add(hello); 
         JPanel bottom = new JPanel(); 
         
