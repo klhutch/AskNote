@@ -7,6 +7,7 @@ package front_end.view;
 
 import java.util.ArrayList;
 import javax.swing.JFrame;
+import model.Deck;
 import model.Quiz;
 import view.SelectQuizPanel;
 
@@ -24,7 +25,28 @@ public class TestSelectQuizPanel {
         frame.setResizable(true);
         frame.setSize(500, 600);
         
-        frame.add(new SelectQuizPanel(new ArrayList<Quiz>(), new ArrayList<String>()));
+        String friend1 = "Marie";
+        Deck deck1 = new Deck("English");
+        Quiz quiz1 = new Quiz(deck1, friend1, false);
+        
+        String friend2 = "Alex";
+        Deck deck2 = new Deck(friend2);
+        Quiz quiz2 = new Quiz(deck2, friend2, true);
+        
+        ArrayList<Quiz> quizzes = new ArrayList();
+        quizzes.add(quiz1);
+        quizzes.add(quiz2);
+        
+        ArrayList<String> friends = new ArrayList();
+        friends.add(friend1);
+        friends.add(friend2);
+        
+        
+        frame.add(new SelectQuizPanel(quizzes, friends));
+        
+        
+        
+        
         
         frame.setVisible(true);
         
