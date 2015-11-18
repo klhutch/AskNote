@@ -16,54 +16,6 @@ import model.*;
  * @author Maha Alkhairy
  */
 
-class OptionPanel  extends JPanel { 
-    OptionPanel(String button, String label) { 
-        FlowLayout flow = new FlowLayout(); 
-        flow.setAlignment(FlowLayout.LEADING);
-        JButton bttn = new JButton(button); 
-        JLabel lbl = new JLabel(label); 
-        
-        Font font = new Font("SanSarif", Font.BOLD, 20); 
-        
-        lbl.setFont(font);
-        bttn.setFont(font);
-        
-        flow.setHgap(25);
-        this.setMaximumSize(new Dimension(500, 100));
-               
-        this.setLayout(flow); 
-        this.add(bttn); 
-        this.add(lbl); 
-        this.validate();
-        
-    }
-}
-
-/**
- *
- * @author Maha Alkhairy
- */
-class SelectionPanel extends JPanel{
-    // takes nothing in 
-    public SelectionPanel() {        
-       
-        OptionPanel add = new OptionPanel("  ", "Add Friend");     
-        OptionPanel checkAll = new OptionPanel("  ", "Check all"); 
-        OptionPanel uncheckAll = new OptionPanel("  ", "Uncheck all");
-        OptionPanel delete = new OptionPanel("  ", "Delete"); 
-        
-        BoxLayout box = new BoxLayout(this, BoxLayout.Y_AXIS); 
-        
-        
-        this.add(add);
-        this.add(checkAll); 
-        this.add(uncheckAll); 
-        this.add(delete); 
-        this.setLayout(box);
-        
-        this.validate();
-        }    
-}
 
 public class FriendsListPanel extends JPanel {
     
@@ -108,4 +60,53 @@ public class FriendsListPanel extends JPanel {
         this.add(right); 
         this.validate(); 
     }    
+   
+    class OptionPanel  extends JPanel { 
+        OptionPanel(String button, String label) { 
+            FlowLayout flow = new FlowLayout(); 
+            flow.setAlignment(FlowLayout.LEADING);
+            JButton bttn = new JButton(button); 
+            JLabel lbl = new JLabel(label); 
+
+            Font font = new Font("SanSarif", Font.BOLD, 20); 
+
+            lbl.setFont(font);
+            bttn.setFont(font);
+
+            flow.setHgap(25);
+            this.setMaximumSize(new Dimension(500, 100));
+
+            this.setLayout(flow); 
+            this.add(bttn); 
+            this.add(lbl); 
+            this.validate();
+
+        }
+    }
+
+    /**
+     *
+     * @author Maha Alkhairy
+     */
+    class SelectionPanel extends JPanel{
+        // takes nothing in 
+        public SelectionPanel() {        
+
+            OptionPanel add = new OptionPanel("  ", "Add Friend");     
+            OptionPanel checkAll = new OptionPanel("  ", "Check all"); 
+            OptionPanel uncheckAll = new OptionPanel("  ", "Uncheck all");
+            OptionPanel delete = new OptionPanel("  ", "Delete"); 
+
+            BoxLayout box = new BoxLayout(this, BoxLayout.Y_AXIS); 
+
+
+            this.add(add);
+            this.add(checkAll); 
+            this.add(uncheckAll); 
+            this.add(delete); 
+            this.setLayout(box);
+
+            this.validate();
+            }    
+    }
 }

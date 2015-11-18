@@ -6,12 +6,18 @@
 package view;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
 import javax.swing.SwingConstants;
+import javax.swing.border.LineBorder;
 import model.Deck;
 import model.FlashCard;
 
@@ -23,91 +29,60 @@ public class EditDeckPanel extends JPanel {
     Deck deck;
     
     public EditDeckPanel(Deck deck) {
-        this.deck = deck;
         
-        // init top level panel
-        this.setLayout(new BorderLayout());
-            
-        // init leftmost deck panel
-        GridLayout gl1 = initGridLayout(deck.getCards().size());
         
-        JPanel deckPanel = new JPanel(); 
-        deckPanel.setLayout(gl1);
-        
-        // add buttons to leftmost deck panel
-        for (int i = 0; i < deck.getSize(); i++) {
-            
-            JButton cardButton = new JButton(getCardPreview(deck.getCard(i)));
-            JLabel cardLabel = new JLabel("Card " + String.valueOf(i + 1), SwingConstants.CENTER);
-            
-            JPanel buttonPanel = new JPanel();      
-            buttonPanel.setLayout(new BorderLayout());
-            buttonPanel.add(cardButton, BorderLayout.CENTER);
-            buttonPanel.add(cardLabel, BorderLayout.SOUTH);
-            
-            deckPanel.add(buttonPanel);
-        }
-
-        JScrollPane scrollPanel = new JScrollPane(deckPanel);
-        
-        // init rightmost options panel
-        JPanel optionPanel = new JPanel();
-        GridLayout gl2 = new GridLayout();
-        gl2.setColumns(1);
-        gl2.setRows(2);
-        gl2.setHgap(20);
-        gl2.setVgap(20);
-        optionPanel.setLayout(gl2);
-        
-        JButton newButton = new JButton("Add Card");
-        JButton deleteButton = new JButton("Delete Card");
-        
-        optionPanel.add(newButton);
-        optionPanel.add(deleteButton);
-        
-        // validate
-        
-        // should be able to rename deck, change to textfield later?
-        this.add(new JLabel(deck.getTitle()), BorderLayout.NORTH);
-        this.add(scrollPanel, BorderLayout.WEST);
-        this.add(optionPanel, BorderLayout.EAST);
-        this.validate();
     }
     
-    /**
-     * sets number of rows based on number of cards in deck.
-     * WIP, this function need to fill rows before columns.
-     * Might change to GridBagLayout
-     * @param numCards number of cards
-     * @return the grid layout
-     */
-    private GridLayout initGridLayout(int numCards) {
-        GridLayout gl = new GridLayout();
-        
-        int cols = 4;
-        int remainder = numCards % cols;
-        int rows = (numCards - remainder) / cols;
-        
-        gl.setColumns(cols);
-        gl.setRows(rows + 1); // include remainder
-        gl.setHgap(20);
-        gl.setHgap(20);
-        return gl;       
-    }
+//    
+//      class CardPanel extends JPanel {
+//        FlashCard card; 
+//        boolean side1Shown; 
+//        JLabel title;
+//        
+//        CardPanel(FlashCard card) {
+//             this.card = card; 
+//             
+//           
+//            
+//            //this.setLayout(new BorderLayout());
+//            this.title = new JLabel("Shown Side");
+//            JButton flip = new JButton("flip");
+//            
+//            flip.addActionListener(new ActionListener() {
+//                @Override
+//                public void actionPerformed(ActionEvent e) {
+//                    if(CardPanel.this.side1Shown) {
+//                        CardPanel.this.title.setText(card.getSide2());
+//                        CardPanel.this.repaint();
+//                    }
+//                    else {
+//                        CardPanel.this.title.setText(card.getSide1());
+//                        CardPanel.this.repaint();
+//                    }
+//                }
+//            });
+//            
+//            
+//            
+////            this.responseArea = new JTextArea(shownSide, 30, 40);
+////            responseArea.setEnabled(false);
+////            
+////            
+////            responseArea.setAlignmentX(JTextArea.CENTER_ALIGNMENT);
+////            responseArea.setAlignmentY(JTextArea.CENTER_ALIGNMENT);
+////            
+////            responseArea.setBorder(new LineBorder(Color.BLACK, 1));
+////            
+////            JPanel north = new JPanel();
+////            north.add(title);
+////            north.add(flip);
+////            north.setPreferredSize(new Dimension(500, 30));
+////            
+////            this.add(north, BorderLayout.NORTH);
+////            this.add(responseArea, BorderLayout.CENTER);
+////        }
+//        
+//    }
+//    
     
-    /**
-     * get preview of flashcard content
-     * @param c the flashcard
-     * @return content preview
-     */
-    private String getCardPreview(FlashCard c) {
-        String content = c.getSide1();
-        if (content.length() <= 20) { // should this be a parameter?
-            // don't change content
-        } else {
-            content = content.substring(0, 20) + "...";
-        }
-        return content;
-    }
-    
-}
+} 
