@@ -6,7 +6,7 @@
 package front_end.view;
 
 import javax.swing.JFrame;
-import view.TesteePanel;
+import view.QuizTesteePanel;
 
 /**
  *
@@ -19,7 +19,7 @@ public class TestQuizTestee {
         frame.setResizable(true);
         frame.setSize(1000, 600);
         
-        TesteePanel testPanel = new TesteePanel("I solemnly Swear I am Up to No Good");
+        QuizTesteePanel testPanel = new QuizTesteePanel("I solemnly Swear I am Up to No Good");
         
         frame.add(testPanel);
         frame.setVisible(true);

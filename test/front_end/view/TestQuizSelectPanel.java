@@ -9,14 +9,14 @@ import java.util.ArrayList;
 import javax.swing.JFrame;
 import model.Deck;
 import model.Quiz;
-import view.SelectQuizPanel;
+import view.QuizSelectPanel;
 
 
 /**
  *
  * @author normal
  */
-public class TestSelectQuizPanel {
+public class TestQuizSelectPanel {
     public static void main(String[] args) {
         //Create Frame
         JFrame frame = new JFrame();
@@ -42,7 +42,7 @@ public class TestSelectQuizPanel {
         friends.add(friend2);
         
         
-        frame.add(new SelectQuizPanel(quizzes, friends));
+        frame.add(new QuizSelectPanel(quizzes, friends));
         
         
         

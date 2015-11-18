@@ -7,7 +7,7 @@ package front_end.view;
 
 import javax.swing.JFrame;
 import model.FlashCard;
-import view.TesterPanel;
+import view.QuizTesterPanel;
 
 /**
  *
@@ -23,7 +23,7 @@ public class TestQuizTester {
         FlashCard card = new FlashCard("I Solemnly Swear I am up to no good", 
                                         "The Marauder's Map Password");
         
-        TesterPanel testPanel = new TesterPanel(card, "An important password", true);
+        QuizTesterPanel testPanel = new QuizTesterPanel(card, "An important password", true);
         
         
         frame.add(testPanel);

@@ -6,6 +6,8 @@
 package view;
 
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.*;
 import javax.swing.border.MatteBorder;
 
@@ -14,6 +16,9 @@ import javax.swing.border.MatteBorder;
  * @author Maha Alkhairy
  */
 public class HeaderPanel extends JPanel {
+    JButton home;
+    JButton back;
+    JButton notification;
     
     public HeaderPanel(String str, int number) { 
     FlowLayout flow = new FlowLayout(); 
@@ -25,9 +30,18 @@ public class HeaderPanel extends JPanel {
     
     
     JLabel title = new JLabel(str);
-    JButton home = new JButton("Home"); 
-    JButton back = new JButton("Back");
-    JButton notification = new JButton("" + number);
+    this.home = new JButton("Home"); 
+    this.back = new JButton("Back");
+    this.notification = new JButton("" + number);
+    
+    this.home.setVisible(false);
+    this.home.addActionListener(new HomeButtonListener());
+    
+    this.back.setVisible(false);
+    this.back.addActionListener(new BackButtonListener());
+    
+    this.notification.addActionListener(new NotificationButtonListener());
+    
     this.add(home);
     this.add(back);
     this.add(title);
@@ -39,6 +53,46 @@ public class HeaderPanel extends JPanel {
     
     
     
-    } 
+    }
     
+    public void setHomeVisible(Boolean visible) {
+        this.home.setVisible(visible);
+    }
+    
+    public void setBackVisible(Boolean visible) {
+        this.back.setVisible(visible);
+    }
+
+    
+    
+    
+    
+    private class NotificationButtonListener implements ActionListener {
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        }
+
+    }
+  
+    private class HomeButtonListener implements ActionListener {
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        }
+
+    }
+
+    private class BackButtonListener implements ActionListener {
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        }
+
+        
+    }
+      
 }

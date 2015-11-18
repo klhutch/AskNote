@@ -27,17 +27,17 @@ public class AskNoteView extends JPanel {
         return AskNoteViewSingleton.SINGLETON;
     }
     
-    private JPanel headerPanel;
+    private HeaderPanel header;
     private JPanel appPanel;
     
     
     private AskNoteView() { 
         this.setLayout(new BorderLayout()); 
         
-        this.headerPanel = new HeaderPanel("Home",0);   
+        this.header = new HeaderPanel("Home",0);   
         this.appPanel = new HomePagePanel();
         
-        this.add(headerPanel, BorderLayout.NORTH);
+        this.add(header, BorderLayout.NORTH);
         this.add(appPanel, BorderLayout.CENTER);
         
         this.validate();
@@ -49,48 +49,59 @@ public class AskNoteView extends JPanel {
     public void updateView() {
         AskNoteModel model = AskNoteModel.instance();
         
-        switch(model.getCurrentPage().getValue()) {
-            case 0: 
+        switch(model.getCurrentPage()) {
+            case HOME: 
                 this.appPanel = new HomePagePanel();
+                this.setHeaderButtonsVisibility(false);
                 break;
-            case 1: 
+            case DECK: 
                 this.appPanel = new DeckPanel(model.getDecks());
+                this.setHeaderButtonsVisibility(true);
                 break;
-            case 2: 
+            case QUIZ: 
                 this.appPanel = new QuizPanel();
+                this.setHeaderButtonsVisibility(true);
                 break;
-            case 3: 
-                this.appPanel = new HomePagePanel(); // CHANGE THIS ///////
+            case QUIZ_DECK: 
+                //this.appPanel = new HomePagePanel(); // CHANGE THIS ///////
+                //this.setHeaderButtonsVisibility(true);
+                model.setPreviousAsCurrent();
                 break;
-            case 4: 
-                this.appPanel = new HomePagePanel(); // CHANGE THIS ///////
+            case EDIT_CARD: 
+                this.appPanel = new EditCardPanel(model.getSelectedFlashCard());
+                this.setHeaderButtonsVisibility(true);
                 break;
-            case 5: 
+            case EDIT_DECK: 
                 this.appPanel = new EditDeckPanel(model.getSelectedDeck());
                 break;
-            case 6: 
+            case FRIENDS_LIST: 
                 this.appPanel = new FriendsListPanel(model.getFriends());
                 break;
-            case 7: 
+            case LOGIN: 
                 this.appPanel = new LoginPanel();
                 break;
-            case 8: 
+            case NOTIFICATIONS: 
                 this.appPanel = new HomePagePanel(); // CHANGE THIS ///////
                 break;
-            case 9: 
+            case QUIZ_SELF: 
                 this.appPanel = new QuizSelfPanel(model.getSelectedDeck());
                 break;
-            case 10: 
-                this.appPanel = new SelectQuizPanel(model.getQuizzes(), model.getFriends());
+            case QUIZ_SELECT: 
+                this.appPanel = new QuizSelectPanel(model.getQuizzes(), model.getFriends());
                 break;
-            case 11: 
-                this.appPanel = new TesterPanel(model.getActiveQuiz().getCurrentCard(), model.getActiveQuiz().getResponse(), true);
+            case QUIZ_TESTER: 
+                this.appPanel = new QuizTesterPanel(model.getActiveQuiz().getCurrentCard(), model.getActiveQuiz().getResponse(), true);
                 break;
-            case 12: 
-                this.appPanel = new TesteePanel(model.getActiveQuiz().getShownSide());                          
+            case QUIZ_TESTEE: 
+                this.appPanel = new QuizTesteePanel(model.getActiveQuiz().getShownSide());                          
         }
         
         this.repaint();
+    }
+    
+    private void setHeaderButtonsVisibility(Boolean visible) {
+        this.header.setHomeVisible(visible);
+        this.header.setBackVisible(visible);
     }
     
     

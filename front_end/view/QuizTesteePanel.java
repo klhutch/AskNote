@@ -18,9 +18,9 @@ import javax.swing.border.LineBorder;
  *
  * @author normal
  */
-public class TesteePanel extends JPanel {
+public class QuizTesteePanel extends JPanel {
     
-    public TesteePanel(String shownSide) {
+    public QuizTesteePanel(String shownSide) {
     
         this.setLayout(new BorderLayout());
         

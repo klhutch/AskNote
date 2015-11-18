@@ -28,11 +28,11 @@ import model.Quiz;
  *
  * @author normal
  */
-public class SelectQuizPanel extends JPanel {
+public class QuizSelectPanel extends JPanel {
     private QuizListPanel quizzesPanel;
     private QuizFriendPanel friendsPanel;
     
-    public SelectQuizPanel(List<Quiz> quizzes, List<String> friends) {
+    public QuizSelectPanel(List<Quiz> quizzes, List<String> friends) {
         this.quizzesPanel = new QuizListPanel(quizzes);
         this.friendsPanel = new QuizFriendPanel(friends);
                   

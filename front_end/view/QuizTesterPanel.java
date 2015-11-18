@@ -13,9 +13,9 @@ import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 import model.*;
 
-public class TesterPanel extends JPanel{
+public class QuizTesterPanel extends JPanel{
      
-    public TesterPanel(FlashCard card, String response, Boolean side1wasShown) {
+    public QuizTesterPanel(FlashCard card, String response, Boolean side1wasShown) {
     
         this.setLayout(new BorderLayout());
         
