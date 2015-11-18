@@ -107,7 +107,6 @@ public class SelectQuizPanel extends JPanel {
             this.setLayout(new BorderLayout());
             
             
-            
             JPanel inner = new JPanel();
             inner.setLayout(null);
             
