@@ -5,9 +5,14 @@
  */
 package view;
 import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.GridLayout;
+import java.awt.Color;
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
+import javax.swing.border.LineBorder;
 
 /**
  *
@@ -24,8 +29,13 @@ public class TesteePanel extends JPanel {
         
         JButton sendButton = new JButton("Send");
         
-        this.add(cardPanel, BorderLayout.EAST);
-        this.add(responsePanel, BorderLayout.WEST);
+        JPanel center = new JPanel();
+        center.setLayout(new GridLayout(1, 2));
+        
+        center.add(cardPanel);
+        center.add(responsePanel);
+        
+        this.add(center, BorderLayout.CENTER);
         this.add(sendButton, BorderLayout.SOUTH);
         
         
@@ -37,10 +47,17 @@ public class TesteePanel extends JPanel {
         
         CardPanel(String shownSide) {
             this.shownSide = shownSide;
-            
-            JTextArea showText = new JTextArea(shownSide);
+            //this.setLayout(new BorderLayout());
+            JLabel shown = new JLabel("Shown Side");
+            JTextArea showText = new JTextArea(shownSide, 30, 40);
             showText.setEnabled(false);
+//            showText.setRows(10);
+//            showText.setMinimumSize(new Dimension(300, 300));
+            showText.setAlignmentX(JTextArea.CENTER_ALIGNMENT);
+            showText.setAlignmentY(JTextArea.CENTER_ALIGNMENT);
             
+            showText.setBorder(new LineBorder(Color.BLACK, 1));
+            this.add(shown);
             this.add(showText);
         }
         
@@ -49,9 +66,16 @@ public class TesteePanel extends JPanel {
     class ResponsePanel extends JPanel {
     
         ResponsePanel() {
+            //this.setLayout(new BorderLayout());
+            JLabel otherSide = new JLabel("What's On The Other Side?");
+            JTextArea responseArea = new JTextArea(30, 40);
+            responseArea.setEnabled(true);
             
-            JTextArea responseArea = new JTextArea();
+//            responseArea.setRows(10);
+//            responseArea.setPreferredSize(new Dimension(300, 300));
             
+            responseArea.setBorder(new LineBorder(Color.BLACK, 1));
+            this.add(otherSide);
             this.add(responseArea);
         }
     }

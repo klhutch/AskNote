@@ -23,7 +23,7 @@ public class TestSelectQuizPanel {
         frame.setTitle("AskNote");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setResizable(true);
-        frame.setSize(500, 600);
+        frame.setSize(1000, 600);
         
         String friend1 = "Marie";
         Deck deck1 = new Deck("English");
