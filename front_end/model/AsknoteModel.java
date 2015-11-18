@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.Stack;
 
-public class AskNoteModel {
+public class AsknoteModel {
     User user; 
     PageType currentPage;
     List<Deck> decks; 
@@ -32,7 +32,7 @@ public class AskNoteModel {
      * @param pages
      * @param notifications
      */
-    public AskNoteModel(User user, PageType currentPage,
+    public AsknoteModel(User user, PageType currentPage,
             List<Deck> decks, Deck activeDeck, Flashcard activeFlashcard,
             List<Quiz> quizzes, List<String> friends,
             Stack<PageType> pages, List<String> notifications) {
@@ -48,7 +48,7 @@ public class AskNoteModel {
             this.notifications = notifications; 
     }
     
-    public AskNoteModel() { 
+    public AsknoteModel() { 
         // 0 is home page
         this(new User(), PageType.HOME, new ArrayList<>(), null, null,
                 new ArrayList<>(), new ArrayList<>(),
@@ -88,9 +88,15 @@ public class AskNoteModel {
         }
     }  
     
-    public void goToLastPage() { 
-        //Should pop the top of the page stack and make it the current page
+    /* 
+    Should pop the top of the page stack and make it the current page
+    */
+    public void popPage() { 
         this.currentPage = pages.pop(); 
+    }
+    
+    public void pushPage(PageType p) {
+        this.currentPage = pages.push(p);
     }
     
     public List<String> getFriends() { 

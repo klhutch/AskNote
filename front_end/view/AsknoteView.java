@@ -1,9 +1,12 @@
 package view;
 
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.List;
 import javax.swing.*;
-import model.AskNoteModel;
+import model.AsknoteModel;
+import model.PageType;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -15,22 +18,37 @@ import model.AskNoteModel;
  *
  * @author tiffanychao
  */
-<<<<<<< HEAD:front_end/view/AsknoteView.java
-public class AsknoteView extends JPanel {
+
+public class AsknoteView extends JPanel implements ActionListener {
     
-    protected final AskNoteModel model;
+    private final AsknoteModel model = initModel();
     private JPanel currentView;
     
-    public AsknoteView(String title, List<String> notifications) {
-        this.model = initModel();
-=======
-public class AskNoteView  extends JPanel{
-    
-    public AskNoteView(JPanel currentView, String title, List<String> notifications) { 
-        JPanel header = new HeaderPanel(title, notifications.size()); 
-      
->>>>>>> ffc86d2134a4d29c3cccd21105f0b52d811aeebf:front_end/view/AskNoteView.java
+    public AsknoteView(String title, List<String> notifications) { 
         
+        JPanel header = new HeaderPanel(title, notifications.size()); 
+        BorderLayout border = new BorderLayout(); 
+        this.setLayout(border);
+        updateView();
+        
+        this.add(header, BorderLayout.NORTH);
+        this.add(currentView, BorderLayout.CENTER);
+        
+        this.validate();
+    }
+    
+    /** initialize the model.
+     * The next implementation of AskNote should get values for the model from a database
+     * @return the model
+     */
+    private AsknoteModel initModel() {
+        // default
+        return new AsknoteModel();
+    }
+    
+    /** based on state of model, update current view **/
+    public void updateView() {
+            
         switch(model.getCurrentPage().getValue()) {
             case 0: currentView = new HomePagePanel();
                 break;
@@ -56,30 +74,51 @@ public class AskNoteView  extends JPanel{
                 break;
             case 11: currentView = new TesterPanel(model.getActiveFlashcard(), ""); // change to model.getResponse
                 break;
-            case 12: currentView = new TesteePanel();
-                           
+            case 12: currentView = new TesteePanel(""); // add boolean isSide1Visible to flashcard                         
         }
-        JPanel header = new HeaderPanel(title, notifications.size()); 
-        BorderLayout border = new BorderLayout(); 
-        this.setLayout(border);
-        
-        this.add(header, BorderLayout.NORTH);
-        this.add(currentView, BorderLayout.CENTER);
-        
-        this.validate();
     }
     
-<<<<<<< HEAD:front_end/view/AsknoteView.java
-    /** initialize the model.
-     * The next implementation of AskNote should get values for the model from a database
-     * @return the model
-     */
-    private AskNoteModel initModel() {
-        // default
-        return new AskNoteModel();
-    }  
+    @Override
+    public void actionPerformed(ActionEvent evt) {
+        String cmd = evt.getActionCommand();
+        System.out.println("Parent" + cmd);
+        switch(model.getCurrentPage().getValue()) {
+            case 0: 
+                if (cmd.equals("Decks")) {
+                    model.pushPage(PageType.CHOOSE_DECK);
+                } else if (cmd.equals("Quiz")) {
+                    model.pushPage(PageType.QUIZ);
+                } else if (cmd.equals("Friends")) {
+                    model.pushPage(PageType.FRIENDS_LIST);
+                }
+                updateView();
+                System.out.println("updated view");
+                break;
+            case 1:
+                break;
+            case 2:
+                break;
+            case 3:
+                break;
+            case 4:
+                break;
+            case 5:
+                break;
+            case 6:
+                break;
+            case 7:
+                break;
+            case 8:
+                break;
+            case 9:
+                break;
+            case 10:
+                break;
+            case 11:
+                break;
+            case 12:
+                break; 
+        }
+  }
 }
-=======
-   
-}
->>>>>>> ffc86d2134a4d29c3cccd21105f0b52d811aeebf:front_end/view/AskNoteView.java
+

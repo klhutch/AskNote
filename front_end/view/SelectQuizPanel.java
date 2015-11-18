@@ -9,6 +9,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.util.List;
+import java.util.ArrayList;
 import javax.swing.BoxLayout;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
@@ -33,9 +34,7 @@ public class SelectQuizPanel extends JPanel {
     public SelectQuizPanel(List<Quiz> quizzes, List<String> friends) {
         this.quizzesPanel = new QuizListPanel(quizzes);
         this.friendsPanel = new QuizFriendPanel(friends);
-        
-        
-                
+                  
         JPanel southPlaceholder = new JPanel();
         JPanel eastPlaceholder = new JPanel();
         JPanel westPlaceholder = new JPanel();
@@ -64,11 +63,8 @@ public class SelectQuizPanel extends JPanel {
         List<OneQuizPanel> activeQuizzes = new ArrayList();
         
         QuizListPanel(List<Quiz> quizzes) {
-<<<<<<< HEAD
-=======
             
             this.setBorder(new MatteBorder(0, 0, 0, 1, Color.BLACK));
->>>>>>> ffc86d2134a4d29c3cccd21105f0b52d811aeebf
             this.setLayout(new BorderLayout());
             
             JPanel center = new JPanel();

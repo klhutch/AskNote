@@ -5,41 +5,6 @@
  */
 package front_end.view;
 
-<<<<<<< HEAD
-import java.awt.EventQueue;
-import javax.swing.JFrame;
-import model.Flashcard;
-import view.TesterPanel;
-
-/**
- *
- * @author tiffanychao
- */
-public class TestTesterPanel extends JFrame {
-    
-    public static void main (String[] argv) {
-        
-        EventQueue.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                new TestTesterPanel().setVisible(true);
-            }
-        });
-    }
-
-    private TestTesterPanel() {
-        setTitle("AskNote");
-        setResizable(true);
-        setSize(500, 600);
-        
-        Flashcard f1 = new Flashcard("red", "green");
-        
-        TesterPanel tp = new TesterPanel(f1, "blue");
-        getContentPane().add(tp);
-        pack();
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    }  
-=======
 import javax.swing.*;
 import view.*;
 import model.*;
@@ -61,13 +26,11 @@ public class TestTesterPanel {
         // f.getContentPane().setBackground (Color.cyan); 
         frame.setSize (500, 600);
         
-        FlashCard card1= new FlashCard("d","dd");
+        Flashcard card1= new Flashcard("d","dd");
         
         frame.getContentPane().add (new TesterPanel(card1, "dS"));
 
         // Show the frame. 
         frame.setVisible (true);
      } 
-    
->>>>>>> ffc86d2134a4d29c3cccd21105f0b52d811aeebf
 }

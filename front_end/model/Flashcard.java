@@ -7,7 +7,7 @@ package model;
 // A flashcard has two sides, each containing text
 public class Flashcard {
     String side1; 
-    String side2; 
+    String side2;
     
     public Flashcard(String side1, String side2) { 
         this.side1 = side1; 

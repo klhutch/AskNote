@@ -6,28 +6,10 @@
 package view;
 
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.*;
- 
-
-
-
-class InnerPanel extends JPanel { 
-    InnerPanel(String button, String label) { 
-        FlowLayout flow = new FlowLayout(); 
-        flow.setAlignment(FlowLayout.CENTER);
-        JButton bttn = new JButton(button); 
-        JLabel lbl = new JLabel(label); 
-        flow.setHgap(50);
-        flow.setVgap(70); 
-        this.setSize(500, 10);
-        
-        
-        this.add(bttn); 
-        this.add(lbl); 
-        this.validate();
-        
-    }
-}
+import model.PageType;
 
 /**
  *
@@ -35,7 +17,6 @@ class InnerPanel extends JPanel {
  */
 public class HomePagePanel extends JPanel{
     // takes nothing in 
-<<<<<<< HEAD
     public HomePagePanel() {
         
         // create layout managers
@@ -58,10 +39,33 @@ public class HomePagePanel extends JPanel{
         // create components
         JButton decks = new JButton("Decks");
         decks.setPreferredSize(new Dimension(100, 100));
+        decks.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent evt) {;
+                System.out.println(evt.getActionCommand());
+                getParent().dispatchEvent(evt);
+            }
+        });
         JButton quiz = new JButton("Quiz"); 
         quiz.setPreferredSize(new Dimension(100, 100));
+        quiz.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent evt) {
+                System.out.println(evt.getActionCommand());
+                getParent().dispatchEvent(evt);
+            }
+        });
+        
         JButton friends = new JButton("Friends");
         friends.setPreferredSize(new Dimension(100, 100));
+        friends.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent evt) {
+                System.out.println(evt.getActionCommand());
+                getParent().dispatchEvent(evt);
+            }
+        });
+        
         JLabel hello = new JLabel("Welcome to AskNote");    
         
         // add components to JPanels
@@ -69,26 +73,23 @@ public class HomePagePanel extends JPanel{
         
         options.add(decks); 
         options.add(quiz); 
-        options.add(friends);
-=======
-    public HomePagePanel() {        
-       
-        InnerPanel decks = new InnerPanel("D", "Decks");     
-        InnerPanel quizzes = new InnerPanel("Q", "Quiz"); 
-        InnerPanel Friends = new InnerPanel("F", "Friends");
-        BoxLayout box = new BoxLayout(this, BoxLayout.Y_AXIS); 
-        
-        
-        this.add(decks);
-        this.add(quizzes); 
-        this.add(Friends); 
-        this.setLayout(box);
->>>>>>> ffc86d2134a4d29c3cccd21105f0b52d811aeebf
-        
+        options.add(friends);  
+      
         this.add(title, BorderLayout.NORTH);
         this.add(options, BorderLayout.CENTER);
     
-        this.validate();
-        
-        }    
+        this.validate();   
+        }
+    
+    public PageType deckButtonActionPerformed(ActionEvent evt) {
+        return PageType.CHOOSE_DECK;
+    }
+    
+    public PageType quizButtonActionPerformed(ActionEvent evt) {
+        return PageType.QUIZ;
+    }
+    
+    public PageType friendsButtonActionPerformed(ActionEvent evt) {
+        return PageType.FRIENDS_LIST;
+    }
 }
