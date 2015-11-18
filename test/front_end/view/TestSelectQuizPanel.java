@@ -30,7 +30,7 @@ public class TestSelectQuizPanel {
         Quiz quiz1 = new Quiz(deck1, friend1, false);
         
         String friend2 = "Alex";
-        Deck deck2 = new Deck(friend2);
+        Deck deck2 = new Deck("Nintendo");
         Quiz quiz2 = new Quiz(deck2, friend2, true);
         
         ArrayList<Quiz> quizzes = new ArrayList();
