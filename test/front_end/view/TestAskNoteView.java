@@ -15,11 +15,11 @@ import view.*;
  */
 public class TestAskNoteView {
     public static void main (String[] argv) {
-        JFrame frame = new JFrame (); 
-        frame.setTitle ("AskNote");
-        frame.setResizable (true);
+        JFrame frame = new JFrame(); 
+        frame.setTitle("AskNote");
+        frame.setResizable(true);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize (1000, 600);
+        frame.setSize(1000, 600);
         
         AskNoteView asknote = AskNoteView.instance();      
         frame.add(asknote);

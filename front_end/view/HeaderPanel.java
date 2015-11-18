@@ -7,6 +7,7 @@ package view;
 
 import java.awt.*;
 import javax.swing.*;
+import javax.swing.border.MatteBorder;
 
 /**
  *
@@ -32,6 +33,8 @@ public class HeaderPanel extends JPanel {
     this.add(title);
     this.add(notification);
     this.setPreferredSize(new Dimension(500, 40));
+    
+    this.setBorder(new MatteBorder(0, 0, 1, 0, Color.GRAY));
     this.validate();
     
     
