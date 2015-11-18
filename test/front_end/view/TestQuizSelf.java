@@ -29,9 +29,9 @@ public class TestQuizSelf {
         frame.setResizable (true);
         // Background is going to be Panel's background. 
         // f.getContentPane().setBackground (Color.cyan); 
-        frame.setSize (500, 600);
+        frame.setSize (1000, 600);
 
-        FlashCard card1Math = new FlashCard("1 + 1", "2");
+        FlashCard card1Math = new FlashCard("what is the color of the sky? ", "the sky is blue");
         FlashCard card2Math = new FlashCard("2 + 1", "3");
         FlashCard card3Math = new FlashCard("1 * 1", "1");
         List<FlashCard> cards = new ArrayList<>();      

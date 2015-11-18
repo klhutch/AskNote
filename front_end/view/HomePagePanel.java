@@ -14,14 +14,19 @@ import javax.swing.*;
 class InnerPanel extends JPanel { 
     InnerPanel(String button, String label) { 
         FlowLayout flow = new FlowLayout(); 
-        flow.setAlignment(FlowLayout.CENTER);
+        flow.setAlignment(FlowLayout.LEFT);
         JButton bttn = new JButton(button); 
         JLabel lbl = new JLabel(label); 
-        flow.setHgap(50);
-        flow.setVgap(70); 
-        this.setSize(500, 10);
         
+        Font font = new Font("SanSarif", Font.BOLD, 20); 
         
+        lbl.setFont(font);
+        bttn.setFont(font);
+        
+        flow.setHgap(25);
+        this.setMaximumSize(new Dimension(1000, 100));
+               
+        this.setLayout(flow); 
         this.add(bttn); 
         this.add(lbl); 
         this.validate();
@@ -33,13 +38,13 @@ class InnerPanel extends JPanel {
  *
  * @author Maha Alkhairy
  */
-public class HomePagePanel extends JPanel{
+ class OptionsPanel extends JPanel{
     // takes nothing in 
-    public HomePagePanel() {        
+    OptionsPanel() {        
        
-        InnerPanel decks = new InnerPanel("D", "Decks");     
-        InnerPanel quizzes = new InnerPanel("Q", "Quiz"); 
-        InnerPanel Friends = new InnerPanel("F", "Friends");
+        InnerPanel decks = new InnerPanel("  ", "Decks");     
+        InnerPanel quizzes = new InnerPanel("  ", "Quiz"); 
+        InnerPanel Friends = new InnerPanel("  ", "Friends");
         BoxLayout box = new BoxLayout(this, BoxLayout.Y_AXIS); 
         
         
@@ -49,6 +54,26 @@ public class HomePagePanel extends JPanel{
         this.setLayout(box);
         
         this.validate();
-        
         }    
 }
+
+public class HomePagePanel extends JPanel{
+    // takes nothing in 
+    public HomePagePanel() {        
+        GridBagLayout gridBag = new GridBagLayout(); 
+        OptionsPanel options = new OptionsPanel(); 
+        
+        //this.setLayout(border);
+        
+        
+        
+        this.add(options, BorderLayout.CENTER); 
+       
+        
+       
+       
+        
+        this.validate();
+        }    
+}
+
