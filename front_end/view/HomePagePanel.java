@@ -7,7 +7,27 @@ package view;
 
 import java.awt.*;
 import javax.swing.*;
-import javax.swing.border.TitledBorder;
+ 
+
+
+
+class InnerPanel extends JPanel { 
+    InnerPanel(String button, String label) { 
+        FlowLayout flow = new FlowLayout(); 
+        flow.setAlignment(FlowLayout.CENTER);
+        JButton bttn = new JButton(button); 
+        JLabel lbl = new JLabel(label); 
+        flow.setHgap(50);
+        flow.setVgap(70); 
+        this.setSize(500, 10);
+        
+        
+        this.add(bttn); 
+        this.add(lbl); 
+        this.validate();
+        
+    }
+}
 
 /**
  *
@@ -15,46 +35,20 @@ import javax.swing.border.TitledBorder;
  */
 public class HomePagePanel extends JPanel{
     // takes nothing in 
-    public HomePagePanel() { 
-        FlowLayout flow = new FlowLayout(); 
-        flow.setAlignment(FlowLayout.CENTER);
-        flow.setHgap(20);
-        flow.setVgap(200);
-        
-        FlowLayout flow2 = new FlowLayout(); 
-        flow.setAlignment(FlowLayout.CENTER);
-        
-        
-        GridLayout grid = new GridLayout(); 
-        grid.setRows(2);
-        grid.setColumns(1);
-        
-        JButton decks = new JButton("Decks"); 
-        JButton quiz = new JButton("Quiz"); 
-        JButton friends = new JButton("Friends");
-        JLabel hello = new JLabel("Welcome to AskNote");    
-        
+    public HomePagePanel() {        
        
-        JPanel top = new JPanel(); 
-        top.add(hello); 
-        JPanel bottom = new JPanel(); 
-        
-        bottom.add(decks); 
-        bottom.add(quiz); 
-        bottom.add(friends);
+        InnerPanel decks = new InnerPanel("D", "Decks");     
+        InnerPanel quizzes = new InnerPanel("Q", "Quiz"); 
+        InnerPanel Friends = new InnerPanel("F", "Friends");
+        BoxLayout box = new BoxLayout(this, BoxLayout.Y_AXIS); 
         
         
-        this.add(top);
-        this.add(bottom);
-        
-        
-        this.setLayout(grid);
-        bottom.setLayout(flow);
-        top.setLayout(flow2);
-        
-        
-        
+        this.add(decks);
+        this.add(quizzes); 
+        this.add(Friends); 
+        this.setLayout(box);
         
         this.validate();
+        
         }    
 }

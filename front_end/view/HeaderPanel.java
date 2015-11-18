@@ -19,7 +19,6 @@ public class HeaderPanel extends JPanel {
     flow.setAlignment(FlowLayout.CENTER);
     this.setLayout(flow);
     flow.setHgap(40); 
-    this.setBackground(Color.CYAN);
     
     JLabel title = new JLabel(str);
     JButton home = new JButton("Home"); 

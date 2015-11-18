@@ -14,36 +14,66 @@ import model.*;
  *
  * @author Maha Alkhairy
  */
-public class TesterPanel extends JPanel{
+class ResponsePanel extends JPanel {
     
-    public TesterPanel(FlashCard card, String str) {
-        JPanel cardsides = new JPanel();
+     ResponsePanel (String str) {
         JPanel response = new JPanel();
-        JPanel buttons = new JPanel();
-        JButton flip = new JButton("flip");
+        JLabel resp = new JLabel(str);
         JButton correct = new JButton("correct");
         JButton wrong = new JButton("wrong");
-        JLabel resp = new JLabel(str);
-        JLabel car = new JLabel(card.getSide1());
-        
-    
         
         TitledBorder title = BorderFactory.createTitledBorder("Response");
         title.setTitleJustification(TitledBorder.CENTER);
         
-        TitledBorder title2 = BorderFactory.createTitledBorder("Card");
-        title.setTitleJustification(TitledBorder.CENTER);
-        
         response.setBorder(title);
-        cardsides.setBorder(title2);
         
         response.add(resp);
+        response.add(correct);
+        response.add(wrong);
+        
+        this.add(response); 
+    }
+    
+}
+
+class CardPanel extends JPanel {
+      
+     CardPanel (FlashCard card) {
+        JPanel cardsides = new JPanel();
+        cardsides.setMinimumSize(new Dimension(100, 100));
+        JLabel car = new JLabel(card.getSide1());
+        JButton flip = new JButton("flip");
+        
+       // TitledBorder title = BorderFactory.createTitledBorder("Card");
+       // title.setTitleJustification(TitledBorder.CENTER);
+        
+       // cardsides.setBorder(title);
+       
         cardsides.add(car);
+        cardsides.add(flip);
+        this.add(cardsides); 
+    }
+    
+}
+
+
+public class TesterPanel extends JPanel{
+     ResponsePanel response;
+     CardPanel cardsides;
+     
+    
+    public TesterPanel(FlashCard card, String str) {
         
-        buttons.add(flip); 
-        buttons.add(correct); 
-        buttons.add(wrong); 
+        GridLayout grid = new GridLayout();
+        grid.setColumns(2);
+        grid.setRows(1);
+        this.setLayout(grid);
         
+        this.response = new ResponsePanel(str);
+        this.cardsides = new CardPanel (card);
         
+        this.add(cardsides);
+        this.add(response);
+        this.validate();
     }
 } 
