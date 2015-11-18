@@ -8,6 +8,7 @@ import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import model.Quiz;
@@ -75,6 +76,37 @@ public class SelectQuizPanel extends JPanel {
         
         QuizFriendPanel(ArrayList<String> friends) {
             this.friends = friends;
+            
+            this.setLayout(new BorderLayout());
+            
+            
+            
+            JPanel inner = new JPanel();
+            inner.setLayout(null);
+            
+            
+            JButton confirm = new JButton("Confirm");
+            
+            JPanel friendList = new JPanel();
+            GridLayout grid = new GridLayout(friends.size(), 1);
+            friendList.setLayout(grid);
+            
+            for (int i = 0; i < friends.size(); i++) {
+                
+            }
+            
+            inner.add(friendList, BorderLayout.CENTER);
+            inner.add(confirm, BorderLayout.SOUTH);
+            
+            
+            
+            this.add(inner, BorderLayout.CENTER);
+            
+            JPanel top = new JPanel();
+            top.add(new JLabel("Current"));
+            
+            this.add(top, BorderLayout.NORTH);
+            this.validate();
         }
         
     }
