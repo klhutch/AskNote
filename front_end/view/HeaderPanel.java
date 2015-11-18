@@ -20,6 +20,8 @@ public class HeaderPanel extends JPanel {
     this.setLayout(flow);
     flow.setHgap(40); 
     
+    this.setBackground(Color.cyan);
+    
     
     JLabel title = new JLabel(str);
     JButton home = new JButton("Home"); 

@@ -23,7 +23,7 @@ public class TestAskNoteView {
     f.setResizable (true);
     // Background is going to be Panel's background. 
     // f.getContentPane().setBackground (Color.cyan); 
-    f.setSize (500, 600);
+    f.setSize (1000, 600);
     AsknoteView asknote = new AsknoteView("Home", new ArrayList<>());      
     f.getContentPane().add(asknote);
 

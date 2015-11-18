@@ -34,7 +34,6 @@ public class FriendsListPanel extends JPanel {
         
         this.setLayout(grid2);
         
-        SelectionPanel right = new SelectionPanel(); 
         
         
         JScrollPane leftPane = new JScrollPane(); 
@@ -53,6 +52,20 @@ public class FriendsListPanel extends JPanel {
          for (int i = 0; i < frnds.size(); i++) {           
            left.add(frnds.get(i)); 
         }
+        
+        OptionPanel add = new OptionPanel("  ", "Add Friend");     
+        OptionPanel checkAll = new OptionPanel("  ", "Check all"); 
+        OptionPanel uncheckAll = new OptionPanel("  ", "Uncheck all");
+        OptionPanel delete = new OptionPanel("  ", "Delete"); 
+        
+        List<OptionPanel> options = new ArrayList<>();
+        options.add(add); 
+        options.add(checkAll); 
+        
+        
+        SelectionPanel right = new SelectionPanel(options); 
+
+         
                  
         
         
@@ -62,6 +75,8 @@ public class FriendsListPanel extends JPanel {
     }    
    
     class OptionPanel  extends JPanel { 
+           JButton button; 
+           JLabel label; 
         OptionPanel(String button, String label) { 
             FlowLayout flow = new FlowLayout(); 
             flow.setAlignment(FlowLayout.LEADING);
@@ -72,7 +87,9 @@ public class FriendsListPanel extends JPanel {
 
             lbl.setFont(font);
             bttn.setFont(font);
-
+             
+            this.button = bttn; 
+            
             flow.setHgap(25);
             this.setMaximumSize(new Dimension(500, 100));
 
@@ -90,20 +107,14 @@ public class FriendsListPanel extends JPanel {
      */
     class SelectionPanel extends JPanel{
         // takes nothing in 
-        public SelectionPanel() {        
+        SelectionPanel(List<OptionPanel> panels) {        
 
-            OptionPanel add = new OptionPanel("  ", "Add Friend");     
-            OptionPanel checkAll = new OptionPanel("  ", "Check all"); 
-            OptionPanel uncheckAll = new OptionPanel("  ", "Uncheck all");
-            OptionPanel delete = new OptionPanel("  ", "Delete"); 
-
+            
             BoxLayout box = new BoxLayout(this, BoxLayout.Y_AXIS); 
-
-
-            this.add(add);
-            this.add(checkAll); 
-            this.add(uncheckAll); 
-            this.add(delete); 
+             
+            for (OptionPanel panel : panels) {
+                this.add(panel);
+            }
             this.setLayout(box);
 
             this.validate();

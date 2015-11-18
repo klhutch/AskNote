@@ -6,8 +6,9 @@
 package view;
 
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.*;
+import java.util.List;
+import java.util.ArrayList; 
 import javax.swing.*;
 
 public class HomePagePanel extends JPanel{
@@ -15,24 +16,40 @@ public class HomePagePanel extends JPanel{
     public HomePagePanel() {        
 
         // create layout managers
-        FlowLayout titleFlow = new FlowLayout(); 
-        titleFlow.setAlignment(FlowLayout.CENTER);
-        
-        FlowLayout optionsFlow = new FlowLayout(); 
-        optionsFlow.setAlignment(FlowLayout.CENTER);
-        optionsFlow.setHgap(20);
-        optionsFlow.setVgap(20);
-        
+//        FlowLayout titleFlow = new FlowLayout(); 
+//        titleFlow.setAlignment(FlowLayout.CENTER);
+//        
+//        FlowLayout optionsFlow = new FlowLayout(); 
+//        optionsFlow.setAlignment(FlowLayout.CENTER);
+//        optionsFlow.setHgap(20);
+//        optionsFlow.setVgap(20);
+//        
         // create nested JPanels, set layout managers
         this.setLayout(new BorderLayout());
         
-        JPanel options = new JPanel(); 
-        options.setLayout(optionsFlow);
         
-        // create components, add action listeners
-        JButton decks = new JButton("Decks");
-        decks.setPreferredSize(new Dimension(100, 100));
-        decks.addActionListener(new ActionListener() {
+        InnerPanel decks = new InnerPanel(" D ", "Decks");     
+        InnerPanel quiz = new InnerPanel(" Q ", "Quiz"); 
+        InnerPanel friends = new InnerPanel(" F ", "Friends");
+        
+        List<InnerPanel> options = new ArrayList<>();
+        options.add(decks); 
+        options.add(quiz); 
+        options.add(friends); 
+       
+        OptionsPanel optionsPanel = new OptionsPanel(options); 
+      
+        this.add(optionsPanel, BorderLayout.CENTER);
+        this.validate(); 
+        
+        
+        //////// for mouse listners /////////////
+        JButton decksButton = decks.button; 
+        JButton quizButton = quiz.button; 
+        JButton friendsButton = friends.button; 
+        
+          
+         decksButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent evt) {;
                 System.out.println(evt.getActionCommand());
@@ -40,9 +57,9 @@ public class HomePagePanel extends JPanel{
                 getParent().dispatchEvent(evt);
             }
         });
-        JButton quiz = new JButton("Quiz"); 
-        quiz.setPreferredSize(new Dimension(100, 100));
-        quiz.addActionListener(new ActionListener() {
+        
+        
+        quizButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent evt) {
                 System.out.println(evt.getActionCommand());
@@ -50,9 +67,7 @@ public class HomePagePanel extends JPanel{
             }
         });
         
-        JButton friends = new JButton("Friends");
-        friends.setPreferredSize(new Dimension(100, 100));
-        friends.addActionListener(new ActionListener() {
+        friendsButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent evt) {
                 System.out.println(evt.getActionCommand());
@@ -60,17 +75,17 @@ public class HomePagePanel extends JPanel{
             }
         });
         
-        options.add(decks); 
-        options.add(quiz); 
-        options.add(friends);  
-      
-        this.add(options, BorderLayout.CENTER);
-        this.validate(); 
+         
+        
+       
     }
 }
 
     class InnerPanel extends JPanel { 
+        JButton button; 
+        JLabel label; 
         InnerPanel(String button, String label) { 
+           
             FlowLayout flow = new FlowLayout(); 
             flow.setAlignment(FlowLayout.LEFT);
             JButton bttn = new JButton(button); 
@@ -80,6 +95,9 @@ public class HomePagePanel extends JPanel{
 
             lbl.setFont(font);
             bttn.setFont(font);
+            
+            this.button = bttn; 
+            this.label = lbl; 
 
             flow.setHgap(25);
             this.setMaximumSize(new Dimension(1000, 100));
@@ -98,17 +116,14 @@ public class HomePagePanel extends JPanel{
      */
      class OptionsPanel extends JPanel{
         // takes nothing in 
-        OptionsPanel() {        
+        OptionsPanel(List<InnerPanel> panels) {        
 
-            InnerPanel decks = new InnerPanel("  ", "Decks");     
-            InnerPanel quizzes = new InnerPanel("  ", "Quiz"); 
-            InnerPanel Friends = new InnerPanel("  ", "Friends");
+            
             BoxLayout box = new BoxLayout(this, BoxLayout.Y_AXIS); 
-
-
-            this.add(decks);
-            this.add(quizzes); 
-            this.add(Friends); 
+             
+            for (InnerPanel panel : panels) {
+                this.add(panel);
+            }
             this.setLayout(box);
 
             this.validate();
