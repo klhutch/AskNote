@@ -108,7 +108,7 @@ public class TestModel {
         notifications.add("Jane wants to start a quiz with you using math"); 
         
         
-        AsknoteModel modelExample = new  AsknoteModel(user, currentPage,
+        AskNoteModel modelExample = new  AskNoteModel(user, currentPage,
                 decks, quizzes, friends, pages, notifications); 
         
         assertEquals(modelExample.getCurrentPage(), currentPage);

@@ -14,20 +14,21 @@ import view.HomePagePanel;
  */
 public class TestHomepage {
     
-     public static void main (String[] argv) {
-    // Create a frame 
-    JFrame f = new JFrame ();
+    public static void main (String[] argv) {
+        // Create a frame 
+        JFrame frame = new JFrame ();
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        
+        // Set the title and other parameters. 
+        frame.setTitle ("AskNote");
+        frame.setResizable (true);
+        // Background is going to be Panel's background. 
+        // f.getContentPane().setBackground (Color.cyan); 
+        frame.setSize (500, 600);
 
-    // Set the title and other parameters. 
-    f.setTitle ("AskNote");
-    f.setResizable (true);
-    // Background is going to be Panel's background. 
-    // f.getContentPane().setBackground (Color.cyan); 
-    f.setSize (500, 600);
-    
-    f.getContentPane().add (new HomePagePanel());
+        frame.getContentPane().add (new HomePagePanel());
 
-    // Show the frame. 
-    f.setVisible (true);
-     } 
+        // Show the frame. 
+        frame.setVisible (true);
+    } 
 }

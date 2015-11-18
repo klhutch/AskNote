@@ -5,6 +5,7 @@
  */
 package view;
 
+<<<<<<< HEAD
 import javax.swing.*;
 import java.awt.*;
 import javax.swing.border.TitledBorder;
@@ -46,5 +47,14 @@ public class TesterPanel extends JPanel{
         
         
     }
+=======
+import javax.swing.JPanel;
+
+/**
+ *
+ * @author normal
+ */
+public class TesterPanel extends JPanel {
+>>>>>>> 81116294f9e28c18943233eb9318677846228280
     
 }

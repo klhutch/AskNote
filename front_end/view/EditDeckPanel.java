@@ -20,8 +20,10 @@ import model.FlashCard;
  * @author tiffanychao
  */
 public class EditDeckPanel extends JPanel {
+    Deck deck;
     
     public EditDeckPanel(Deck deck) {
+        this.deck = deck;
         
         // init top level panel
         this.setLayout(new BorderLayout());
