@@ -50,8 +50,15 @@ public class SelectQuizPanel extends JPanel {
             GridLayout grid = new GridLayout(quizzes.size(), 1);
             center.setLayout(grid);
             
-            for (Quiz quiz : quizzes) {
-                activeQuizzes.add(new OneQuizPanel(quiz));
+            if (quizzes.size() > 0) {
+                for (Quiz quiz : quizzes) {
+                    OneQuizPanel quizPanel = new OneQuizPanel(quiz);
+                    activeQuizzes.add(quizPanel);
+                    center.add(quizPanel);
+                }
+            }
+            else {
+                center.add(new JLabel("No Active Quizzes"));
             }
             
             this.add(center, BorderLayout.CENTER);
