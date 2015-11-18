@@ -21,38 +21,48 @@ package model;
 public class Quiz {
     
     private Deck deck; 
-    private User testee; 
-    private User tester; 
+    private String friend;
+    private Boolean userIsTester;
     
-    public Quiz() { 
-        this(new Deck(), new User(), new User()); 
-    }
-    
-    public Quiz(Deck deck, User testee, User tester) { 
+    public Quiz(Deck deck, String friend, Boolean UserIsTester) { 
         this.deck = deck; 
-        this.testee = testee; 
-        this.tester = tester; 
+        this.friend = friend; 
+        this.userIsTester = userIsTester;
     }
     
     public void setDeck(Deck deck) { 
         this.deck = deck; 
     }
     
+    public Deck getDeck() {
+        return this.deck;
+    }
+    
     // not sure about type
-    public void setTestee(User testee) { 
-        this.testee = testee; 
+    public void setFriend(String friend) { 
+        this.friend = friend; 
         
     }
     
-    // not sure about type 
-    public void setTester(User tester) { 
-        this.tester = tester; 
+    public String getFriend() {
+        return this.friend;
     }
     
-    // 
-    public boolean equals(Quiz quiz) { 
-        return (this.deck.equals(quiz.deck) && this.testee.equals(quiz.testee) &&
-                this.tester.equals(quiz.tester)); 
+    public void setUserIsTester(Boolean userIsTester) {
+        this.userIsTester = userIsTester;
+    }
+    
+    public Boolean getUserIsTester() {
+        return this.userIsTester;
+    }
+    
+    @Override
+    public boolean equals(Object obj) { 
+        if (obj instanceof Quiz) {
+            Quiz quiz = (Quiz) obj;
+            return (this.deck.equals(quiz.deck)  && this.friend.equals(quiz.friend));
+        }
+        return false;
     }
     
     

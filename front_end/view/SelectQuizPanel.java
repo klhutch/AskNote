@@ -39,10 +39,9 @@ public class SelectQuizPanel extends JPanel {
     
     
     class QuizListPanel extends JPanel {
-        List<Quiz> quizzes;
+        List<OneQuizPanel> activeQuizzes;
         
         QuizListPanel(ArrayList<Quiz> quizzes) {
-            this.quizzes = quizzes;
             this.setLayout(new BorderLayout());
             
             JPanel center = new JPanel();
@@ -50,7 +49,7 @@ public class SelectQuizPanel extends JPanel {
             center.setLayout(grid);
             
             for (int i = 0; i < quizzes.size(); i++) {
-                center.add()
+                activeQuizzes.add(new OneQuizPanel(quizzes.get(i)));
             }
             
             this.add(center, BorderLayout.CENTER);
@@ -64,7 +63,16 @@ public class SelectQuizPanel extends JPanel {
     }
     
     class OneQuizPanel extends JPanel {
-    
+        Quiz quiz;
+        
+        OneQuizPanel(Quiz quiz) {
+            this.quiz = quiz;
+            
+            JButton cont = new JButton("Continue");
+            JButton end = new JButton("End");
+            
+            
+        }
     
     }
     
