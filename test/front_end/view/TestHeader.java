@@ -5,19 +5,18 @@
  */
 package front_end.view;
 
-import java.util.ArrayList;
-import java.util.List;
-import javax.swing.JFrame;
-import view.FriendsListPanel;
+import javax.swing.*;
+import view.*;
 
 /**
  *
  * @author Maha Alkhairy
  */
-public class TestFriendsList {
-     public static void main (String[] argv) {
-    // Create a frame 
+public class TestHeader {
+
+    public static void main (String[] argv) {
     JFrame f = new JFrame ();
+    
 
     // Set the title and other parameters. 
     f.setTitle ("AskNote");
@@ -26,24 +25,9 @@ public class TestFriendsList {
     // f.getContentPane().setBackground (Color.cyan); 
     f.setSize (500, 600);
     
-    /// make a FriendsList
-    List<String> frnds = new ArrayList<>(); 
-    
-    for (int i = 0; i < 100; i++) { 
-         String str = "friend" + i; 
-         frnds.add(str); 
-     }
-    
-   
-    ////
-    
-    FriendsListPanel flst = new FriendsListPanel(frnds); 
-   
-    f.getContentPane().add (flst);
+    f.getContentPane().add (new HeaderPanel("Home", 0));
 
     // Show the frame. 
     f.setVisible (true);
-  }
-
-    
+    } 
 }

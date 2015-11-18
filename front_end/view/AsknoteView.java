@@ -1,5 +1,7 @@
 package view;
 
+import java.awt.*;
+import java.util.List;
 import javax.swing.*;
 import model.*;
 
@@ -13,14 +15,19 @@ import model.*;
  *
  * @author tiffanychao
  */
-public class AsknoteView {
+public class AsknoteView  extends JPanel{
     
-    public AsknoteView() { 
+    public AsknoteView(JPanel currentView, String title, List<String> notifications) { 
+        JPanel header = new HeaderPanel(title, notifications.size()); 
         
+        BorderLayout border = new BorderLayout(); 
+        this.setLayout(border);
         
-      
+        this.add(header, BorderLayout.NORTH);
+        this.add(currentView, BorderLayout.CENTER);
         
-    }
+        this.validate();
+    } 
     
    
 }

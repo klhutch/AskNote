@@ -16,7 +16,7 @@ import model.*;
  * @author Maha Alkhairy
  */
 public class FriendsListPanel extends JPanel {
-    public FriendsListPanel(List<User> friends) { 
+    public FriendsListPanel(List<String> friends) { 
         GridLayout grid = new GridLayout(); 
         grid.setColumns(1);
         grid.setRows(-1);
@@ -43,7 +43,7 @@ public class FriendsListPanel extends JPanel {
         List<JCheckBox> frnds = new ArrayList<JCheckBox>(); 
                                     
         for (int i = 0; i < friends.size(); i++) { 
-           String name =  friends.get(i).getUsername();
+           String name = friends.get(i); 
            JCheckBox frnd = new JCheckBox(name); 
            frnds.add(frnd); 
         }
