@@ -14,7 +14,7 @@ import view.HomePagePanel;
  *
  * @author Maha Alkhairy
  */
-public class TestAsknoteView {
+public class TestAskNoteView {
     public static void main (String[] argv) {
     JFrame f = new JFrame ();
     
