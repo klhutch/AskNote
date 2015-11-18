@@ -13,52 +13,6 @@ import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 import model.*;
 
-/**
- *
- * @author Maha Alkhairy
- */
-class ResponsePanel extends JPanel {
-    
-     ResponsePanel (String str) {
-        JPanel response = new JPanel();
-        JLabel resp = new JLabel(str);
-        JButton correct = new JButton("correct");
-        JButton wrong = new JButton("wrong");
-        
-        TitledBorder title = BorderFactory.createTitledBorder("Response");
-        title.setTitleJustification(TitledBorder.CENTER);
-        
-        response.setBorder(title);
-        
-        response.add(resp);
-        response.add(correct);
-        response.add(wrong);
-        
-        this.add(response); 
-    }
-    
-}
-
-class CardPanel extends JPanel {
-      
-     CardPanel (FlashCard card) {
-        JPanel cardsides = new JPanel();
-        cardsides.setMinimumSize(new Dimension(100, 100));
-        JLabel car = new JLabel(card.getSide1());
-        JButton flip = new JButton("flip");
-        
-       // TitledBorder title = BorderFactory.createTitledBorder("Card");
-       // title.setTitleJustification(TitledBorder.CENTER);
-        
-       // cardsides.setBorder(title);
-       
-        cardsides.add(car);
-        cardsides.add(flip);
-        this.add(cardsides); 
-    }
-    
-}
-
 
 public class TesterPanel extends JPanel{
      
