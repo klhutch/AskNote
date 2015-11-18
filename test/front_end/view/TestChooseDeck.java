@@ -26,7 +26,6 @@ public class TestChooseDeck extends JFrame {
     private TestChooseDeck() {
         setTitle ("AskNote");
         setResizable(true);
-        setSize (500, 600);
         
         List<Deck> decks = new ArrayList<>();
         decks.add(new Deck("Bio1"));
@@ -40,6 +39,7 @@ public class TestChooseDeck extends JFrame {
         
         ChooseDeckPanel ed = new ChooseDeckPanel(decks);
         getContentPane().add(ed);
+        pack();
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 }

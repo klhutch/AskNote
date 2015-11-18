@@ -9,7 +9,7 @@ import javax.swing.JTextArea;
 import model.FlashCard;
 
 /**
- * Note: This JPanel should be added to a dialog box
+ * Note: This JPanel should be added to a JDialog
  */
 public class EditCardPanel extends JPanel {
     

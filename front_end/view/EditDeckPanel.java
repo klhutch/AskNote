@@ -1,12 +1,10 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package view;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.GridLayout;
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -29,10 +27,10 @@ public class EditDeckPanel extends JPanel {
         this.setLayout(new BorderLayout());
             
         // init leftmost deck panel
-        GridLayout gl1 = initGridLayout(deck.getCards().size());
+        GridLayout gl = initGridLayout(deck.getCards().size());
         
         JPanel deckPanel = new JPanel(); 
-        deckPanel.setLayout(gl1);
+        deckPanel.setLayout(gl);
         
         // add buttons to leftmost deck panel
         for (int i = 0; i < deck.getSize(); i++) {
@@ -42,6 +40,7 @@ public class EditDeckPanel extends JPanel {
             
             JPanel buttonPanel = new JPanel();      
             buttonPanel.setLayout(new BorderLayout());
+            buttonPanel.setPreferredSize(new Dimension(100, 100));
             buttonPanel.add(cardButton, BorderLayout.CENTER);
             buttonPanel.add(cardLabel, BorderLayout.SOUTH);
             
@@ -52,12 +51,7 @@ public class EditDeckPanel extends JPanel {
         
         // init rightmost options panel
         JPanel optionPanel = new JPanel();
-        GridLayout gl2 = new GridLayout();
-        gl2.setColumns(1);
-        gl2.setRows(2);
-        gl2.setHgap(20);
-        gl2.setVgap(20);
-        optionPanel.setLayout(gl2);
+        optionPanel.setLayout(new BoxLayout(optionPanel, BoxLayout.Y_AXIS));
         
         JButton newButton = new JButton("Add Card");
         JButton deleteButton = new JButton("Delete Card");
@@ -65,10 +59,13 @@ public class EditDeckPanel extends JPanel {
         optionPanel.add(newButton);
         optionPanel.add(deleteButton);
         
-        // validate
+        // init deck title
+        JLabel title = new JLabel(deck.getTitle());
+        title.setFont(new Font(title.getFont().getName(), Font.PLAIN, 20));
         
+        // add to top level panel
         // should be able to rename deck, change to textfield later?
-        this.add(new JLabel(deck.getTitle()), BorderLayout.NORTH);
+        this.add(title, BorderLayout.NORTH);
         this.add(scrollPanel, BorderLayout.WEST);
         this.add(optionPanel, BorderLayout.EAST);
         this.validate();
@@ -89,9 +86,13 @@ public class EditDeckPanel extends JPanel {
         int rows = (numCards - remainder) / cols;
         
         gl.setColumns(cols);
-        gl.setRows(rows + 1); // include remainder
+        if (remainder != 0) {
+            gl.setRows(rows + 1); // include remainder
+        } else {
+            gl.setRows(rows);
+        }
         gl.setHgap(20);
-        gl.setHgap(20);
+        gl.setVgap(20);
         return gl;       
     }
     

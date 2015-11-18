@@ -17,7 +17,6 @@ public class TestHomepage {
     public static void main (String[] argv) {
         // Create a frame 
         JFrame frame = new JFrame ();
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         
         // Set the title and other parameters. 
         frame.setTitle ("AskNote");
@@ -30,5 +29,6 @@ public class TestHomepage {
 
         // Show the frame. 
         frame.setVisible (true);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     } 
 }

@@ -14,7 +14,7 @@ public class AskNoteModel {
     PageType currentPage;
     List<Deck> decks; 
     List<Quiz> quizzes; 
-    List<User> friends; 
+    List<String> friends; 
     Stack<PageType> pages;
     List<String> notifications; 
     
@@ -29,7 +29,7 @@ public class AskNoteModel {
      * @param notifications
      */
     public AskNoteModel(User user, PageType currentPage,
-            List<Deck> decks, List<Quiz> quizzes, List<User> friends,
+            List<Deck> decks, List<Quiz> quizzes, List<String> friends,
             Stack<PageType> pages, List<String> notifications) {
         
             this.user = user; 
@@ -78,7 +78,7 @@ public class AskNoteModel {
         this.currentPage = pages.pop(); 
     }
     
-    public List<User> getFriends() { 
+    public List<String> getFriends() { 
         return this.friends; 
     }
     

@@ -25,9 +25,9 @@ public class TestEditDeck extends JFrame {
     }
 
     private TestEditDeck() {
-        setTitle ("AskNote");
+        setTitle("AskNote");
         setResizable(true);
-        setSize (500, 600);
+        setSize(500, 600);
         
         FlashCard f1 = new FlashCard("photosynthesis", "");
         FlashCard f2 = new FlashCard("Calvin Cycle", "");
@@ -45,6 +45,7 @@ public class TestEditDeck extends JFrame {
         
         EditDeckPanel ed = new EditDeckPanel(new Deck("Bio", cards));
         getContentPane().add(ed);
+        pack();
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 }
