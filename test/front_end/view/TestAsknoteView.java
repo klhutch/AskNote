@@ -25,7 +25,7 @@ public class TestAsknoteView {
     // Background is going to be Panel's background. 
     // f.getContentPane().setBackground (Color.cyan); 
     f.setSize (500, 600);
-    AsknoteView asknote = new AsknoteView(new HomePagePanel(), "Home", new ArrayList<String>());  
+    AskNoteView asknote = new AskNoteView(new HomePagePanel(), "Home", new ArrayList<String>());  
     
     f.getContentPane().add (asknote);
 

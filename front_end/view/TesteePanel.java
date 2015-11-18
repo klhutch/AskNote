@@ -7,21 +7,19 @@ package view;
 import java.awt.BorderLayout;
 import javax.swing.JButton;
 import javax.swing.JPanel;
+import javax.swing.JTextArea;
 
 /**
  *
  * @author normal
  */
 public class TesteePanel extends JPanel {
-    String shownSide;
     
     public TesteePanel(String shownSide) {
-        this.shownSide = shownSide;
-        
-        
+    
         this.setLayout(new BorderLayout());
         
-        CardPanel cardPanel = new CardPanel();
+        CardPanel cardPanel = new CardPanel(shownSide);
         ResponsePanel responsePanel = new ResponsePanel();
         
         JButton sendButton = new JButton("Send");
@@ -35,10 +33,26 @@ public class TesteePanel extends JPanel {
     }
     
     class CardPanel extends JPanel {
+        String shownSide;
+        
+        CardPanel(String shownSide) {
+            this.shownSide = shownSide;
+            
+            JTextArea showText = new JTextArea(shownSide);
+            showText.setEnabled(false);
+            
+            this.add(showText);
+        }
         
     }
     
     class ResponsePanel extends JPanel {
-        
+    
+        ResponsePanel() {
+            
+            JTextArea responseArea = new JTextArea();
+            
+            this.add(responseArea);
+        }
     }
 }

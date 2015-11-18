@@ -15,9 +15,9 @@ import model.*;
  *
  * @author tiffanychao
  */
-public class AsknoteView  extends JPanel{
+public class AskNoteView  extends JPanel{
     
-    public AsknoteView(JPanel currentView, String title, List<String> notifications) { 
+    public AskNoteView(JPanel currentView, String title, List<String> notifications) { 
         JPanel header = new HeaderPanel(title, notifications.size()); 
       
         
