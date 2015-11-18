@@ -15,6 +15,7 @@ import model.AskNoteModel;
  *
  * @author tiffanychao
  */
+<<<<<<< HEAD:front_end/view/AsknoteView.java
 public class AsknoteView extends JPanel {
     
     protected final AskNoteModel model;
@@ -22,6 +23,13 @@ public class AsknoteView extends JPanel {
     
     public AsknoteView(String title, List<String> notifications) {
         this.model = initModel();
+=======
+public class AskNoteView  extends JPanel{
+    
+    public AskNoteView(JPanel currentView, String title, List<String> notifications) { 
+        JPanel header = new HeaderPanel(title, notifications.size()); 
+      
+>>>>>>> ffc86d2134a4d29c3cccd21105f0b52d811aeebf:front_end/view/AskNoteView.java
         
         switch(model.getCurrentPage().getValue()) {
             case 0: currentView = new HomePagePanel();
@@ -61,6 +69,7 @@ public class AsknoteView extends JPanel {
         this.validate();
     }
     
+<<<<<<< HEAD:front_end/view/AsknoteView.java
     /** initialize the model.
      * The next implementation of AskNote should get values for the model from a database
      * @return the model
@@ -70,3 +79,7 @@ public class AsknoteView extends JPanel {
         return new AskNoteModel();
     }  
 }
+=======
+   
+}
+>>>>>>> ffc86d2134a4d29c3cccd21105f0b52d811aeebf:front_end/view/AskNoteView.java

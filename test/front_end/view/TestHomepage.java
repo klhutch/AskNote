@@ -25,7 +25,7 @@ public class TestHomepage {
         // f.getContentPane().setBackground (Color.cyan); 
         frame.setSize (500, 600);
 
-        frame.getContentPane().add (new HomePagePanel());
+        frame.getContentPane().add(new HomePagePanel());
 
         // Show the frame. 
         frame.setVisible (true);

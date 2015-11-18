@@ -7,7 +7,27 @@ package view;
 
 import java.awt.*;
 import javax.swing.*;
-import javax.swing.border.TitledBorder;
+ 
+
+
+
+class InnerPanel extends JPanel { 
+    InnerPanel(String button, String label) { 
+        FlowLayout flow = new FlowLayout(); 
+        flow.setAlignment(FlowLayout.CENTER);
+        JButton bttn = new JButton(button); 
+        JLabel lbl = new JLabel(label); 
+        flow.setHgap(50);
+        flow.setVgap(70); 
+        this.setSize(500, 10);
+        
+        
+        this.add(bttn); 
+        this.add(lbl); 
+        this.validate();
+        
+    }
+}
 
 /**
  *
@@ -15,6 +35,7 @@ import javax.swing.border.TitledBorder;
  */
 public class HomePagePanel extends JPanel{
     // takes nothing in 
+<<<<<<< HEAD
     public HomePagePanel() {
         
         // create layout managers
@@ -49,10 +70,25 @@ public class HomePagePanel extends JPanel{
         options.add(decks); 
         options.add(quiz); 
         options.add(friends);
+=======
+    public HomePagePanel() {        
+       
+        InnerPanel decks = new InnerPanel("D", "Decks");     
+        InnerPanel quizzes = new InnerPanel("Q", "Quiz"); 
+        InnerPanel Friends = new InnerPanel("F", "Friends");
+        BoxLayout box = new BoxLayout(this, BoxLayout.Y_AXIS); 
+        
+        
+        this.add(decks);
+        this.add(quizzes); 
+        this.add(Friends); 
+        this.setLayout(box);
+>>>>>>> ffc86d2134a4d29c3cccd21105f0b52d811aeebf
         
         this.add(title, BorderLayout.NORTH);
         this.add(options, BorderLayout.CENTER);
     
         this.validate();
+        
         }    
 }
