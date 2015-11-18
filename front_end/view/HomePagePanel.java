@@ -29,13 +29,14 @@ public class HomePagePanel extends JPanel{
         JPanel options = new JPanel(); 
         options.setLayout(optionsFlow);
         
-        // create components
+        // create components, add action listeners
         JButton decks = new JButton("Decks");
         decks.setPreferredSize(new Dimension(100, 100));
         decks.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent evt) {;
                 System.out.println(evt.getActionCommand());
+                // should send event to parent asknoteview
                 getParent().dispatchEvent(evt);
             }
         });
@@ -64,7 +65,6 @@ public class HomePagePanel extends JPanel{
         options.add(friends);  
       
         this.add(options, BorderLayout.CENTER);
-    
         this.validate(); 
     }
 }

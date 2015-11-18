@@ -78,6 +78,10 @@ public class AsknoteView extends JPanel implements ActionListener {
         }
     }
     
+    /**
+     * need to get events from nested jpanels
+     * @param evt 
+     */
     @Override
     public void actionPerformed(ActionEvent evt) {
         String cmd = evt.getActionCommand();
