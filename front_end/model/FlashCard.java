@@ -1,5 +1,7 @@
 package model;
 
+import java.util.Objects;
+
 /*
  *
  * @author Maha Alkhairy
@@ -34,11 +36,25 @@ public class FlashCard {
         this.side2 = side2; 
     }
     
-    // 
-    
-    public boolean equals(FlashCard card) {
-        return (this.side1.equals(card.side1) 
-                && this.side2.equals(card.side2)); 
+    @Override
+    public boolean equals(Object o) {
+        if (o == this) {
+            return true;
+        }
+        if (!(o instanceof FlashCard)) {
+            return false;
+        }
+        FlashCard that = (FlashCard)o;
         
-    }      
+        return (this.side1.equals(that.side1) 
+                && this.side2.equals(that.side2));     
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 97 * hash + Objects.hashCode(this.side1);
+        hash = 97 * hash + Objects.hashCode(this.side2);
+        return hash;
+    }
 }

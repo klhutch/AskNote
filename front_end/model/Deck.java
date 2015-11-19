@@ -2,6 +2,7 @@ package model;
 
 import java.util.List;
 import java.util.ArrayList; 
+import java.util.Objects;
 
 /**
  *
@@ -73,10 +74,25 @@ public class Deck {
         return this.getCard(currentCardIndex);
     }
     
-
-    public boolean equals(Deck deck) { 
-        return (this.title.equals(deck.title) && 
-                this.cards.containsAll(deck.cards)
-                && deck.cards.containsAll(this.cards));        
+    @Override
+    public boolean equals(Object o) {
+        if (o == this) {
+            return true;
+        }
+        if (!(o instanceof Deck)) {
+            return false;
+        }
+        Deck that = (Deck)o;
+        return (this.title.equals(that.title) && 
+            this.cards.containsAll(that.cards)
+            && that.cards.containsAll(that.cards));    
+    }
+    
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 67 * hash + Objects.hashCode(this.title);
+        hash = 67 * hash + Objects.hashCode(this.cards);
+        return hash;
     }
 }

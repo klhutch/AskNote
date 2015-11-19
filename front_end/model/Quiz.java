@@ -93,12 +93,15 @@ public class Quiz {
     }
     
     @Override
-    public boolean equals(Object obj) { 
-        if (obj instanceof Quiz) {
-            Quiz quiz = (Quiz) obj;
-            return (this.deck.equals(quiz.deck)  && this.friend.equals(quiz.friend));
+    public boolean equals(Object o) { 
+        if (o == this) {
+            return true;
         }
-        return false;
+        if (!(o instanceof Quiz)) {
+            return false;
+        }
+        Quiz quiz = (Quiz)o;
+        return (this.deck.equals(quiz.deck)  && this.friend.equals(quiz.friend));
     }
 
     @Override
