@@ -6,7 +6,11 @@
 package view;
 
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.*;
+import model.AskNoteModel;
+import model.PageType;
 
 /**
  *
@@ -26,7 +30,9 @@ public class LoginPanel extends JPanel{
         
         
         // components 
-        JButton signin = new JButton("SIGN IN"); 
+        JButton signin = new JButton("SIGN IN");
+        signin.addActionListener(new LoginButtonListener());
+        
         JLabel username = new JLabel("Username"); 
         JLabel password = new JLabel("Password"); 
         JPasswordField passwordType = new JPasswordField();
@@ -43,6 +49,19 @@ public class LoginPanel extends JPanel{
         this.add(signin); 
         this.validate();
         
+    }
+    
+    private class LoginButtonListener implements ActionListener {
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            //TODO validate username and password stuff before doing this stuff
+            AskNoteModel model = AskNoteModel.instance();
+            model.setCurrentPage(PageType.HOME);
+            
+            AskNoteView.instance().updateView();
+        }
+    
     }
     
 }

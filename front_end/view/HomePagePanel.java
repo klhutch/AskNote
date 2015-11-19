@@ -10,7 +10,9 @@ import java.awt.event.*;
 import java.util.List;
 import java.util.ArrayList; 
 import javax.swing.*;
+import model.AskNoteModel;
 import model.Deck;
+import model.PageType;
 
 public class HomePagePanel extends JPanel{
     // takes nothing in 
@@ -110,7 +112,10 @@ public class HomePagePanel extends JPanel{
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            AskNoteModel model = AskNoteModel.instance();
+            model.setCurrentPage(PageType.DECK);
+            
+            AskNoteView.instance().updateView();
         }
     
     }
@@ -119,8 +124,10 @@ public class HomePagePanel extends JPanel{
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-        }
+            AskNoteModel model = AskNoteModel.instance();
+            model.setCurrentPage(PageType.QUIZ);
+            
+            AskNoteView.instance().updateView();        }
     
     }
     
@@ -128,7 +135,11 @@ public class HomePagePanel extends JPanel{
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            AskNoteModel model = AskNoteModel.instance();
+            model.setCurrentPage(PageType.FRIENDS_LIST);
+            
+            AskNoteView.instance().updateView();
+            
         }
     
     }
