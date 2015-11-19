@@ -5,6 +5,8 @@
  */
 package model;
 
+import java.util.Objects;
+
 /**
  *
  * @author Maha Alkhairy
@@ -39,8 +41,23 @@ public class User {
         return this.userID; 
     }
     
-    // 
-    public boolean equals(User user) { 
-        return (this.userID == user.userID && this.username.equals(user.username)); 
+    @Override
+    public boolean equals(Object o) { 
+        if (o == this) {
+            return true;
+        }
+        if (!(o instanceof User)) {
+            return false;
+        }
+        User that = (User)o;
+        return (this.userID == that.userID && this.username.equals(that.username)); 
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 67 * hash + Objects.hashCode(this.username);
+        hash = 67 * hash + this.userID;
+        return hash;
     }
 }
