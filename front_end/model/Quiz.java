@@ -37,6 +37,10 @@ public class Quiz {
         this.currentCard = deck.getCurrentCard();
         this.side1Shown = true;
     }
+ 
+    public Quiz() {
+        this(new Deck(), "--Friend--" , false, ""); 
+    }
     
     public void setDeck(Deck deck) { 
         this.deck = deck; 
