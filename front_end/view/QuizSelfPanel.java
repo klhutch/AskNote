@@ -6,6 +6,8 @@
 package view;
 
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javafx.scene.layout.Border;
 import javax.swing.*;
 import model.*;
@@ -18,12 +20,18 @@ import java.util.Random;
 
 
 public class QuizSelfPanel extends JPanel{
-      Deck deck; 
+      Deck deck;
+      Boolean side1Shown;
+      
+      ShownTextPanel shownText;
+      
     public QuizSelfPanel(Deck deck) { 
         this.deck = deck; 
        
         
-        CardShownPanel card = new CardShownPanel(deck.getCards().get(0).getSide1()); 
+        this.shownText =  new ShownTextPanel(deck.getCurrentCard().getSide1()); 
+        this.side1Shown = true;
+        
         ButtonPanel buttons = new ButtonPanel(); 
         EndButtonPanel end = new EndButtonPanel(); 
         
@@ -38,26 +46,35 @@ public class QuizSelfPanel extends JPanel{
         this.setLayout(border);
         
         this.add(buttons, BorderLayout.SOUTH); 
-        this.add(card, BorderLayout.CENTER); 
+        this.add(shownText, BorderLayout.CENTER); 
+        
+        
         this.add(new JPanel(), BorderLayout.EAST); 
         this.add(new JPanel(), BorderLayout.WEST); 
         this.add(new JPanel(), BorderLayout.NORTH); 
+        
         this.validate();
        
     } 
     
     
-    class CardShownPanel extends JPanel { 
-        CardShownPanel (String sideText) { 
-            FlowLayout flow = new FlowLayout(); 
-            flow.setAlignment(FlowLayout.CENTER);
-            JLabel card = new JLabel(sideText); 
+    class ShownTextPanel extends JPanel {
+        JLabel shownText;
+        
+        ShownTextPanel (String text) {
+            
+//            FlowLayout flow = new FlowLayout(); 
+//            flow.setAlignment(FlowLayout.CENTER);
+            this.shownText = new JLabel(text); 
             this.setBackground(Color.white);
 
-            this.add(card, BorderLayout.CENTER); 
+            this.add(this.shownText);//, BorderLayout.CENTER); 
 
-
-
+        }
+        
+        void updateText(String text) {
+            this.shownText.setText(text);
+            QuizSelfPanel.this.validate();
         }
 
     }
@@ -67,15 +84,18 @@ public class QuizSelfPanel extends JPanel{
          ButtonPanel () { 
             FlowLayout flow = new FlowLayout(); 
             flow.setAlignment(FlowLayout.CENTER);
-            JButton back = new JButton("<"); 
+            JButton previousCard = new JButton("<"); 
             JButton flip = new JButton("flip");
-            JButton forward = new JButton(">"); 
-
-
+            JButton nextCard = new JButton(">"); 
+            
+            flip.addActionListener(new FlipCardButtonListener());
+            previousCard.addActionListener(new PreviousCardButtonListener());
+            nextCard.addActionListener(new NextCardButtonListener());
+            
             this.setLayout(flow);
-            this.add(back);
+            this.add(previousCard);
             this.add(flip); 
-            this.add(forward); 
+            this.add(nextCard); 
          } 
     }
 
@@ -89,6 +109,48 @@ public class QuizSelfPanel extends JPanel{
             this.setLayout(flow);
             this.add(end); 
          } 
+    }
+    
+    class FlipCardButtonListener implements ActionListener {
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            QuizSelfPanel quizPanel = QuizSelfPanel.this;
+            
+            if(quizPanel.side1Shown) {
+                quizPanel.side1Shown = false;
+                quizPanel.shownText.updateText(quizPanel.deck.getCurrentCard().getSide2());
+            }
+            else {
+                quizPanel.side1Shown = true;
+                quizPanel.shownText.updateText(quizPanel.deck.getCurrentCard().getSide1());
+            }
+        }
+        
+        
+    } 
+    
+    class PreviousCardButtonListener implements ActionListener {
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            QuizSelfPanel quizPanel = QuizSelfPanel.this;
+            quizPanel.shownText.updateText(quizPanel.deck.getPreviousCard().getSide1());
+            quizPanel.side1Shown = true;
+        }
+        
+    }
+    
+    
+    class NextCardButtonListener implements ActionListener {
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            QuizSelfPanel quizPanel = QuizSelfPanel.this;
+            quizPanel.shownText.updateText(quizPanel.deck.getNextCard().getSide1());
+            quizPanel.side1Shown = true;
+        }
+        
     }
 } 
     
