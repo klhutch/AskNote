@@ -2,6 +2,7 @@ Functional Panels
 - AskNoteViewPanel
 - HomePagePanel (when accessed from  AskNoteViewPanel)
 - QuizSelfPanel
+- HeaderPanel
 
 Non-Functional Items
 - Changing title in HeaderPanel
