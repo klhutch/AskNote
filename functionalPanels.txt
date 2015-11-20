@@ -1,0 +1,21 @@
+Functional Panels
+- AskNoteViewPanel
+- HomePagePanel (when accessed from  AskNoteViewPanel)
+- QuizSelfPanel
+
+Non-Functional Items
+- Changing title in HeaderPanel
+- DeckPanel*
+- ViewDecksHelperPanel!
+- EditCardPanel
+- EditDeckPanel*
+- FriendsListPanel*
+- LoginPanel
+- QuizDeck!
+- QuizWaiting!
+- QuizSelectPanel
+- QuizTesteePanel
+- QuizTesterPanel
+
+* = Panel is being updated
+! = Panel does not exist yet
