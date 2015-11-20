@@ -24,7 +24,7 @@ public class AskNoteModel {
     
     List<Quiz> quizzes = null; 
     List<String> friends = null; 
-    Stack<PageType> pageHistory = null;
+    Stack<PageType> pageHistory = new Stack();
     List<String> notifications = null; 
     
     

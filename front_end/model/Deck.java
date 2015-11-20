@@ -68,10 +68,29 @@ public class Deck {
         if(cards.isEmpty()){
             return null;
         }
-        if(cards.size() > currentCardIndex + 1){
-            return this.getCard(currentCardIndex++);
-        }
         return this.getCard(currentCardIndex);
+    }
+    
+    public FlashCard getNextCard() {
+        if (cards.isEmpty()) {
+            return null;
+        }
+        if (cards.size() > currentCardIndex + 1) {
+            return this.getCard(++currentCardIndex);
+        }
+        currentCardIndex = 0;
+        return this.getCard(currentCardIndex);    
+    }
+
+    public FlashCard getPreviousCard() {
+        if (cards.isEmpty()) {
+            return null;
+        }
+        if (currentCardIndex - 1 >= 0) {
+            return this.getCard(--currentCardIndex);
+        }
+        currentCardIndex = cards.size() - 1;
+        return this.getCard(currentCardIndex); 
     }
     
     @Override
@@ -95,4 +114,6 @@ public class Deck {
         hash = 67 * hash + Objects.hashCode(this.cards);
         return hash;
     }
+
+    
 }

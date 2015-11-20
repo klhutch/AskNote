@@ -139,6 +139,7 @@ public class QuizSelectPanel extends JPanel {
     
     class QuizFriendPanel extends JPanel {
         List<String> friends;
+        JList friendList; 
         
         QuizFriendPanel(List<String> friends) {
             this.friends = friends;
@@ -152,17 +153,7 @@ public class QuizSelectPanel extends JPanel {
             
             JButton confirm = new JButton("Confirm");
             
-            JList friendList; 
-//            GridLayout grid = new GridLayout(friends.size(), 2);
-//            friendList.setLayout(grid);
-//            friendList.setBackground(Color.WHITE);
             
-//            ButtonGroup selectFriend = new ButtonGroup();
-//            
-//            for (String friend : friends) {
-//                JRadioButton friendSelection = new JRadioButton(friend);
-//                selectFriend.add(friendSelection);
-//            }
             
             if (friends.size() > 0) {
                 friendList = new JList(friends.toArray());

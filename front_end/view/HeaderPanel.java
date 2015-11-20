@@ -10,6 +10,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
 import javax.swing.border.MatteBorder;
+import model.AskNoteModel;
+import model.PageType;
 
 /**
  *
@@ -41,6 +43,7 @@ public class HeaderPanel extends JPanel {
     this.back.addActionListener(new BackButtonListener());
     
     this.notification.addActionListener(new NotificationButtonListener());
+    this.notification.setVisible(false); //TODO remove once notificationPanel actually does something
     
     this.add(home);
     this.add(back);
@@ -80,7 +83,11 @@ public class HeaderPanel extends JPanel {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            AskNoteModel model = AskNoteModel.instance();
+            model.wipePageHistory();
+            model.setCurrentPage(PageType.HOME);
+            
+            AskNoteView.instance().updateView();
         }
 
     }
@@ -89,7 +96,10 @@ public class HeaderPanel extends JPanel {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            AskNoteModel model = AskNoteModel.instance();
+            model.setPreviousAsCurrent();
+            
+            AskNoteView.instance().updateView();
         }
 
         

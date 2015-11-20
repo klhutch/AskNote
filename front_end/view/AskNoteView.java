@@ -48,28 +48,25 @@ public class AskNoteView extends JPanel {
     /** based on state of model, update current view **/
     public void updateView() {
         AskNoteModel model = AskNoteModel.instance();
+        this.remove(appPanel);
         
         switch(model.getCurrentPage()) {
             case HOME: 
                 this.appPanel = new HomePagePanel();
-                this.setHeaderButtonsVisibility(false);
                 break;
             case DECK: 
+                System.out.println("Switching to Deck Panel");
                 this.appPanel = new DeckPanel(model.getDecks());
-                this.setHeaderButtonsVisibility(true);
                 break;
             case QUIZ: 
                 this.appPanel = new QuizPanel();
-                this.setHeaderButtonsVisibility(true);
                 break;
             case QUIZ_DECK: 
                 //this.appPanel = new HomePagePanel(); // CHANGE THIS ///////
-                //this.setHeaderButtonsVisibility(true);
                 model.setPreviousAsCurrent();
                 break;
             case EDIT_CARD: 
                 this.appPanel = new EditCardPanel(model.getSelectedFlashCard());
-                this.setHeaderButtonsVisibility(true);
                 break;
             case EDIT_DECK: 
                 this.appPanel = new EditDeckPanel(model.getSelectedDeck());
@@ -81,7 +78,7 @@ public class AskNoteView extends JPanel {
                 this.appPanel = new LoginPanel();
                 break;
             case NOTIFICATIONS: 
-                this.appPanel = new HomePagePanel(); // CHANGE THIS ///////
+                //this.appPanel = new HomePagePanel(); // CHANGE THIS ///////
                 break;
             case QUIZ_SELF: 
                 this.appPanel = new QuizSelfPanel(model.getSelectedDeck());
@@ -96,7 +93,16 @@ public class AskNoteView extends JPanel {
                 this.appPanel = new QuizTesteePanel(model.getActiveQuiz().getShownSide());                          
         }
         
+        
+        if(model.getCurrentPage() == PageType.HOME)
+            this.setHeaderButtonsVisibility(false);
+        else
+            this.setHeaderButtonsVisibility(true);
+        
+        this.add(this.appPanel, BorderLayout.CENTER);
+        appPanel.repaint();
         this.repaint();
+        this.validate();
     }
     
     private void setHeaderButtonsVisibility(Boolean visible) {
