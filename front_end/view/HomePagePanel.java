@@ -27,7 +27,7 @@ public class HomePagePanel extends JPanel{
         // create nested JPanels, set layout managers
         BorderLayout border = new BorderLayout(); 
         
-        border.setHgap(100);
+        border.setHgap(350);
         border.setVgap(100); 
         this.setLayout(border);
         
@@ -46,6 +46,11 @@ public class HomePagePanel extends JPanel{
         this.add(new JPanel(), BorderLayout.WEST); 
         this.add(new JPanel(), BorderLayout.EAST); 
         this.add(optionsPanel, BorderLayout.CENTER);
+        
+        this.add(new JPanel(), BorderLayout.NORTH); 
+        
+        this.add(new JPanel(), BorderLayout.SOUTH); 
+        
         this.validate(); 
         
         
