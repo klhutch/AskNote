@@ -19,7 +19,6 @@ public class QuizEndPanel extends JPanel {
        flow.setVgap(200);
        CombinedButtonTextPanel innerPanel = new CombinedButtonTextPanel(); 
        
-       
        this.setLayout(flow);
        this.add(innerPanel); 
        

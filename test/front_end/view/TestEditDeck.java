@@ -35,6 +35,8 @@ public class TestEditDeck extends JFrame {
         FlashCard f4 = new FlashCard("plants produce oxygen", "");
         FlashCard f5 = new FlashCard("glucose", "");
         
+        
+        
         List<FlashCard> cards = new ArrayList<>();
         
         cards.add(f1);
@@ -42,6 +44,10 @@ public class TestEditDeck extends JFrame {
         cards.add(f3);
         cards.add(f4);
         cards.add(f5);
+        
+        for (int i = 0; i < 100; i++) { 
+            cards.add(f5); 
+        }
         
         EditDeckPanel ed = new EditDeckPanel(new Deck("Bio", cards));
         getContentPane().add(ed);

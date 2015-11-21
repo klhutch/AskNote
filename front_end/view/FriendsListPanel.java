@@ -34,7 +34,6 @@ public class FriendsListPanel extends JPanel {
         
         
         
-             
         JList friendList = new JList();                            
          if (friends.size() > 0) {
                 friendList = new JList(friends.toArray());
