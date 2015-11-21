@@ -2,9 +2,7 @@ package view;
 
 import java.awt.BorderLayout;
 import java.util.List;
-import javax.swing.JButton;
-import javax.swing.JPanel;
-import javax.swing.SwingConstants;
+import javax.swing.*;
 import model.Deck;
 
 /**

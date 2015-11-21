@@ -45,8 +45,10 @@ public class FriendsListPanel extends JPanel {
                 friendList = new JList(friendArray);
             }
         
+          
+         
         OptionPanel add = new OptionPanel("  ", "Add Friend");     
-        OptionPanel checkAll = new OptionPanel("  ", "Check all"); 
+        OptionPanel checkAll = new OptionPanel("  ", "Select all"); 
         OptionPanel uncheckAll = new OptionPanel("  ", "Uncheck all");
         OptionPanel delete = new OptionPanel("  ", "Delete"); 
         
@@ -62,7 +64,9 @@ public class FriendsListPanel extends JPanel {
         
         
         left.add(friendList, BorderLayout.CENTER);
-        this.add(left); 
+        JScrollPane scroll = new JScrollPane(left); 
+        
+        this.add(scroll); 
         this.add(right); 
         this.validate(); 
     }    
