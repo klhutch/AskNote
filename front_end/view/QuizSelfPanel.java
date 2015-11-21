@@ -66,6 +66,7 @@ public class QuizSelfPanel extends JPanel{
 //            FlowLayout flow = new FlowLayout(); 
 //            flow.setAlignment(FlowLayout.CENTER);
             this.shownText = new JLabel(text); 
+            
             this.setBackground(Color.white);
 
             this.add(this.shownText);//, BorderLayout.CENTER); 
@@ -80,6 +81,7 @@ public class QuizSelfPanel extends JPanel{
     }
 
 
+    
     class ButtonPanel extends JPanel { 
          ButtonPanel () { 
             FlowLayout flow = new FlowLayout(); 

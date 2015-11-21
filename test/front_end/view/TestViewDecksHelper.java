@@ -45,9 +45,30 @@ public class TestViewDecksHelper extends JFrame {
         decks.add(new Deck("NewDeck8"));
         decks.add(new Deck("NewDeck9"));
         decks.add(new Deck("NewDeck10"));
+        decks.add(new Deck("NewDeck1"));
+        decks.add(new Deck("NewDeck2"));
+        decks.add(new Deck("NewDeck3"));
+        decks.add(new Deck("NewDeck4"));
+        decks.add(new Deck("NewDeck5"));
+        decks.add(new Deck("NewDeck6"));
+        decks.add(new Deck("NewDeck7"));
+        decks.add(new Deck("NewDeck8"));
+        decks.add(new Deck("NewDeck9"));
+        decks.add(new Deck("NewDeck10"));
+        decks.add(new Deck("NewDeck1"));
+        decks.add(new Deck("NewDeck2"));
+        decks.add(new Deck("NewDeck3"));
+        decks.add(new Deck("NewDeck4"));
+        decks.add(new Deck("NewDeck5"));
+        decks.add(new Deck("NewDeck6"));
+        decks.add(new Deck("NewDeck7"));
+        decks.add(new Deck("NewDeck8"));
+        decks.add(new Deck("NewDeck9"));
+        decks.add(new Deck("NewDeck10"));
         
         ViewDecksHelperPanel ed = new ViewDecksHelperPanel(decks);
         getContentPane().add(ed);
+        
         pack();
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }  

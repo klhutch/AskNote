@@ -21,12 +21,10 @@ public class FriendsListPanel extends JPanel {
     
     
     public FriendsListPanel(List<String> friends) { 
-        GridLayout grid = new GridLayout(); 
-        grid.setColumns(1);
-        grid.setRows(-1);
+        BorderLayout border = new BorderLayout(); 
         
         JPanel left = new JPanel(); 
-        left.setLayout(grid);
+        left.setLayout(border);
              
         GridLayout grid2 = new GridLayout(); 
         grid2.setColumns(2);
@@ -36,22 +34,17 @@ public class FriendsListPanel extends JPanel {
         
         
         
-        JScrollPane leftPane = new JScrollPane(); 
-        leftPane.setViewportView(left);
-        
-        leftPane.setAutoscrolls(true);
              
-        List<JCheckBox> frnds = new ArrayList<JCheckBox>(); 
-                                    
-        for (int i = 0; i < friends.size(); i++) { 
-           String name = friends.get(i); 
-           JCheckBox frnd = new JCheckBox(name); 
-           frnds.add(frnd); 
-        }
-        
-         for (int i = 0; i < frnds.size(); i++) {           
-           left.add(frnds.get(i)); 
-        }
+        JList friendList = new JList();                            
+         if (friends.size() > 0) {
+                friendList = new JList(friends.toArray());
+                friendList.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+                
+            }
+            else {
+                String[] friendArray = {"No Friends Added"};
+                friendList = new JList(friendArray);
+            }
         
         OptionPanel add = new OptionPanel("  ", "Add Friend");     
         OptionPanel checkAll = new OptionPanel("  ", "Check all"); 
@@ -69,7 +62,8 @@ public class FriendsListPanel extends JPanel {
                  
         
         
-        this.add(leftPane);
+        left.add(friendList, BorderLayout.CENTER);
+        this.add(left); 
         this.add(right); 
         this.validate(); 
     }    

@@ -14,14 +14,16 @@ import javax.swing.*;
  */
 public class QuizEndPanel extends JPanel {
     public QuizEndPanel () { 
-       BorderLayout border = new BorderLayout();
-       this.setLayout(border);
+       FlowLayout flow = new FlowLayout(); 
+       flow.setAlignment(FlowLayout.CENTER);
+       flow.setVgap(200);
+       CombinedButtonTextPanel innerPanel = new CombinedButtonTextPanel(); 
        
-       TextPanel completePanel = new TextPanel(); 
-       ButtonPanel buttons = new ButtonPanel(); 
        
-       this.add(completePanel, BorderLayout.CENTER);
-       this.add(buttons, BorderLayout.SOUTH); 
+       this.setLayout(flow);
+       this.add(innerPanel); 
+       
+       
        this.validate();
        
     }
@@ -32,15 +34,14 @@ public class QuizEndPanel extends JPanel {
         flow.setAlignment(FlowLayout.CENTER);
         JLabel complete = new JLabel("complete"); 
         complete.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 40));
-        flow.setVgap(200);
+        this.setMaximumSize(new Dimension(300, 70));
+        flow.setVgap(10);
         this.setLayout(flow);
         this.add(complete); 
         this.validate();
         
        
         } 
-        
-
         
     }
     
@@ -53,13 +54,25 @@ public class QuizEndPanel extends JPanel {
             JButton repeat = new JButton("repeat");
             JButton end = new JButton("end"); 
             
-            
-            
             this.setLayout(flow);
             this.add(repeat);
             this.add(end); 
             
          } 
     }
+    
+    class CombinedButtonTextPanel extends JPanel { 
+        CombinedButtonTextPanel () { 
+            
+            BoxLayout box = new BoxLayout(this, BoxLayout.Y_AXIS); 
+            this.setLayout(box);
+            TextPanel text = new TextPanel(); 
+            ButtonPanel buttons = new ButtonPanel(); 
+            
+            this.add(text); 
+            this.add(buttons);
+            
+        }
+      }
 
 }

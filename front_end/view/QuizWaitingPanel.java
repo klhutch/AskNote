@@ -63,8 +63,6 @@ public class QuizWaitingPanel extends JPanel {
        
         } 
         
-
-        
     }
     
     class ButtonPanel extends JPanel { 
@@ -73,9 +71,14 @@ public class QuizWaitingPanel extends JPanel {
             flow.setAlignment(FlowLayout.CENTER);
             flow.setHgap(25); 
             flow.setVgap(20); 
-            JButton cancel = new JButton("cancel");        
+            
+            JButton cancel = new JButton("cancel");  
+            JButton back = new JButton("back"); 
+            
             this.setLayout(flow);
             this.add(cancel);
+            this.add(back); 
+            
             
          } 
     }

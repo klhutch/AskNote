@@ -40,6 +40,7 @@ public class TestQuizDeck extends JFrame {
         decks.add(new Deck("PreCalc"));
         decks.add(new Deck("OOD"));
         decks.add(new Deck("Discrete Structs"));
+        
     
         QuizDeck qd = new QuizDeck(decks);
         getContentPane().add(qd);
