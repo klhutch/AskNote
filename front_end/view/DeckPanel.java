@@ -115,7 +115,7 @@ public class DeckPanel extends JPanel {
                 String msg = "Are you sure you want to delete the deck \"" + 
                         toRemove.getTitle() + "\"?";
                 int response = JOptionPane.showConfirmDialog(decksPanel, msg,
-                        "Confirm", JOptionPane.YES_NO_OPTION);
+                        "Confirm", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
                 
                 if (response == JOptionPane.YES_OPTION) {
                     model.deleteDeck(toRemove);

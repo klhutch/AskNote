@@ -16,7 +16,9 @@ public class Deck {
     private List<FlashCard> cards; 
     private int currentCardIndex = 0;
     private Boolean isNewAddition = false;
-       
+    
+    private Deck unsaved = null;
+    
     public Deck(String title, List<FlashCard> cards) { 
         this.title = title; 
         this.cards = cards; 
@@ -44,6 +46,9 @@ public class Deck {
         this("New Deck", new ArrayList<FlashCard>()); 
     }
     
+    public Boolean isEmpty(){
+        return cards.isEmpty();
+    }
     public List<FlashCard> getCards() {
          return this.cards; 
     }
@@ -114,6 +119,44 @@ public class Deck {
         }
         currentCardIndex = cards.size() - 1;
         return this.getCard(currentCardIndex); 
+    }
+    
+    public void startEdits() {
+        if(this.unsaved == null){
+            this.unsaved = new Deck(this);
+        }
+    }
+    public void editAddCard(FlashCard card) {
+        if(this.unsaved != null) {
+            this.unsaved.add(card);
+        }
+    }
+    public void editRemoveCard(FlashCard card) {
+        if (this.unsaved != null) {
+            this.unsaved.remove(card);    
+        }
+    }
+    public void editTitle(String title){
+        this.unsaved.setTitle(title);
+    }
+    public void saveEdits(){
+        if (this.unsaved != null) {
+            this.setTitle(this.unsaved.getTitle());
+            this.setCards(this.unsaved.getCards());
+            this.currentCardIndex = 0;
+        }       
+    }
+    public void cancelEdits(){
+        this.unsaved = null;
+    }
+    public List<FlashCard> getEditCards(){
+        if (this.unsaved != null){
+            return this.unsaved.getCards();
+        }
+        return null;
+    }
+    public String getEditTitle(){
+        return this.unsaved.getTitle();
     }
     
     @Override

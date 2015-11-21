@@ -5,12 +5,16 @@
  */
 package front_end.view;
 
+import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JFrame;
+import model.AskNoteModel;
 import model.Deck;
-import view.QuizDeck;
+import model.PageType;
+import view.AskNoteView;
+import view.QuizDeckPanel;
 
 /**
  *
@@ -31,6 +35,7 @@ public class TestQuizDeck extends JFrame {
     private TestQuizDeck() {
         setTitle ("AskNote");
         setResizable(true);
+        setSize(new Dimension(1000, 600));
         
         List<Deck> decks = new ArrayList<>();
         decks.add(new Deck("Bio1"));
@@ -41,10 +46,13 @@ public class TestQuizDeck extends JFrame {
         decks.add(new Deck("OOD"));
         decks.add(new Deck("Discrete Structs"));
         
-    
-        QuizDeck qd = new QuizDeck(decks);
-        getContentPane().add(qd);
-        pack();
+        AskNoteModel model = AskNoteModel.instance();
+        model.setDecks(decks);
+        model.setCurrentPage(PageType.QUIZ);
+        model.setCurrentPage(PageType.QUIZ_DECK);
+        
+        AskNoteView.instance().updateView();
+        getContentPane().add(AskNoteView.instance());
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 }

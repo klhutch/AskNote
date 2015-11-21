@@ -22,31 +22,46 @@ import java.util.Random;
 public class QuizSelfPanel extends JPanel{
       Deck deck;
       Boolean side1Shown;
-      
       ShownTextPanel shownText;
       
     public QuizSelfPanel(Deck deck) { 
         this.deck = deck; 
-       
-        
-        this.shownText =  new ShownTextPanel(deck.getCurrentCard().getSide1()); 
-        this.side1Shown = true;
-        
-        ButtonPanel buttons = new ButtonPanel(); 
-        EndButtonPanel end = new EndButtonPanel(); 
-        
-        JPanel bottomPanel = new JPanel(); 
-        bottomPanel.add(buttons); 
-        bottomPanel.add(end); 
-        
-        
-        
         
         BorderLayout border = new BorderLayout(); 
         this.setLayout(border);
+       
+        if(!deck.isEmpty()) {
+            this.shownText =  new ShownTextPanel(deck.getCurrentCard().getSide1()); 
+            this.add(shownText, BorderLayout.CENTER); 
+            this.side1Shown = true;
         
-        this.add(buttons, BorderLayout.SOUTH); 
-        this.add(shownText, BorderLayout.CENTER); 
+            ButtonPanel buttons = new ButtonPanel(); 
+            EndButtonPanel end = new EndButtonPanel(); 
+
+            JPanel bottomPanel = new JPanel(); 
+            bottomPanel.add(buttons); 
+            bottomPanel.add(end); 
+
+            this.add(buttons, BorderLayout.SOUTH); 
+        
+        }
+        else {
+            JLabel noCards = new JLabel("No Cards in this Deck", SwingConstants.CENTER);
+            noCards.setVerticalAlignment(SwingConstants.CENTER);
+            this.add(noCards, BorderLayout.CENTER);
+            
+            JButton okay = new JButton("okay");
+            okay.addActionListener(new EndQuizButtonListener());
+            
+            JPanel south = new JPanel();
+            FlowLayout flow = new FlowLayout(); 
+            flow.setAlignment(FlowLayout.CENTER);
+            south.setLayout(flow);
+            south.add(okay);
+            
+            this.add(south, BorderLayout.SOUTH);
+        }
+        
         
         
         this.add(new JPanel(), BorderLayout.EAST); 
@@ -108,7 +123,8 @@ public class QuizSelfPanel extends JPanel{
             FlowLayout flow = new FlowLayout(); 
             flow.setAlignment(FlowLayout.CENTER);
             JButton end = new JButton("end");
-
+            
+            end.addActionListener(new EndQuizButtonListener());
 
             this.setLayout(flow);
             this.add(end); 
@@ -144,7 +160,7 @@ public class QuizSelfPanel extends JPanel{
         }
         
     }
-    
+
     
     class NextCardButtonListener implements ActionListener {
 
@@ -153,6 +169,18 @@ public class QuizSelfPanel extends JPanel{
             QuizSelfPanel quizPanel = QuizSelfPanel.this;
             quizPanel.shownText.updateText(quizPanel.deck.getNextCard().getSide1());
             quizPanel.side1Shown = true;
+        }
+        
+    }
+    
+    
+    class EndQuizButtonListener implements ActionListener {
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            AskNoteModel.instance().setSelectedDeck(null);
+            AskNoteModel.instance().setPreviousAsCurrent();
+            AskNoteView.instance().updateView();
         }
         
     }

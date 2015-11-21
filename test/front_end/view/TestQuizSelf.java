@@ -8,8 +8,11 @@ package front_end.view;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JFrame;
+import model.AskNoteModel;
 import model.Deck;
 import model.FlashCard;
+import model.PageType;
+import view.AskNoteView;
 import view.LoginPanel;
 import view.QuizSelfPanel;
 
@@ -40,8 +43,18 @@ public class TestQuizSelf {
         cards.add(card3Math);
 
         Deck math = new Deck("math", cards); 
-
-        frame.getContentPane().add (new QuizSelfPanel(math));
+        List<Deck> decks = new ArrayList();
+        decks.add(math);
+        
+        AskNoteModel model = AskNoteModel.instance();
+        model.setDecks(decks);
+        model.setSelectedDeck(math);
+        model.setCurrentPage(PageType.QUIZ);
+        model.setCurrentPage(PageType.QUIZ_DECK);
+        model.setCurrentPage(PageType.QUIZ_SELF);
+        
+        AskNoteView.instance().updateView();
+        frame.getContentPane().add (AskNoteView.instance());
 
         // Show the frame. 
         frame.setVisible (true);

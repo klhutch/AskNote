@@ -121,7 +121,10 @@ public class AskNoteModel {
     }
     public PageType getCurrentPage() {
         return this.currentPage;
-    } 
+    }
+    public PageType getPreviousPage() {
+        return pageHistory.peek();
+    }
     
     
     public Deck getDeck(String title) { 

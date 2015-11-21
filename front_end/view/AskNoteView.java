@@ -62,8 +62,7 @@ public class AskNoteView extends JPanel {
                 this.appPanel = new QuizPanel();
                 break;
             case QUIZ_DECK: 
-                //this.appPanel = new HomePagePanel(); // CHANGE THIS ///////
-                model.setPreviousAsCurrent();
+                this.appPanel = new QuizDeckPanel(model.getDecks()); // CHANGE THIS ///////
                 break;
             case EDIT_CARD: 
                 this.appPanel = new EditCardPanel(model.getSelectedFlashCard());
@@ -90,7 +89,10 @@ public class AskNoteView extends JPanel {
                 this.appPanel = new QuizTesterPanel(model.getActiveQuiz().getCurrentCard(), model.getActiveQuiz().getResponse(), true);
                 break;
             case QUIZ_TESTEE: 
-                this.appPanel = new QuizTesteePanel(model.getActiveQuiz().getShownSide());                          
+                this.appPanel = new QuizTesteePanel(model.getActiveQuiz().getShownSide()); 
+                break;
+            case QUIZ_WAITING:
+                this.appPanel = new QuizWaitingPanel(model.getActiveQuiz());
         }
         
         

@@ -13,6 +13,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import model.FlashCard;
 import javax.swing.border.LineBorder;
+import model.AskNoteModel;
 
 /**
  * Note: This JPanel should be added to a JDialog
@@ -20,17 +21,23 @@ import javax.swing.border.LineBorder;
 public class EditCardPanel extends JPanel {
     SidePanel side1;
     SidePanel side2;
+    FlashCard card;
     
     public EditCardPanel(FlashCard card) {
-    
+        this.card = card;
         this.setLayout(new BorderLayout());
         
         this.side1 = new SidePanel(card.getSide1(), "Side 1") ;
         this.side2 = new SidePanel(card.getSide2(), "Side 2");
         
         
-        JButton correctButton = new JButton("Save");
-        JButton incorrectButton = new JButton("Delete Card");
+        JButton save = new JButton("Save");
+        JButton delete = new JButton("Delete Card");
+        JButton cancel = new JButton("Cancel");
+        
+        save.addActionListener(new SaveCardEditListener());
+        cancel.addActionListener(new CancelCardEditListener());
+        delete.addActionListener(new DeleteCardListener());
         
         JPanel center = new JPanel();
         center.setLayout(new GridLayout(1, 2));
@@ -39,8 +46,9 @@ public class EditCardPanel extends JPanel {
         center.add(side2);
         
         JPanel south = new JPanel();
-        south.add(correctButton);
-        south.add(incorrectButton);
+        south.add(save);
+        south.add(cancel);
+        south.add(delete);
         
         
         this.add(center, BorderLayout.CENTER);
@@ -50,26 +58,75 @@ public class EditCardPanel extends JPanel {
     
     
     class SidePanel extends JPanel {
-        String text;
+        JTextArea text;
         
-        SidePanel(String text, String side) {
-            this.text = text;
+        SidePanel(String str, String side) {
             //this.setLayout(new BorderLayout());
             JLabel title = new JLabel(side);
-            JTextArea responseArea = new JTextArea(text, 30, 40);
-            responseArea.setEnabled(true);
+            this.text = new JTextArea(str, 30, 40);
+            this.text.setEnabled(true);
             
-            responseArea.setAlignmentX(JTextArea.CENTER_ALIGNMENT);
-            responseArea.setAlignmentY(JTextArea.CENTER_ALIGNMENT);
+            this.text.setAlignmentX(JTextArea.CENTER_ALIGNMENT);
+            this.text.setAlignmentY(JTextArea.CENTER_ALIGNMENT);
             
-            responseArea.setBorder(new LineBorder(Color.BLACK, 1));
+            this.text.setBorder(new LineBorder(Color.BLACK, 1));
             
             JPanel north = new JPanel();
             north.add(title);
             north.setPreferredSize(new Dimension(500, 30));
             
             this.add(north, BorderLayout.NORTH);
-            this.add(responseArea, BorderLayout.CENTER);
+            this.add(text, BorderLayout.CENTER);
         }
     }
+    
+    class SaveCardEditListener implements ActionListener {
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            FlashCard card = EditCardPanel.this.card;
+            
+            if(card.getIsNewAddition()){
+                card.setIsNewAddition(false);
+            }
+            
+            card.setSide1(EditCardPanel.this.side1.text.getText());
+            card.setSide2(EditCardPanel.this.side2.text.getText());
+            
+            AskNoteModel.instance().setPreviousAsCurrent();
+            AskNoteModel.instance().setSelectedFlashCard(null);
+            AskNoteView.instance().updateView();
+        }
+    }
+    
+    class CancelCardEditListener implements ActionListener {
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            FlashCard card = EditCardPanel.this.card;
+            AskNoteModel model = AskNoteModel.instance();
+            
+            if (card.getIsNewAddition()) {
+                model.getSelectedDeck().editRemoveCard(card);
+                
+            }
+            model.setPreviousAsCurrent();
+            model.setSelectedFlashCard(null);
+            AskNoteView.instance().updateView();
+        }
+    }
+    
+    class DeleteCardListener implements ActionListener {
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            AskNoteModel model = AskNoteModel.instance();
+            model.getSelectedDeck().editRemoveCard(EditCardPanel.this.card);
+            
+            model.setPreviousAsCurrent();
+            model.setSelectedFlashCard(null);
+            AskNoteView.instance().updateView();
+        }
+    }
+    
 }

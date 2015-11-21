@@ -33,15 +33,19 @@ public class QuizPanel extends JPanel{
     
     class TextPanel extends JPanel { 
         TextPanel() {
-        FlowLayout flow = new FlowLayout();
-        flow.setAlignment(FlowLayout.CENTER);
-        JLabel complete = new JLabel("quiz"); 
-        complete.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 40));
-        this.setMaximumSize(new Dimension(300, 70));
-        flow.setVgap(10);
-        this.setLayout(flow);
-        this.add(complete); 
-        this.validate();
+            FlowLayout flow = new FlowLayout();
+            flow.setAlignment(FlowLayout.CENTER);
+
+            JLabel quiz = new JLabel("Quiz"); 
+            quiz.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 40));
+
+            this.setMaximumSize(new Dimension(300, 70));
+            
+            flow.setVgap(10);
+            
+            this.setLayout(flow);
+            this.add(quiz); 
+            this.validate();
         
        
         } 
@@ -54,12 +58,16 @@ public class QuizPanel extends JPanel{
             flow.setAlignment(FlowLayout.CENTER);
             flow.setHgap(25); 
             flow.setVgap(20); 
-            JButton repeat = new JButton("self");
-            JButton end = new JButton("friend"); 
+            
+            JButton self = new JButton("self");
+            JButton friends = new JButton("friends"); 
+            
+            self.addActionListener(new QuizSelfButtonListener());
+            friends.addActionListener(new QuizFriendsButtonListener());
             
             this.setLayout(flow);
-            this.add(repeat);
-            this.add(end); 
+            this.add(self);
+            this.add(friends); 
             
          } 
     }
@@ -76,7 +84,9 @@ public class QuizPanel extends JPanel{
             this.add(buttons);
             
         }
-      }
+    }
+    
+    
     private class QuizSelfButtonListener implements ActionListener {
 
         @Override

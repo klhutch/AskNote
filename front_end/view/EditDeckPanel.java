@@ -17,6 +17,7 @@ import javax.swing.BorderFactory;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
@@ -27,6 +28,7 @@ import javax.swing.border.LineBorder;
 import model.AskNoteModel;
 import model.Deck;
 import model.FlashCard;
+import model.PageType;
 
 /**
  *
@@ -35,21 +37,22 @@ import model.FlashCard;
 public class EditDeckPanel extends JPanel {
 
     Deck deck;
-    private Deck original;
+    TitlePanel title;
+    FlashCardsPanel flashCards;
     
     public EditDeckPanel(Deck deck) {
-        this.original = deck;
-        this.deck = new Deck(deck);
+        this.deck = deck;
+        this.deck.startEdits();
+        
+        this.flashCards = new FlashCardsPanel(this.deck);
+        this.title = new TitlePanel(this.deck); 
         
         BorderLayout border = new BorderLayout(); 
         border.setHgap(10); 
-        border.setVgap(10); 
-        
+        border.setVgap(10);  
         this.setLayout(border);
-        
-        FlashCardsPanel flashCards = new FlashCardsPanel(this.deck);
+      
         ButtonPanel buttons = new ButtonPanel(); 
-        TitlePanel title = new TitlePanel(this.deck); 
         JScrollPane scrollPanel = new JScrollPane(flashCards);
         
         scrollPanel.setBorder(new LineBorder(Color.LIGHT_GRAY, 1));
@@ -61,10 +64,7 @@ public class EditDeckPanel extends JPanel {
         this.validate(); 
     }
     
-    void updateOriginal(){
-        original.setTitle(new String(deck.getTitle()));
-        original.setCards(deck.getCards());
-    }
+    
     
 
 
@@ -73,21 +73,37 @@ public class EditDeckPanel extends JPanel {
 //// title and edit button top // 
 
   class TitlePanel extends JPanel { 
-         TitlePanel (Deck deck) { 
+        JLabel text;
+        TitlePanel (Deck deck) { 
             FlowLayout flow = new FlowLayout(); 
             flow.setAlignment(FlowLayout.CENTER);
             flow.setHgap(25); 
             flow.setVgap(20); 
             
-            JLabel title = new JLabel(deck.getTitle());  
+            this.text = new JLabel(deck.getEditTitle());  
             JButton edit = new JButton("edit"); 
             
+            edit.addActionListener(new EditTitleListener());
+            
             this.setLayout(flow);
-            this.add(title);
+            this.add(text);
             this.add(edit);
             
             
-         } 
+         }
+        
+        class EditTitleListener implements ActionListener {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String msg = "Edit Deck Title";
+                String text = JOptionPane.showInputDialog(AskNoteView.instance(),
+                        msg, TitlePanel.this.text.getText());
+                TitlePanel.this.text.setText(text);
+                EditDeckPanel.this.deck.editTitle(text);
+                
+            }
+        }
     }
 
 
@@ -105,6 +121,10 @@ public class EditDeckPanel extends JPanel {
             JButton save = new JButton("save"); 
             JButton cancel = new JButton("cancel"); 
             
+            add.addActionListener(new AddCardListener());
+            save.addActionListener(new SaveEditListener());
+            cancel.addActionListener(new CancelEditListener());
+            
             this.setLayout(flow);
             this.add(add);
             this.add(save);
@@ -118,20 +138,15 @@ public class EditDeckPanel extends JPanel {
     
     
     
-    class EditTitleListener implements ActionListener {
-
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-        }
-    }
+    
 
     class SaveEditListener implements ActionListener {
 
         @Override
         public void actionPerformed(ActionEvent e) {
             AskNoteModel.instance().setPreviousAsCurrent();
-            EditDeckPanel.this.updateOriginal();
+            //TODO add a confirmation dialog
+            EditDeckPanel.this.deck.saveEdits();
             AskNoteView.instance().updateView();
         }
         
@@ -142,8 +157,27 @@ public class EditDeckPanel extends JPanel {
         @Override
         public void actionPerformed(ActionEvent e) {
             AskNoteModel.instance().setPreviousAsCurrent();
+            //TODO add a confirmation dialog
+            EditDeckPanel.this.deck.cancelEdits();
             AskNoteView.instance().updateView();
         }
+    }
+    
+    class AddCardListener implements ActionListener {
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            AskNoteModel model = AskNoteModel.instance();
+            
+            FlashCard card = new FlashCard();
+            card.setIsNewAddition(true);
+            EditDeckPanel.this.deck.editAddCard(card);
+            
+            model.setSelectedFlashCard(card);
+            model.setCurrentPage(PageType.EDIT_CARD);
+            AskNoteView.instance().updateView();
+        }
+        
     }
 
 
@@ -159,7 +193,7 @@ public class EditDeckPanel extends JPanel {
             this.setLayout(grid);
             List<FlashCardPanel> cardPanels = new ArrayList<FlashCardPanel>();
 
-            for (FlashCard card : deck.getCards()) {
+            for (FlashCard card : deck.getEditCards()) {
 
                 cardPanels.add(new FlashCardPanel(card));
 
@@ -175,45 +209,85 @@ public class EditDeckPanel extends JPanel {
         }
 
         class FlashCardPanel extends JPanel {
-
+            FlashCard card;
+            Boolean side1Shown = true;
+            CardTextPanel shownText;
+            
             FlashCardPanel(FlashCard card) {
+                this.card = card;
                 //BoxLayout box = new BoxLayout(this, BoxLayout.Y_AXIS);
                 this.setLayout(new BorderLayout());
                 this.setBackground(Color.WHITE);
 
 
-                CardTextPanel text = new CardTextPanel(card.getSide1());
+                this.shownText = new CardTextPanel(card.getSide1());
                 FlashCardButtonPanel buttons = new FlashCardButtonPanel();
 
                 this.setBorder(new LineBorder(Color.BLACK, 1));
 
-                this.add(text, BorderLayout.CENTER);
+                this.add(shownText, BorderLayout.CENTER);
                 this.add(buttons, BorderLayout.SOUTH);
 
                 //this.setPreferredSize(new Dimension(200, 100));
 
 
             }
+            
+            class FlashCardButtonPanel extends JPanel {
+
+                FlashCardButtonPanel() {
+                    FlowLayout flow = new FlowLayout();
+                    flow.setAlignment(FlowLayout.CENTER);
+
+                    JButton edit = new JButton("edit");
+                    JButton flip = new JButton("flip");
+                    
+                    edit.addActionListener(new EditCardListener());
+                    flip.addActionListener(new FlipCardListener());
+                    
+                    this.setLayout(flow);
+                    this.add(flip);
+                    this.add(edit);
+                    this.setBackground(Color.WHITE);
+
+                }
+            }
 
             class FlipCardListener implements ActionListener {
 
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                    FlashCardPanel cardPanel = FlashCardPanel.this;
+            
+                    if(cardPanel.side1Shown) {
+                        cardPanel.side1Shown = false;
+                        cardPanel.shownText.updateText(cardPanel.card.getSide2());
+                    }
+                    else {
+                        cardPanel.side1Shown = true;
+                        cardPanel.shownText.updateText(cardPanel.card.getSide1());
+                    }
                 }
 
             }
+            
             class EditCardListener implements ActionListener {
 
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                    AskNoteModel model = AskNoteModel.instance();
+            
+                    FlashCard card = FlashCardPanel.this.card;
+
+                    model.setSelectedFlashCard(card);
+                    model.setCurrentPage(PageType.EDIT_CARD);
+                    AskNoteView.instance().updateView();
                 }
             }
         }
 
         class CardTextPanel extends JPanel {
-
+            JTextArea cardSideText;
             CardTextPanel(String text) {
                 this.setBackground(Color.WHITE);
                 FlowLayout flow = new FlowLayout();
@@ -222,7 +296,7 @@ public class EditDeckPanel extends JPanel {
 
 
 
-                JTextArea cardSideText = new JTextArea(text);
+                cardSideText = new JTextArea(text);
                 cardSideText.setEnabled(false);
                 cardSideText.setDisabledTextColor(Color.BLACK);
                 cardSideText.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 20));
@@ -235,24 +309,14 @@ public class EditDeckPanel extends JPanel {
 
 
             }
-
-        }
-
-        class FlashCardButtonPanel extends JPanel {
-
-            FlashCardButtonPanel() {
-                FlowLayout flow = new FlowLayout();
-                flow.setAlignment(FlowLayout.CENTER);
-
-                JButton edit = new JButton("edit");
-                JButton flip = new JButton("flip");
-                this.setLayout(flow);
-                this.add(flip);
-                this.add(edit);
-                this.setBackground(Color.WHITE);
-
+            
+            void updateText(String text){
+                cardSideText.setText(text);
             }
+
         }
+
+        
 
 
 
