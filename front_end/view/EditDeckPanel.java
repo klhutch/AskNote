@@ -35,15 +35,23 @@ public class EditDeckPanel extends JPanel {
     Deck deck;
 
     public EditDeckPanel(Deck deck) {
+        BorderLayout border = new BorderLayout(); 
+        border.setHgap(10); 
+        border.setVgap(10); 
         
+        this.setLayout(border);
         
         FlashCardsPanel flashCards = new FlashCardsPanel(deck);
-        this.add(flashCards);
-        this.validate();
-
+        
+        JScrollPane scrollPanel = new JScrollPane(flashCards);
+        this.add(scrollPanel, BorderLayout.CENTER);
+       
+        this.validate(); 
     }
 
 }
+
+
 
 /////////////// for flash cards///////////
 class FlashCardsPanel extends JPanel {
@@ -65,7 +73,6 @@ class FlashCardsPanel extends JPanel {
         for (FlashCardViewPanel card : cardPanels) {
             this.add(card);
         }
-        
         
         
     }

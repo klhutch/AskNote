@@ -46,7 +46,7 @@ public class TestEditDeck extends JFrame {
         cards.add(f5);
         
         for (int i = 0; i < 100; i++) { 
-            cards.add(f5); 
+            cards.add(f5);
         }
         
         EditDeckPanel ed = new EditDeckPanel(new Deck("Bio", cards));
