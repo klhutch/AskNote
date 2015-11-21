@@ -35,6 +35,8 @@ public class EditDeckPanel extends JPanel {
     Deck deck;
 
     public EditDeckPanel(Deck deck) {
+        
+        
         BorderLayout border = new BorderLayout(); 
         border.setHgap(10); 
         border.setVgap(10); 
@@ -42,8 +44,12 @@ public class EditDeckPanel extends JPanel {
         this.setLayout(border);
         
         FlashCardsPanel flashCards = new FlashCardsPanel(deck);
-        
+        ButtonPanel buttons = new ButtonPanel(); 
+        TitlePanel title = new TitlePanel(deck); 
         JScrollPane scrollPanel = new JScrollPane(flashCards);
+        
+        this.add(buttons, BorderLayout.SOUTH);
+        this.add(title, BorderLayout.NORTH);
         this.add(scrollPanel, BorderLayout.CENTER);
        
         this.validate(); 
@@ -51,6 +57,51 @@ public class EditDeckPanel extends JPanel {
 
 }
 
+
+//// title and edit button top // 
+
+  class TitlePanel extends JPanel { 
+         TitlePanel (Deck deck) { 
+            FlowLayout flow = new FlowLayout(); 
+            flow.setAlignment(FlowLayout.CENTER);
+            flow.setHgap(25); 
+            flow.setVgap(20); 
+            
+            JLabel title = new JLabel(deck.getTitle());  
+            JButton edit = new JButton("edit"); 
+            
+            this.setLayout(flow);
+            this.add(title);
+            this.add(edit);
+            
+            
+         } 
+    }
+
+
+
+
+///////// Buttons  Bottom ////////
+    
+    class ButtonPanel extends JPanel { 
+         ButtonPanel () { 
+            FlowLayout flow = new FlowLayout(); 
+            flow.setAlignment(FlowLayout.CENTER);
+            flow.setHgap(25); 
+            flow.setVgap(20); 
+            
+            JButton add = new JButton("add");  
+            JButton save = new JButton("save"); 
+            JButton cancel = new JButton("cancel"); 
+            
+            this.setLayout(flow);
+            this.add(add);
+            this.add(save);
+            this.add(cancel); 
+            
+            
+         } 
+    }
 
 
 /////////////// for flash cards///////////
