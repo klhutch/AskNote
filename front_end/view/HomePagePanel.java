@@ -10,9 +10,7 @@ import java.awt.event.*;
 import java.util.List;
 import java.util.ArrayList; 
 import javax.swing.*;
-import model.AskNoteModel;
-import model.Deck;
-import model.PageType;
+import model.*;
 
 
     /**
@@ -25,15 +23,13 @@ public class HomePagePanel extends JPanel{
          
          
         // create nested JPanels, set layout managers
-        BorderLayout border = new BorderLayout(); 
-        
-        border.setHgap(350);
-        border.setVgap(100); 
-        this.setLayout(border);
+       FlowLayout flow = new FlowLayout(); 
+       flow.setAlignment(FlowLayout.CENTER);     
+       this.setLayout(flow);
         
         
-        InnerPanel decks = new InnerPanel(" D ", "Decks");     
-        InnerPanel quiz = new InnerPanel(" Q ", "Quiz"); 
+        InnerPanel decks = new InnerPanel(" D " , "Decks");     
+        InnerPanel quiz = new InnerPanel(" Q " , "Quiz"); 
         InnerPanel friends = new InnerPanel(" F ", "Friends");
         
         List<InnerPanel> options = new ArrayList<>();
@@ -43,13 +39,7 @@ public class HomePagePanel extends JPanel{
        
         OptionsPanel optionsPanel = new OptionsPanel(options); 
        
-        this.add(new JPanel(), BorderLayout.WEST); 
-        this.add(new JPanel(), BorderLayout.EAST); 
-        this.add(optionsPanel, BorderLayout.CENTER);
-        
-        this.add(new JPanel(), BorderLayout.NORTH); 
-        
-        this.add(new JPanel(), BorderLayout.SOUTH); 
+        this.add(optionsPanel);
         
         this.validate(); 
         
@@ -103,9 +93,16 @@ public class HomePagePanel extends JPanel{
 
             
             BoxLayout box = new BoxLayout(this, BoxLayout.Y_AXIS); 
-             
+            
+             this.add(new JPanel()); 
+             this.add(new JPanel()); 
+             this.add(new JPanel()); 
             for (InnerPanel panel : panels) {
+                this.add(new JPanel()); 
+                this.add(new JPanel()); 
+                this.add(new JPanel()); 
                 this.add(panel);
+               
             }
             this.setLayout(box);
 
@@ -149,4 +146,3 @@ public class HomePagePanel extends JPanel{
     
     }
 }
-
