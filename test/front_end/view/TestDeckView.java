@@ -4,11 +4,15 @@ package front_end.view;
  *
  * @author tiffanychao
  */
+import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JFrame;
+import model.AskNoteModel;
 import model.Deck;
+import model.PageType;
+import view.AskNoteView;
 import view.DeckPanel;
 
 public class TestDeckView extends JFrame {
@@ -25,7 +29,9 @@ public class TestDeckView extends JFrame {
 
     private TestDeckView() {
         setTitle ("AskNote");
+        setSize(new Dimension(1000, 600));
         setResizable(true);
+        
         
         List<Deck> decks = new ArrayList<>();
         decks.add(new Deck("Bio1"));
@@ -37,9 +43,13 @@ public class TestDeckView extends JFrame {
         decks.add(new Deck("Discrete Structs"));
         decks.add(new Deck("Music"));
         
-        DeckPanel ed = new DeckPanel(decks);
-        getContentPane().add(ed);
-        pack();
+        AskNoteModel model = AskNoteModel.instance();
+        model.setDecks(decks);
+        model.setCurrentPage(PageType.DECK);
+        
+        AskNoteView view = AskNoteView.instance();
+        view.updateView();
+        getContentPane().add(view);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 }

@@ -15,6 +15,9 @@ public class FlashCard {
         this.side1 = side1; 
         this.side2 = side2; 
     }
+    public FlashCard(FlashCard card){
+        this(new String(card.getSide1()), new String(card.getSide2()));
+    }
     public FlashCard() { 
         this("", ""); 
     }    

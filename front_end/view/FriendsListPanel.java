@@ -18,7 +18,7 @@ import model.*;
 
 
 public class FriendsListPanel extends JPanel {
-    
+    JList friendList;
     
     public FriendsListPanel(List<String> friends) { 
         BorderLayout border = new BorderLayout(); 
@@ -34,15 +34,15 @@ public class FriendsListPanel extends JPanel {
         
         
         
-        JList friendList = new JList();                            
+                                    
          if (friends.size() > 0) {
-                friendList = new JList(friends.toArray());
-                friendList.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+                this.friendList = new JList(friends.toArray());
+                this.friendList.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
                 
             }
             else {
                 String[] friendArray = {"No Friends Added"};
-                friendList = new JList(friendArray);
+                this.friendList = new JList(friendArray);
             }
         
           

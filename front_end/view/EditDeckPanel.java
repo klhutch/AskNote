@@ -20,9 +20,11 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
+import javax.swing.JTextPane;
 import javax.swing.SwingConstants;
 import javax.swing.border.*;
 import javax.swing.border.LineBorder;
+import model.AskNoteModel;
 import model.Deck;
 import model.FlashCard;
 
@@ -33,9 +35,11 @@ import model.FlashCard;
 public class EditDeckPanel extends JPanel {
 
     Deck deck;
-
+    private Deck original;
+    
     public EditDeckPanel(Deck deck) {
-        
+        this.original = deck;
+        this.deck = new Deck(deck);
         
         BorderLayout border = new BorderLayout(); 
         border.setHgap(10); 
@@ -43,10 +47,12 @@ public class EditDeckPanel extends JPanel {
         
         this.setLayout(border);
         
-        FlashCardsPanel flashCards = new FlashCardsPanel(deck);
+        FlashCardsPanel flashCards = new FlashCardsPanel(this.deck);
         ButtonPanel buttons = new ButtonPanel(); 
-        TitlePanel title = new TitlePanel(deck); 
+        TitlePanel title = new TitlePanel(this.deck); 
         JScrollPane scrollPanel = new JScrollPane(flashCards);
+        
+        scrollPanel.setBorder(new LineBorder(Color.LIGHT_GRAY, 1));
         
         this.add(buttons, BorderLayout.SOUTH);
         this.add(title, BorderLayout.NORTH);
@@ -54,8 +60,14 @@ public class EditDeckPanel extends JPanel {
        
         this.validate(); 
     }
+    
+    void updateOriginal(){
+        original.setTitle(new String(deck.getTitle()));
+        original.setCards(deck.getCards());
+    }
+    
 
-}
+
 
 
 //// title and edit button top // 
@@ -77,7 +89,6 @@ public class EditDeckPanel extends JPanel {
             
          } 
     }
-
 
 
 
@@ -103,94 +114,147 @@ public class EditDeckPanel extends JPanel {
          } 
     }
 
+/****************************** LISTENERS ********************************/
+    
+    
+    
+    class EditTitleListener implements ActionListener {
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        }
+    }
+
+    class SaveEditListener implements ActionListener {
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            AskNoteModel.instance().setPreviousAsCurrent();
+            EditDeckPanel.this.updateOriginal();
+            AskNoteView.instance().updateView();
+        }
+        
+    }
+    
+    class CancelEditListener implements ActionListener {
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            AskNoteModel.instance().setPreviousAsCurrent();
+            AskNoteView.instance().updateView();
+        }
+    }
+
 
 /////////////// for flash cards///////////
-class FlashCardsPanel extends JPanel {
+    class FlashCardsPanel extends JPanel {
 
-    FlashCardsPanel(Deck deck) {
-       
-        GridLayout grid = new GridLayout(-1, 3);
-        grid.setVgap(20);
-        grid.setHgap(20);
-        this.setLayout(grid);
-        List<FlashCardViewPanel> cardPanels = new ArrayList<FlashCardViewPanel>();
+        FlashCardsPanel(Deck deck) {
+            //TODO: make the number of columns dynamic
+            GridLayout grid = new GridLayout(-1, 3);
+            grid.setVgap(20);
+            grid.setHgap(20);
 
-        for (FlashCard card : deck.getCards()) {
+            this.setLayout(grid);
+            List<FlashCardPanel> cardPanels = new ArrayList<FlashCardPanel>();
 
-            cardPanels.add(new FlashCardViewPanel(card));
+            for (FlashCard card : deck.getCards()) {
 
-        }
+                cardPanels.add(new FlashCardPanel(card));
 
-        for (FlashCardViewPanel card : cardPanels) {
-            this.add(card);
-        }
-        
-        this.setSize(new Dimension(200, 100));
-        
-        
-    }
+            }
 
-    class FlashCardViewPanel extends JPanel {
+            for (FlashCardPanel card : cardPanels) {
+                this.add(card);
+            }
 
-        FlashCardViewPanel(FlashCard card) {
-            BoxLayout box = new BoxLayout(this, BoxLayout.Y_AXIS);
-            this.setLayout(box);
-            this.setBackground(Color.WHITE);
+            this.setSize(new Dimension(200, 150));
 
-            FlashCardPanel text = new FlashCardPanel(card);
-            FlashCardButtonPanel buttons = new FlashCardButtonPanel();
-
-            Border linedBorder = BorderFactory.createLineBorder(Color.BLACK);
-            //this.setBorder(linedBorder);
-
-            this.add(text);
-            this.add(buttons);
-
-          //  this.setMaximumSize(new Dimension(100, 100));
-            
-
-        }
-    }
-
-    class FlashCardPanel extends JPanel {
-
-        FlashCardPanel(FlashCard card) {
-
-            FlowLayout flow = new FlowLayout();
-            flow.setAlignment(FlowLayout.CENTER);
-
-            flow.setVgap(20);
-            flow.setHgap(20);
-
-            JPanel textPanel = new JPanel();
-            textPanel.setLayout(flow);
-
-            JLabel cardSideText = new JLabel(card.getSide1());
-
-            cardSideText.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 20));
-
-            this.setLayout(flow);
-            this.add(cardSideText);
-            this.setBackground(Color.WHITE);
 
         }
 
-    }
+        class FlashCardPanel extends JPanel {
 
-    class FlashCardButtonPanel extends JPanel {
+            FlashCardPanel(FlashCard card) {
+                //BoxLayout box = new BoxLayout(this, BoxLayout.Y_AXIS);
+                this.setLayout(new BorderLayout());
+                this.setBackground(Color.WHITE);
 
-        FlashCardButtonPanel() {
-            FlowLayout flow = new FlowLayout();
-            flow.setAlignment(FlowLayout.CENTER);
-            flow.setHgap(25);
-            flow.setVgap(20);
-            JButton edit = new JButton("edit");
-            JButton flip = new JButton("flip");
-            this.setLayout(flow);
-            this.add(flip);
-            this.add(edit);
-            this.setBackground(Color.WHITE);
+
+                CardTextPanel text = new CardTextPanel(card.getSide1());
+                FlashCardButtonPanel buttons = new FlashCardButtonPanel();
+
+                this.setBorder(new LineBorder(Color.BLACK, 1));
+
+                this.add(text, BorderLayout.CENTER);
+                this.add(buttons, BorderLayout.SOUTH);
+
+                //this.setPreferredSize(new Dimension(200, 100));
+
+
+            }
+
+            class FlipCardListener implements ActionListener {
+
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                }
+
+            }
+            class EditCardListener implements ActionListener {
+
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                }
+            }
+        }
+
+        class CardTextPanel extends JPanel {
+
+            CardTextPanel(String text) {
+                this.setBackground(Color.WHITE);
+                FlowLayout flow = new FlowLayout();
+                flow.setAlignment(FlowLayout.CENTER);
+                this.setLayout(flow);
+
+
+
+                JTextArea cardSideText = new JTextArea(text);
+                cardSideText.setEnabled(false);
+                cardSideText.setDisabledTextColor(Color.BLACK);
+                cardSideText.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 20));
+                cardSideText.setLineWrap(true);
+                cardSideText.setWrapStyleWord(true);
+
+                cardSideText.setCaretPosition(0);
+
+                this.add(cardSideText);
+
+
+            }
 
         }
+
+        class FlashCardButtonPanel extends JPanel {
+
+            FlashCardButtonPanel() {
+                FlowLayout flow = new FlowLayout();
+                flow.setAlignment(FlowLayout.CENTER);
+
+                JButton edit = new JButton("edit");
+                JButton flip = new JButton("flip");
+                this.setLayout(flow);
+                this.add(flip);
+                this.add(edit);
+                this.setBackground(Color.WHITE);
+
+            }
+        }
+
+
+
     }
 }

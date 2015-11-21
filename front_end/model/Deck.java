@@ -15,6 +15,7 @@ public class Deck {
     private String title; 
     private List<FlashCard> cards; 
     private int currentCardIndex = 0;
+    private Boolean isNewAddition = false;
        
     public Deck(String title, List<FlashCard> cards) { 
         this.title = title; 
@@ -30,12 +31,27 @@ public class Deck {
         this("New Deck", cards); 
     }
     
+    public Deck(Deck deck){
+        this.title = new String(deck.getTitle());
+        List<FlashCard> oldCards = deck.getCards();
+        this.setCards(deck.getCards());
+        
+        
+        this.isNewAddition = deck.getIsNewAddition();
+    }
+    
     public Deck() { 
         this("New Deck", new ArrayList<FlashCard>()); 
     }
     
     public List<FlashCard> getCards() {
          return this.cards; 
+    }
+    public void setCards(List<FlashCard> oldCards){
+        this.cards = new ArrayList();
+        for(FlashCard card : oldCards){
+            this.cards.add(new FlashCard(card));
+        }
     }
     
     public FlashCard getCard(int index) {
@@ -62,6 +78,13 @@ public class Deck {
     public void setTitle(String title) { 
         this.title = title; 
     } 
+    
+    public Boolean getIsNewAddition() {
+        return this.isNewAddition;
+    }
+    public void setIsNewAddition(Boolean bool) {
+        this.isNewAddition = bool;
+    }
     
     
     public FlashCard getCurrentCard(){

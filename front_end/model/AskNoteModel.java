@@ -134,6 +134,13 @@ public class AskNoteModel {
         return null; 
     }
     
+    public void deleteDeck(Deck deck) {
+        this.decks.remove(deck);
+    }
+    
+    public void addDeck(Deck deck) {
+        this.decks.add(deck);
+    }
     
     public Deck getSelectedDeck() {
         return this.selectedDeck;
@@ -155,5 +162,7 @@ public class AskNoteModel {
     public void setActiveQuiz(Quiz quiz){
         this.activeQuiz = quiz;
     }
+    
+    
      
 } 

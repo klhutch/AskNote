@@ -23,39 +23,50 @@ public class HeaderPanel extends JPanel {
     JButton notification;
     
     public HeaderPanel(String str, int number) { 
-    FlowLayout flow = new FlowLayout(); 
-    flow.setAlignment(FlowLayout.CENTER);
-    this.setLayout(flow);
-    flow.setHgap(40); 
-    
-    //this.setBackground(Color.cyan);
-    
-    
-    JLabel title = new JLabel(str);
-    this.home = new JButton("Home"); 
-    this.back = new JButton("Back");
-    this.notification = new JButton("" + number);
-    
-    this.home.setVisible(false);
-    this.home.addActionListener(new HomeButtonListener());
-    
-    this.back.setVisible(false);
-    this.back.addActionListener(new BackButtonListener());
-    
-    this.notification.addActionListener(new NotificationButtonListener());
-    this.notification.setVisible(false); //TODO remove once notificationPanel actually does something
-    
-    this.add(home);
-    this.add(back);
-    this.add(title);
-    this.add(notification);
-    this.setPreferredSize(new Dimension(500, 40));
-    
-    this.setBorder(new MatteBorder(0, 0, 1, 0, Color.GRAY));
-    this.validate();
-    
-    
-    
+        this.setLayout(new BorderLayout());
+        
+        FlowLayout flow = new FlowLayout();
+         
+
+        //this.setBackground(Color.cyan);
+        JPanel homeBack = new JPanel();
+        homeBack.setLayout(flow);
+        
+        JPanel east = new JPanel();
+        //east.setPreferredSize(homeBack.getPreferredSize());
+        east.setSize(homeBack.getSize());
+        
+        JLabel title = new JLabel(str, SwingConstants.CENTER);
+        title.setAlignmentX(java.awt.Component.CENTER_ALIGNMENT);
+        title.setAlignmentY(java.awt.Component.CENTER_ALIGNMENT);
+        
+        this.home = new JButton("Home"); 
+        this.back = new JButton("Back");
+        this.notification = new JButton("" + number);
+
+        this.home.setVisible(false);
+        this.home.addActionListener(new HomeButtonListener());
+
+        this.back.setVisible(false);
+        this.back.addActionListener(new BackButtonListener());
+
+        this.notification.addActionListener(new NotificationButtonListener());
+        this.notification.setVisible(false); //TODO remove once notificationPanel actually does something
+
+        homeBack.add(home);
+        homeBack.add(back);
+        east.add(notification);
+        
+        this.add(homeBack, BorderLayout.WEST);
+        this.add(title, BorderLayout.CENTER);
+        this.add(Box.createRigidArea(homeBack.getSize()), BorderLayout.EAST);
+        this.setPreferredSize(new Dimension(500, 40));
+
+        this.setBorder(new MatteBorder(0, 0, 1, 0, Color.GRAY));
+        this.validate();
+
+
+
     }
     
     public void setHomeVisible(Boolean visible) {
