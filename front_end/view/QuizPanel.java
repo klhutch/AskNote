@@ -18,24 +18,65 @@ import model.PageType;
  */
 public class QuizPanel extends JPanel{
     public QuizPanel() { 
-        FlowLayout flow = new FlowLayout(); 
-        flow.setAlignment(FlowLayout.CENTER);
-        flow.setHgap(20);
-        flow.setVgap(200);
-        this.setLayout(flow);
-        
-        JLabel quiz = new JLabel("Quiz"); 
-        JButton self = new JButton("Self"); 
-        JButton friends = new JButton("Friend"); 
-        
-        self.addActionListener(new QuizSelfButtonListener());
-        friends.addActionListener(new QuizFriendsButtonListener());
-        
-        this.add(self); 
-        this.add(friends); 
-        this.validate();
+       FlowLayout flow = new FlowLayout(); 
+       flow.setAlignment(FlowLayout.CENTER);
+       flow.setVgap(200);
+       CombinedButtonTextPanel innerPanel = new CombinedButtonTextPanel(); 
+       
+       this.setLayout(flow);
+       this.add(innerPanel); 
+       
+       
+       this.validate();
+       
     }
     
+    class TextPanel extends JPanel { 
+        TextPanel() {
+        FlowLayout flow = new FlowLayout();
+        flow.setAlignment(FlowLayout.CENTER);
+        JLabel complete = new JLabel("quiz"); 
+        complete.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 40));
+        this.setMaximumSize(new Dimension(300, 70));
+        flow.setVgap(10);
+        this.setLayout(flow);
+        this.add(complete); 
+        this.validate();
+        
+       
+        } 
+        
+    }
+    
+    class ButtonPanel extends JPanel { 
+         ButtonPanel () { 
+            FlowLayout flow = new FlowLayout(); 
+            flow.setAlignment(FlowLayout.CENTER);
+            flow.setHgap(25); 
+            flow.setVgap(20); 
+            JButton repeat = new JButton("self");
+            JButton end = new JButton("friend"); 
+            
+            this.setLayout(flow);
+            this.add(repeat);
+            this.add(end); 
+            
+         } 
+    }
+    
+    class CombinedButtonTextPanel extends JPanel { 
+        CombinedButtonTextPanel () { 
+            
+            BoxLayout box = new BoxLayout(this, BoxLayout.Y_AXIS); 
+            this.setLayout(box);
+            TextPanel text = new TextPanel(); 
+            ButtonPanel buttons = new ButtonPanel(); 
+            
+            this.add(text); 
+            this.add(buttons);
+            
+        }
+      }
     private class QuizSelfButtonListener implements ActionListener {
 
         @Override

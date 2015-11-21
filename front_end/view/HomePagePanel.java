@@ -14,22 +14,22 @@ import model.AskNoteModel;
 import model.Deck;
 import model.PageType;
 
+
+    /**
+     *
+     * @author Maha Alkhairy
+     */
 public class HomePagePanel extends JPanel{
     // takes nothing in 
     public HomePagePanel() {     
          
          
-        // create layout managers
-//        FlowLayout titleFlow = new FlowLayout(); 
-//        titleFlow.setAlignment(FlowLayout.CENTER);
-//        
-//        FlowLayout optionsFlow = new FlowLayout(); 
-//        optionsFlow.setAlignment(FlowLayout.CENTER);
-//        optionsFlow.setHgap(20);
-//        optionsFlow.setVgap(20);
-//        
         // create nested JPanels, set layout managers
-        this.setLayout(new BorderLayout());
+        BorderLayout border = new BorderLayout(); 
+        
+        border.setHgap(100);
+        border.setVgap(100); 
+        this.setLayout(border);
         
         
         InnerPanel decks = new InnerPanel(" D ", "Decks");     
@@ -42,9 +42,13 @@ public class HomePagePanel extends JPanel{
         options.add(friends); 
        
         OptionsPanel optionsPanel = new OptionsPanel(options); 
-      
+       
+        this.add(new JPanel(), BorderLayout.WEST); 
+        this.add(new JPanel(), BorderLayout.EAST); 
         this.add(optionsPanel, BorderLayout.CENTER);
         this.validate(); 
+        
+        
         
         
         //////// for mouse listners /////////////
@@ -65,7 +69,7 @@ public class HomePagePanel extends JPanel{
         InnerPanel(String button, String label) { 
            
             FlowLayout flow = new FlowLayout(); 
-            flow.setAlignment(FlowLayout.LEFT);
+            flow.setAlignment(FlowLayout.LEADING);
             JButton bttn = new JButton(button); 
             JLabel lbl = new JLabel(label); 
 
@@ -88,10 +92,6 @@ public class HomePagePanel extends JPanel{
         }
     }
 
-    /**
-     *
-     * @author Maha Alkhairy
-     */
      class OptionsPanel extends JPanel{
         // takes nothing in 
         OptionsPanel(List<InnerPanel> panels) {        

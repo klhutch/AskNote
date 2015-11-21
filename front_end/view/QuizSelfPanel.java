@@ -63,13 +63,15 @@ public class QuizSelfPanel extends JPanel{
         
         ShownTextPanel (String text) {
             
-//            FlowLayout flow = new FlowLayout(); 
-//            flow.setAlignment(FlowLayout.CENTER);
+           FlowLayout flow = new FlowLayout(); 
+           flow.setAlignment(FlowLayout.CENTER);
+           flow.setVgap(200); 
             this.shownText = new JLabel(text); 
             
             this.setBackground(Color.white);
 
             this.add(this.shownText);//, BorderLayout.CENTER); 
+            this.setLayout(flow);
 
         }
         
