@@ -110,8 +110,8 @@ class FlashCardsPanel extends JPanel {
     FlashCardsPanel(Deck deck) {
        
         GridLayout grid = new GridLayout(-1, 3);
-        grid.setVgap(10);
-        grid.setHgap(10);
+        grid.setVgap(20);
+        grid.setHgap(20);
         this.setLayout(grid);
         List<FlashCardViewPanel> cardPanels = new ArrayList<FlashCardViewPanel>();
 
@@ -125,6 +125,8 @@ class FlashCardsPanel extends JPanel {
             this.add(card);
         }
         
+        this.setSize(new Dimension(200, 100));
+        
         
     }
 
@@ -133,17 +135,19 @@ class FlashCardsPanel extends JPanel {
         FlashCardViewPanel(FlashCard card) {
             BoxLayout box = new BoxLayout(this, BoxLayout.Y_AXIS);
             this.setLayout(box);
+            this.setBackground(Color.WHITE);
 
             FlashCardPanel text = new FlashCardPanel(card);
             FlashCardButtonPanel buttons = new FlashCardButtonPanel();
 
             Border linedBorder = BorderFactory.createLineBorder(Color.BLACK);
-            this.setBorder(linedBorder);
+            //this.setBorder(linedBorder);
 
             this.add(text);
             this.add(buttons);
 
-            this.setMaximumSize(new Dimension(50, 50));
+          //  this.setMaximumSize(new Dimension(100, 100));
+            
 
         }
     }
@@ -167,6 +171,7 @@ class FlashCardsPanel extends JPanel {
 
             this.setLayout(flow);
             this.add(cardSideText);
+            this.setBackground(Color.WHITE);
 
         }
 
@@ -184,6 +189,7 @@ class FlashCardsPanel extends JPanel {
             this.setLayout(flow);
             this.add(flip);
             this.add(edit);
+            this.setBackground(Color.WHITE);
 
         }
     }
