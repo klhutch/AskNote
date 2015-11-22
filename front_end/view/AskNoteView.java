@@ -53,25 +53,31 @@ public class AskNoteView extends JPanel {
         switch(model.getCurrentPage()) {
             case HOME: 
                 this.appPanel = new HomePagePanel();
+                this.header.setTitle("Home");
                 break;
             case DECK: 
-                System.out.println("Switching to Deck Panel");
                 this.appPanel = new DeckPanel(model.getDecks());
+                this.header.setTitle("Flashcard Decks");
                 break;
             case QUIZ: 
                 this.appPanel = new QuizPanel();
+                this.header.setTitle("");
                 break;
             case QUIZ_DECK: 
                 this.appPanel = new QuizDeckPanel(model.getDecks()); // CHANGE THIS ///////
+                this.header.setTitle("Choose A Deck to Quiz With");
                 break;
             case EDIT_CARD: 
                 this.appPanel = new EditCardPanel(model.getSelectedFlashCard());
+                this.header.setTitle("Edit Flashcard");
                 break;
             case EDIT_DECK: 
                 this.appPanel = new EditDeckPanel(model.getSelectedDeck());
+                this.header.setTitle("Edit Deck");
                 break;
             case FRIENDS_LIST: 
                 this.appPanel = new FriendsListPanel(model.getFriends());
+                this.header.setTitle("Friends List");
                 break;
             case LOGIN: 
                 this.appPanel = new LoginPanel();
@@ -81,18 +87,25 @@ public class AskNoteView extends JPanel {
                 break;
             case QUIZ_SELF: 
                 this.appPanel = new QuizSelfPanel(model.getSelectedDeck());
+                this.header.setTitle("");
                 break;
             case QUIZ_SELECT: 
                 this.appPanel = new QuizSelectPanel(model.getQuizzes(), model.getFriends());
+                this.header.setTitle("Select a Quiz");
                 break;
             case QUIZ_TESTER: 
-                this.appPanel = new QuizTesterPanel(model.getActiveQuiz().getCurrentCard(), model.getActiveQuiz().getResponse(), true);
+                this.appPanel = new QuizTesterPanel(model.getActiveQuiz().getCurrentCard(), 
+                        model.getActiveQuiz().getResponse(), true);
+                this.header.setTitle("Quiz View");
                 break;
             case QUIZ_TESTEE: 
                 this.appPanel = new QuizTesteePanel(model.getActiveQuiz().getShownSide()); 
+                this.header.setTitle("Quiz View");
                 break;
             case QUIZ_WAITING:
                 this.appPanel = new QuizWaitingPanel(model.getActiveQuiz());
+                this.header.setTitle("Quiz View");
+                
         }
         
         

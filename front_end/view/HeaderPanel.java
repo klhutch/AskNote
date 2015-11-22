@@ -18,9 +18,10 @@ import model.PageType;
  * @author Maha Alkhairy
  */
 public class HeaderPanel extends JPanel {
-    JButton home;
-    JButton back;
-    JButton notification;
+    private JButton home;
+    private JButton back;
+    private JButton notification;
+    private JLabel title;
     
     public HeaderPanel(String str, int number) { 
         this.setLayout(new BorderLayout());
@@ -36,7 +37,7 @@ public class HeaderPanel extends JPanel {
         //east.setPreferredSize(homeBack.getPreferredSize());
         east.setSize(homeBack.getSize());
         
-        JLabel title = new JLabel(str, SwingConstants.CENTER);
+        title = new JLabel(str, SwingConstants.CENTER);
         title.setAlignmentX(java.awt.Component.CENTER_ALIGNMENT);
         title.setAlignmentY(java.awt.Component.CENTER_ALIGNMENT);
         
@@ -75,6 +76,10 @@ public class HeaderPanel extends JPanel {
     
     public void setBackVisible(Boolean visible) {
         this.back.setVisible(visible);
+    }
+    
+    public void setTitle(String text){
+        this.title.setText(text);
     }
 
     

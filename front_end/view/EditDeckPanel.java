@@ -97,10 +97,12 @@ public class EditDeckPanel extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String msg = "Edit Deck Title";
-                String text = JOptionPane.showInputDialog(AskNoteView.instance(),
+                String newText = JOptionPane.showInputDialog(AskNoteView.instance(),
                         msg, TitlePanel.this.text.getText());
-                TitlePanel.this.text.setText(text);
-                EditDeckPanel.this.deck.editTitle(text);
+                if (newText != null && !newText.equals("")) {
+                    TitlePanel.this.text.setText(newText);
+                    EditDeckPanel.this.deck.editTitle(newText);
+                }
                 
             }
         }

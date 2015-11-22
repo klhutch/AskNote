@@ -1,4 +1,4 @@
-Functional Panels
+Functional Items
 - AskNoteViewPanel
 - HomePagePanel (when accessed from  AskNoteViewPanel)
 - QuizSelfPanel
@@ -7,14 +7,15 @@ Functional Panels
 - EditCardPanel
 - EditDeckPanel
 - ViewDecksHelperPanel
+- QuizPanel
+- QuizDeckPanel
+- Changing Title in header panel
 
 Non-Functional Items
-- Changing title in HeaderPanel
 - Checking the current view in HeaderPanel to warn users of deleting edits before going back or home
 - Checking the current view in HeaderPanel to delete new card before going back or home
 - FriendsListPanel*
 - LoginPanel*
-- QuizDeck
 - QuizWaiting
 - QuizSelectPanel
 - QuizTesteePanel

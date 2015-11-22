@@ -19,7 +19,7 @@ public class TestAskNoteView {
         frame.setTitle("AskNote");
         frame.setResizable(true);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(1000, 600);
+        frame.setSize(1000, 650);
         
         AskNoteView asknote = AskNoteView.instance();      
         frame.add(asknote);
