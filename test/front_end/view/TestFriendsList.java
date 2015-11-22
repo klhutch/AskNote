@@ -8,6 +8,9 @@ package front_end.view;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JFrame;
+import model.AskNoteModel;
+import model.PageType;
+import view.AskNoteView;
 import view.FriendsListPanel;
 
 /**
@@ -17,32 +20,33 @@ import view.FriendsListPanel;
 public class TestFriendsList {
     public static void main (String[] argv) {
         // Create a frame 
-    JFrame frame = new JFrame ();
-    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        
+        JFrame frame = new JFrame ();
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
         // Set the title and other parameters. 
-    frame.setTitle ("AskNote");
-    frame.setResizable (true);
+        frame.setTitle ("AskNote");
+        frame.setResizable (true);
         // Background is going to be Panel's background. 
         // f.getContentPane().setBackground (Color.cyan); 
-    frame.setSize (1000, 600);
-    
-    
-    /// make a FriendsList
-    List<String> frnds = new ArrayList<>(); 
-    
-    for (int i = 0; i < 100; i++) { 
-         String str = "friend" + i; 
-         frnds.add(str); 
-     }
-    
-    
-    FriendsListPanel flst = new FriendsListPanel(frnds); 
-    
-    frame.getContentPane().add (flst);
-        // Show the frame. 
-    frame.setVisible (true);
-  }
+        frame.setSize (1000, 650);
+
+
+        /// make a list of friends
+        List<String> friends = new ArrayList<>(); 
+
+        for (int i = 0; i < 100; i++) { 
+            String str = "friend" + i; 
+            friends.add(str); 
+        }
+
+        AskNoteModel model = AskNoteModel.instance();
+        model.setFriends(friends);
+        model.setCurrentPage(PageType.FRIENDS_LIST);
+
+        AskNoteView.instance().updateView();
+        frame.add(AskNoteView.instance());
+        frame.setVisible (true);
+    }
 
     
 }

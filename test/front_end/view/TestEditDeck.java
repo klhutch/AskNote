@@ -53,6 +53,7 @@ public class TestEditDeck extends JFrame {
         for (int i = 0; i < 100; i++) { 
             cards.add(card5); 
         }
+        cards.add(card1);
         Deck deck = new Deck("Bio", cards);
         
         AskNoteModel model = AskNoteModel.instance();

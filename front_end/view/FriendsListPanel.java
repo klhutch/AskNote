@@ -58,7 +58,9 @@ public class FriendsListPanel extends JPanel {
         
         List<OptionPanel> options = new ArrayList<>();
         options.add(add); 
-        options.add(checkAll); 
+        options.add(delete);
+        //options.add(checkAll); 
+        //options.add(uncheckAll);
         
         
         SelectionPanel right = new SelectionPanel(options); 
@@ -77,34 +79,50 @@ public class FriendsListPanel extends JPanel {
         this.validate(); 
     }    
 
-    private static class AddFriendListener implements ActionListener {
+    class AddFriendListener implements ActionListener {
 
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            String msg = "Add New Friend";
+            String newText = JOptionPane.showInputDialog(AskNoteView.instance(), msg, "Friend's Name");
+
+            if (newText != null && !newText.equals("")) {
+                AskNoteModel.instance().addFriend(newText);
+                AskNoteView.instance().updateView();
+            }
+        }
+    }
+
+    class RemoveFriendsListener implements ActionListener {
+
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            AskNoteModel model = AskNoteModel.instance();
+                
+                int index = FriendsListPanel.this.friendList.getMinSelectionIndex();
+                
+                if (index >= 0) {
+                    String friend = FriendsListPanel.this.friends.get(index);
+                    
+                    //TODO add a confirmation dialog
+                    model.deleteFriend(friend);
+                    AskNoteView.instance().updateView();
+                }
+        }
+    }
+
+    class SelectAllListener implements ActionListener {
 
         @Override
         public void actionPerformed(ActionEvent e) {
             
         }
-    }
-
-    private static class RemoveFriendsListener implements ActionListener {
-
-
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            
-        }
-    }
-
-    private static class SelectAllListener implements ActionListener {
-
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            
-        }
 
     }
 
-    private static class UnselectAllListener implements ActionListener{
+    class UnselectAllListener implements ActionListener{
 
         @Override
         public void actionPerformed(ActionEvent e) {

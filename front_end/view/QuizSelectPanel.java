@@ -171,12 +171,13 @@ public class QuizSelectPanel extends JPanel {
                 Quiz toRemove = OneQuizPanel.this.quiz;
                         
                 String msg = "Are you sure you want to delete your quiz on  \"" + 
-                        toRemove.getDeck().getTitle() + "\" with " + quiz.getFriend()+"?";
+                        toRemove.getDeck().getTitle() + "\" with " + toRemove.getFriend()+"?";
                 int response = JOptionPane.showConfirmDialog(AskNoteView.instance(), msg,
                         "Confirm", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
                 
                 if (response == JOptionPane.YES_OPTION) {
                     model.deleteQuiz(toRemove);
+                    model.setActiveQuiz(null);
                     AskNoteView.instance().updateView();
                 }
             }
@@ -245,7 +246,7 @@ public class QuizSelectPanel extends JPanel {
               
                     model.addQuiz(quiz);
                     model.setActiveQuiz(quiz);
-                    model.setCurrentPage(PageType.QUIZ_WAITING);
+                    model.setCurrentPage(PageType.QUIZ_DECK);
                     AskNoteView.instance().updateView();
                 }
             }

@@ -9,7 +9,9 @@ import java.util.ArrayList;
 import javax.swing.JFrame;
 import model.AskNoteModel;
 import model.Deck;
+import model.PageType;
 import model.Quiz;
+import view.AskNoteView;
 import view.QuizSelectPanel;
 
 
@@ -24,7 +26,7 @@ public class TestQuizSelectPanel {
         frame.setTitle("AskNote");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setResizable(true);
-        frame.setSize(1000, 600);
+        frame.setSize(1000, 650);
         
         String friend1 = "Marie";
         Deck deck1 = new Deck("English");
@@ -46,8 +48,12 @@ public class TestQuizSelectPanel {
         AskNoteModel model = AskNoteModel.instance();
         model.setFriends(friends);
         model.setQuizzes(quizzes);
+        model.setCurrentPage(PageType.QUIZ);
+        model.setCurrentPage(PageType.QUIZ_SELECT);
         
-        frame.add(new QuizSelectPanel(quizzes, friends));
+        AskNoteView.instance().updateView();
+        
+        frame.add(AskNoteView.instance());
         
         
         

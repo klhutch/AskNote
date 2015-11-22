@@ -29,12 +29,13 @@ public class ViewDecksHelperPanel extends JPanel {
     // should maintain references to decktitlepanels
     
     public ViewDecksHelperPanel(List<Deck> decks) {
-        
+        this.setBackground(Color.WHITE);
         setLayout(new BorderLayout());
         
         JPanel decksPanel = new ScrollableDecksPanel(decks);
         
         JScrollPane scrollPanel = new JScrollPane(decksPanel);
+        
         add(scrollPanel, BorderLayout.CENTER);
         validate();
     }
@@ -44,12 +45,15 @@ public class ViewDecksHelperPanel extends JPanel {
         ScrollableDecksPanel(List<Deck> decks) {
             setLayout(new FlowLayout(FlowLayout.LEFT));
             setPreferredSize(findPreferredSize(decks.size()));
+            this.setBackground(Color.WHITE);
             
             for (Deck deck : decks) {
-            DeckTitlePanel deckPanel = new DeckTitlePanel(deck);
-            add(deckPanel);
-            addMouseListener(new DeckSelectedListener());
+                DeckTitlePanel deckPanel = new DeckTitlePanel(deck);
+                this.add(deckPanel);
+                deckPanel.addMouseListener(new DeckSelectedListener());
             }
+            
+            
         }
         
         private Dimension findPreferredSize(int numDecks) {
@@ -126,11 +130,12 @@ public class ViewDecksHelperPanel extends JPanel {
         @Override
         public void mouseClicked(MouseEvent e) {
             ViewDecksHelperPanel deckPanel = ViewDecksHelperPanel.this;
-            
-            if (deckPanel.selected != null) {
-                deckPanel.selected.deSelect();
+            if (e.getSource() instanceof DeckTitlePanel){
+                if (deckPanel.selected != null) {
+                    deckPanel.selected.deSelect();
+                }
+                ((DeckTitlePanel)e.getSource()).select();
             }
-            ((DeckTitlePanel)e.getSource()).select();
         }
 
         @Override

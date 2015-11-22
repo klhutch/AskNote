@@ -29,17 +29,24 @@ public class Quiz {
     private FlashCard currentCard;
     private Boolean side1Shown;
     
+    
     private Boolean notYetAccepted = false;
     private Boolean waitingOnResponse = false;
+    
+    private Boolean correct = null;
     
     public Quiz(Deck deck, String friend, Boolean userIsTester, String response) { 
         this.deck = deck; 
         this.friend = friend; 
         this.userIsTester = userIsTester;
         this.response = response;
-        this.currentCard = deck.getCurrentCard();
+        if (deck != null)
+            this.currentCard = deck.getCurrentCard();
+        else
+            this.currentCard = null;
         this.side1Shown = true;
     }
+    
  
     public Quiz() {
         this(new Deck(), "--Friend--" , false, ""); 
@@ -47,6 +54,7 @@ public class Quiz {
     
     public void setDeck(Deck deck) { 
         this.deck = deck; 
+        this.currentCard = deck.getCurrentCard();
     }
     public Deck getDeck() {
         return this.deck;
@@ -87,6 +95,9 @@ public class Quiz {
     }
     
     public String getShownSide(){
+        if (this.currentCard == null){
+            return "No Cards Found - Test";
+        }
         if(side1Shown) {
             return this.currentCard.getSide1();
         }
@@ -117,6 +128,13 @@ public class Quiz {
         return (this.notYetAccepted || this.waitingOnResponse);
     }
     
+    public void setCorrect(Boolean bool) {
+        this.correct = bool;
+    }
+    public Boolean getCorrect(){
+        return this.correct;
+    }
+    
     @Override
     public boolean equals(Object o) { 
         if (o == this) {
@@ -126,6 +144,14 @@ public class Quiz {
             return false;
         }
         Quiz quiz = (Quiz)o;
+        
+        if (this.deck == null && quiz.getDeck() != null)
+            return false;
+        if (this.deck != null && quiz.getDeck() == null)
+            return false;
+        if (this.deck == quiz.getDeck())
+            return this.friend.equals(quiz.getFriend());
+        
         return (this.deck.equals(quiz.deck)  && this.friend.equals(quiz.friend));
     }
 

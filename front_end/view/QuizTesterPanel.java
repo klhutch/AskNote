@@ -14,38 +14,65 @@ import javax.swing.border.TitledBorder;
 import model.*;
 
 public class QuizTesterPanel extends JPanel{
-     
-    public QuizTesterPanel(FlashCard card, String response, Boolean side1wasShown) {
+    Quiz quiz;
+    ResponsePanel responsePanel;
     
+    public QuizTesterPanel(Quiz quiz) {
+        this.quiz = quiz;
+        FlashCard card = quiz.getCurrentCard();
+        String response = quiz.getResponse();
+        Boolean side1wasShown = quiz.getSide1Shown();
+        
         this.setLayout(new BorderLayout());
-        
-        CardPanel cardPanel;
-        if(side1wasShown) {
-            cardPanel = new CardPanel(card.getSide1(), card.getSide2());
+        if(card != null){
+            CardPanel cardPanel;
+            if(side1wasShown) {
+                cardPanel = new CardPanel(card.getSide1(), card.getSide2());
+            }
+            else {
+                cardPanel = new CardPanel(card.getSide2(), card.getSide1());
+            }
+
+            this.responsePanel = new ResponsePanel(response);
+
+            JButton correctButton = new JButton("Correct");
+            JButton incorrectButton = new JButton("Incorrect");
+            
+            correctButton.addActionListener(new CorrectButtonListener());
+            incorrectButton.addActionListener(new IncorrectButtonListener());
+            
+            JPanel center = new JPanel();
+            center.setLayout(new GridLayout(1, 2));
+
+            center.add(cardPanel);
+            center.add(responsePanel);
+
+            JPanel south = new JPanel();
+            south.add(correctButton);
+            south.add(incorrectButton);
+
+
+            this.add(center, BorderLayout.CENTER);
+            this.add(south, BorderLayout.SOUTH);
         }
-        else {
-            cardPanel = new CardPanel(card.getSide2(), card.getSide1());
+        else{
+            JLabel test = new JLabel("This is just a test", JLabel.CENTER);
+            test.setVerticalAlignment(JLabel.CENTER);
+            this.add(test, BorderLayout.CENTER);
         }
+    }
+    
+    void decided(Boolean correct) {
+        AskNoteModel model = AskNoteModel.instance();
+        model.setActiveQuiz(null);
+        model.setPreviousAsCurrent();
         
-        ResponsePanel responsePanel = new ResponsePanel(response);
+        this.quiz.setCorrect(correct);
+        this.quiz.setWaitingOnResponse(true);
         
-        JButton correctButton = new JButton("Correct");
-        JButton incorrectButton = new JButton("Incorrect");
+        AskNoteView.instance().updateView();
         
-        JPanel center = new JPanel();
-        center.setLayout(new GridLayout(1, 2));
-        
-        center.add(cardPanel);
-        center.add(responsePanel);
-        
-        JPanel south = new JPanel();
-        south.add(correctButton);
-        south.add(incorrectButton);
-        
-        
-        this.add(center, BorderLayout.CENTER);
-        this.add(south, BorderLayout.SOUTH);
-}
+    }
 
     class CardPanel extends JPanel {
         String shownSide;
@@ -121,6 +148,21 @@ public class QuizTesterPanel extends JPanel{
             
             this.add(north, BorderLayout.NORTH);
             this.add(responseArea, BorderLayout.CENTER);
+        }
+    }
+    
+    class CorrectButtonListener implements ActionListener {
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            QuizTesterPanel.this.decided(true);
+        }
+    }
+    class IncorrectButtonListener implements ActionListener {
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            QuizTesterPanel.this.decided(false);
         }
     }
 } 

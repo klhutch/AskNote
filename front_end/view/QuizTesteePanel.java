@@ -8,26 +8,34 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.Color;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.border.LineBorder;
+import model.AskNoteModel;
+import model.Quiz;
 
 /**
  *
  * @author normal
  */
 public class QuizTesteePanel extends JPanel {
+    Quiz quiz;
+    ResponsePanel responsePanel;
     
-    public QuizTesteePanel(String shownSide) {
-    
+    public QuizTesteePanel(Quiz quiz) {
+        this.quiz = quiz;
+        String shownSide = quiz.getShownSide();
         this.setLayout(new BorderLayout());
         
         CardPanel cardPanel = new CardPanel(shownSide);
-        ResponsePanel responsePanel = new ResponsePanel();
+        this.responsePanel = new ResponsePanel();
         
         JButton sendButton = new JButton("Send");
+        sendButton.addActionListener(new SendResponseButtonListener());
         
         JPanel center = new JPanel();
         center.setLayout(new GridLayout(1, 2));
@@ -64,11 +72,11 @@ public class QuizTesteePanel extends JPanel {
     }
     
     class ResponsePanel extends JPanel {
-    
+        JTextArea responseArea;
         ResponsePanel() {
             //this.setLayout(new BorderLayout());
             JLabel otherSide = new JLabel("What's On The Other Side?");
-            JTextArea responseArea = new JTextArea(30, 40);
+            this.responseArea = new JTextArea(30, 40);
             responseArea.setEnabled(true);
             
 //            responseArea.setRows(10);
@@ -79,4 +87,22 @@ public class QuizTesteePanel extends JPanel {
             this.add(responseArea);
         }
     }
+    
+    class SendResponseButtonListener implements ActionListener {
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            AskNoteModel model = AskNoteModel.instance();
+            model.setPreviousAsCurrent();
+            String response = QuizTesteePanel.this.responsePanel.responseArea.getText();
+            
+            Quiz quiz = QuizTesteePanel.this.quiz;
+            quiz.setResponse(TOOL_TIP_TEXT_KEY);
+            quiz.setWaitingOnResponse(true);
+            model.setActiveQuiz(null);
+            
+            AskNoteView.instance().updateView();
+        }
+    }
+    
 }

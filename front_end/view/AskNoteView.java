@@ -94,12 +94,11 @@ public class AskNoteView extends JPanel {
                 this.header.setTitle("Select a Quiz");
                 break;
             case QUIZ_TESTER: 
-                this.appPanel = new QuizTesterPanel(model.getActiveQuiz().getCurrentCard(), 
-                        model.getActiveQuiz().getResponse(), true);
+                this.appPanel = new QuizTesterPanel(model.getActiveQuiz());
                 this.header.setTitle("Quiz View");
                 break;
             case QUIZ_TESTEE: 
-                this.appPanel = new QuizTesteePanel(model.getActiveQuiz().getShownSide()); 
+                this.appPanel = new QuizTesteePanel(model.getActiveQuiz()); 
                 this.header.setTitle("Quiz View");
                 break;
             case QUIZ_WAITING:

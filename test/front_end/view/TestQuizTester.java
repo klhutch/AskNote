@@ -6,7 +6,12 @@
 package front_end.view;
 
 import javax.swing.JFrame;
+import model.AskNoteModel;
+import model.Deck;
 import model.FlashCard;
+import model.PageType;
+import model.Quiz;
+import view.AskNoteView;
 import view.QuizTesterPanel;
 
 /**
@@ -18,15 +23,30 @@ public class TestQuizTester {
         JFrame frame = new JFrame("AskNote");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setResizable(true);
-        frame.setSize(1000, 600);
-        
-        FlashCard card = new FlashCard("I Solemnly Swear I am up to no good", 
-                                        "The Marauder's Map Password");
-        
-        QuizTesterPanel testPanel = new QuizTesterPanel(card, "An important password", true);
+        frame.setSize(1000, 650);
         
         
-        frame.add(testPanel);
+        String friend1 = "Amanda";
+        FlashCard card1 = new FlashCard("I solemnly Swear I am Up to No Good", "Marauder's Map Password");
+        
+        Deck deck = new Deck("Harry Potter");
+        deck.add(card1);
+        
+        AskNoteModel model = AskNoteModel.instance();
+        model.addDeck(deck);
+        model.addFriend(friend1);
+        
+        Quiz quiz = new Quiz(deck, friend1, true, "A Very Important Password");
+        model.addQuiz(quiz);
+        model.setActiveQuiz(quiz);
+        
+        model.setCurrentPage(PageType.QUIZ);
+        model.setCurrentPage(PageType.QUIZ_SELECT);
+        model.setCurrentPage(PageType.QUIZ_TESTER);
+        
+        AskNoteView.instance().updateView();
+        frame.add(AskNoteView.instance());
+        frame.validate();
         frame.setVisible(true);
         
         
