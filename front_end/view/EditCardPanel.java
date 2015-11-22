@@ -103,6 +103,7 @@ public class EditCardPanel extends JPanel {
 
         @Override
         public void actionPerformed(ActionEvent e) {
+            //TODO add a confirmation dialog
             FlashCard card = EditCardPanel.this.card;
             AskNoteModel model = AskNoteModel.instance();
             

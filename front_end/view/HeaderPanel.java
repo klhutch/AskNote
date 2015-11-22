@@ -11,7 +11,9 @@ import java.awt.event.ActionListener;
 import javax.swing.*;
 import javax.swing.border.MatteBorder;
 import model.AskNoteModel;
+import model.FlashCard;
 import model.PageType;
+import model.Quiz;
 
 /**
  *
@@ -70,6 +72,45 @@ public class HeaderPanel extends JPanel {
 
     }
     
+    public Boolean handlePageType(){
+        AskNoteModel model = AskNoteModel.instance();
+        PageType page = model.getCurrentPage();
+        PageType previous = model.getPreviousPage();
+        
+        if (page == PageType.QUIZ_DECK && previous == PageType.QUIZ_SELECT){
+            Quiz toRemove = model.getActiveQuiz();
+
+            String msg = "Are you sure you want to stop your request to quiz with " + toRemove.getFriend()+"?";
+            int response = JOptionPane.showConfirmDialog(AskNoteView.instance(), msg,
+                    "Confirm", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+
+            if (response == JOptionPane.YES_OPTION) {
+                model.deleteQuiz(toRemove);
+                model.setActiveQuiz(null);
+                return true;
+            }
+            return false;
+        }
+        if (page == PageType.EDIT_DECK) {
+            //TODO add a confirmation dialog
+            model.getSelectedDeck().cancelEdits();
+            model.setSelectedDeck(null);
+            return true;
+        }
+        if (page == PageType.EDIT_CARD) {
+            //TODO add a confirmation dialog
+            FlashCard card = model.getSelectedFlashCard();
+            
+            if (card.getIsNewAddition()) {
+                model.getSelectedDeck().editRemoveCard(card);  
+            }
+            model.setSelectedFlashCard(null);
+            return true;
+        }
+        
+        return true;
+    }
+    
     public void setHomeVisible(Boolean visible) {
         this.home.setVisible(visible);
     }
@@ -99,11 +140,13 @@ public class HeaderPanel extends JPanel {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            AskNoteModel model = AskNoteModel.instance();
-            model.wipePageHistory();
-            model.setCurrentPage(PageType.HOME);
-            
-            AskNoteView.instance().updateView();
+            if (HeaderPanel.this.handlePageType()) {
+                AskNoteModel model = AskNoteModel.instance();
+                model.wipePageHistory();
+                model.setCurrentPage(PageType.HOME);
+
+                AskNoteView.instance().updateView();
+            }
         }
 
     }
@@ -112,10 +155,12 @@ public class HeaderPanel extends JPanel {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            AskNoteModel model = AskNoteModel.instance();
-            model.setPreviousAsCurrent();
-            
-            AskNoteView.instance().updateView();
+            if (HeaderPanel.this.handlePageType()) {
+                AskNoteModel model = AskNoteModel.instance();
+                model.setPreviousAsCurrent();
+
+                AskNoteView.instance().updateView();
+            }
         }
 
         

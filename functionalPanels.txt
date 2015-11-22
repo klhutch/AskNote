@@ -10,16 +10,17 @@ Functional Items
 - QuizPanel
 - QuizDeckPanel
 - Changing Title in header panel
-
-Non-Functional Items
-- Checking the current view in HeaderPanel to warn users of deleting edits before going back or home
-- Checking the current view in HeaderPanel to delete new card before going back or home
-- FriendsListPanel*
-- LoginPanel*
 - QuizWaiting
 - QuizSelectPanel
 - QuizTesteePanel
 - QuizTesterPanel
+- FriendsListPanel*
+
+
+Non-Functional Items
+- Checking the current view in HeaderPanel to warn users of deleting edits before going back or home
+- Checking the current view in HeaderPanel to delete new card before going back or home
+- LoginPanel*
 
 * = Panel is being or needs to be updated
 ! = Panel does not exist yet
