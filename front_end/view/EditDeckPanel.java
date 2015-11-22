@@ -76,7 +76,7 @@ public class EditDeckPanel extends JPanel {
             flow.setVgap(20); 
             
             this.text = new JLabel(deck.getEditTitle()); 
-            this.text.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 20));
+            this.text.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 18));
             JButton edit = new JButton("edit"); 
             
             edit.addActionListener(new EditTitleListener());
