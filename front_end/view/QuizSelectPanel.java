@@ -8,6 +8,8 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.List;
 import java.util.ArrayList;
 import javax.swing.Box;
@@ -17,11 +19,14 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.ListSelectionModel;
 import javax.swing.border.LineBorder;
 import javax.swing.border.MatteBorder;
+import model.AskNoteModel;
+import model.PageType;
 import model.Quiz;
 
 /**
@@ -110,6 +115,9 @@ public class QuizSelectPanel extends JPanel {
             JButton cont = new JButton("Continue");
             JButton end = new JButton("End");
             
+            cont.addActionListener(new ContinueQuizListener());
+            end.addActionListener(new RemoveQuizListener());
+            
             JLabel friendName = new JLabel(quiz.getFriend());
             JLabel deckTitle = new JLabel(quiz.getDeck().getTitle());
             
@@ -130,6 +138,48 @@ public class QuizSelectPanel extends JPanel {
             this.add(deckTitle);
             this.add(buttonPanel);
             
+        }
+        
+        class ContinueQuizListener implements ActionListener {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                AskNoteModel model = AskNoteModel.instance();
+                Quiz quiz = OneQuizPanel.this.quiz;
+                
+                model.setActiveQuiz(quiz);
+                
+                if (quiz.inWaitingState()) {
+                    model.setCurrentPage(PageType.QUIZ_WAITING);
+                }
+                else if (quiz.getUserIsTester()){
+                    model.setCurrentPage(PageType.QUIZ_TESTER);
+                }
+                else {
+                    model.setCurrentPage(PageType.QUIZ_TESTEE);
+                }
+                
+                AskNoteView.instance().updateView();
+            }
+        }
+        
+        class RemoveQuizListener implements ActionListener {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                AskNoteModel model = AskNoteModel.instance();
+                Quiz toRemove = OneQuizPanel.this.quiz;
+                        
+                String msg = "Are you sure you want to delete your quiz on  \"" + 
+                        toRemove.getDeck().getTitle() + "\" with " + quiz.getFriend()+"?";
+                int response = JOptionPane.showConfirmDialog(AskNoteView.instance(), msg,
+                        "Confirm", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+                
+                if (response == JOptionPane.YES_OPTION) {
+                    model.deleteQuiz(toRemove);
+                    AskNoteView.instance().updateView();
+                }
+            }
         }
     
     }
@@ -152,7 +202,7 @@ public class QuizSelectPanel extends JPanel {
             
             
             JButton confirm = new JButton("Confirm");
-            
+            confirm.addActionListener(new NewQuizListener());
             
             
             if (friends.size() > 0) {
@@ -177,6 +227,29 @@ public class QuizSelectPanel extends JPanel {
             
             this.add(top, BorderLayout.NORTH);
             this.validate();
+        }
+        
+        
+        class NewQuizListener implements ActionListener {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                AskNoteModel model = AskNoteModel.instance();
+                
+                int index = QuizFriendPanel.this.friendList.getMinSelectionIndex();
+                
+                if (index >= 0) {
+                    String friend = QuizFriendPanel.this.friends.get(index);
+                    Quiz quiz = new Quiz(null, friend, false, "");
+                    quiz.setNotYetAccepted(true);
+              
+                    model.addQuiz(quiz);
+                    model.setActiveQuiz(quiz);
+                    model.setCurrentPage(PageType.QUIZ_WAITING);
+                    AskNoteView.instance().updateView();
+                }
+            }
+            
         }
         
     }

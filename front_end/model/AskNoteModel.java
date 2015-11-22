@@ -80,6 +80,12 @@ public class AskNoteModel {
         //TODO make it not work if friends is set
         this.friends = friends;
     }
+    public void addFriend(String friend){
+        this.friends.add(friend);
+    }
+    public void deleteFriend(String friend){
+        this.friends.remove(friend);
+    }
     
     public List<String> getNotifications() { 
         return this.notifications; 
@@ -164,6 +170,13 @@ public class AskNoteModel {
     }
     public void setActiveQuiz(Quiz quiz){
         this.activeQuiz = quiz;
+    }
+    
+    public void deleteQuiz(Quiz quiz){
+        this.quizzes.remove(quiz);
+    }
+    public void addQuiz(Quiz quiz) {
+        this.quizzes.add(quiz);
     }
     
     

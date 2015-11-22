@@ -29,6 +29,9 @@ public class Quiz {
     private FlashCard currentCard;
     private Boolean side1Shown;
     
+    private Boolean notYetAccepted = false;
+    private Boolean waitingOnResponse = false;
+    
     public Quiz(Deck deck, String friend, Boolean userIsTester, String response) { 
         this.deck = deck; 
         this.friend = friend; 
@@ -94,6 +97,24 @@ public class Quiz {
             return this.currentCard.getSide2();
         }
         return this.currentCard.getSide1();
+    }
+    
+    public Boolean getWaitingOnResponse(){
+        return this.waitingOnResponse;
+    }
+    public void setWaitingOnResponse(Boolean bool){
+        this.waitingOnResponse = bool;
+    }
+    
+    public Boolean getNotYetAccepted() {
+        return this.notYetAccepted;
+    }
+    public void setNotYetAccepted(Boolean bool) {
+        this.notYetAccepted = bool;
+    }
+    
+    public Boolean inWaitingState() {
+        return (this.notYetAccepted || this.waitingOnResponse);
     }
     
     @Override

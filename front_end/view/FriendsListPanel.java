@@ -6,6 +6,8 @@
 package view;
 
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.*;
@@ -19,8 +21,10 @@ import model.*;
 
 public class FriendsListPanel extends JPanel {
     JList friendList;
+    List<String> friends;
     
     public FriendsListPanel(List<String> friends) { 
+        this.friends = friends;
         BorderLayout border = new BorderLayout(); 
         
         JPanel left = new JPanel(); 
@@ -60,8 +64,10 @@ public class FriendsListPanel extends JPanel {
         SelectionPanel right = new SelectionPanel(options); 
 
          
-                 
-        
+        add.button.addActionListener(new AddFriendListener());
+        delete.button.addActionListener(new RemoveFriendsListener());
+        checkAll.button.addActionListener(new SelectAllListener());
+        uncheckAll.button.addActionListener(new UnselectAllListener());
         
         left.add(friendList, BorderLayout.CENTER);
         JScrollPane scroll = new JScrollPane(left); 
@@ -70,6 +76,42 @@ public class FriendsListPanel extends JPanel {
         this.add(right); 
         this.validate(); 
     }    
+
+    private static class AddFriendListener implements ActionListener {
+
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            
+        }
+    }
+
+    private static class RemoveFriendsListener implements ActionListener {
+
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            
+        }
+    }
+
+    private static class SelectAllListener implements ActionListener {
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            
+        }
+
+    }
+
+    private static class UnselectAllListener implements ActionListener{
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            
+        }
+
+    }
    
     class OptionPanel  extends JPanel { 
            JButton button; 
@@ -93,6 +135,7 @@ public class FriendsListPanel extends JPanel {
             this.setLayout(flow); 
             this.add(bttn); 
             this.add(lbl); 
+            
             this.validate();
 
         }

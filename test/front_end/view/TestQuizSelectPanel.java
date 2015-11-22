@@ -7,6 +7,7 @@ package front_end.view;
 
 import java.util.ArrayList;
 import javax.swing.JFrame;
+import model.AskNoteModel;
 import model.Deck;
 import model.Quiz;
 import view.QuizSelectPanel;
@@ -41,6 +42,10 @@ public class TestQuizSelectPanel {
         friends.add(friend1);
         friends.add(friend2);
         
+        
+        AskNoteModel model = AskNoteModel.instance();
+        model.setFriends(friends);
+        model.setQuizzes(quizzes);
         
         frame.add(new QuizSelectPanel(quizzes, friends));
         
