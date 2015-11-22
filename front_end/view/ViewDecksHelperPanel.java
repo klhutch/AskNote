@@ -11,7 +11,6 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.List;
-import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -25,7 +24,7 @@ import model.Deck;
  * @author tiffanychao
  */
 public class ViewDecksHelperPanel extends JPanel {
-    private Dimension deckTitlePanelSize = new Dimension(100, 100);
+    private final Dimension deckTitlePanelSize = new Dimension(100, 100);
     DeckTitlePanel selected = null;
     // should maintain references to decktitlepanels
     
