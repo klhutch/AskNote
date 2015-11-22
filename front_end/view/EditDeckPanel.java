@@ -75,16 +75,15 @@ public class EditDeckPanel extends JPanel {
             flow.setHgap(25); 
             flow.setVgap(20); 
             
-            this.text = new JLabel(deck.getEditTitle());  
+            this.text = new JLabel(deck.getEditTitle()); 
+            this.text.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 20));
             JButton edit = new JButton("edit"); 
             
             edit.addActionListener(new EditTitleListener());
             
             this.setLayout(flow);
             this.add(text);
-            this.add(edit);
-            
-            
+            this.add(edit);   
          }
         
         class EditTitleListener implements ActionListener {
@@ -230,22 +229,26 @@ public class EditDeckPanel extends JPanel {
         class FlashCardPanel extends JPanel {
             FlashCard card;
             Boolean side1Shown = true;
-            CardTextPanel shownText;
+            JLabel shownText;
             
             FlashCardPanel(FlashCard card) {
                 this.card = card;
-                //BoxLayout box = new BoxLayout(this, BoxLayout.Y_AXIS);
-                this.setLayout(new BorderLayout());
+                this.setLayout(new BorderLayout(5, 5));
                 this.setPreferredSize(flashCardPanelSize);
                 this.setBackground(Color.WHITE);               
 
-                this.shownText = new CardTextPanel(card.getSide1());
+                this.shownText = new JLabel(card.getSide1(), SwingConstants.CENTER);
+                this.shownText.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 14));
                 FlashCardButtonPanel buttons = new FlashCardButtonPanel();
 
                 this.setBorder(new LineBorder(Color.BLACK, 1));
 
                 this.add(shownText, BorderLayout.CENTER);
                 this.add(buttons, BorderLayout.SOUTH);
+            }
+            
+            void updateText(String text){
+                shownText.setText(text);
             }
             
             class FlashCardButtonPanel extends JPanel {
@@ -275,11 +278,11 @@ public class EditDeckPanel extends JPanel {
             
                     if(cardPanel.side1Shown) {
                         cardPanel.side1Shown = false;
-                        cardPanel.shownText.updateText(cardPanel.card.getSide2());
+                        cardPanel.updateText(cardPanel.card.getSide2());
                     }
                     else {
                         cardPanel.side1Shown = true;
-                        cardPanel.shownText.updateText(cardPanel.card.getSide1());
+                        cardPanel.updateText(cardPanel.card.getSide1());
                     }
                 }
             }
@@ -296,31 +299,6 @@ public class EditDeckPanel extends JPanel {
                     model.setCurrentPage(PageType.EDIT_CARD);
                     AskNoteView.instance().updateView();
                 }
-            }
-        }
-
-        class CardTextPanel extends JPanel {
-            JTextArea cardSideText;
-            CardTextPanel(String text) {
-                this.setBackground(Color.WHITE);
-                FlowLayout flow = new FlowLayout();
-                flow.setAlignment(FlowLayout.CENTER);
-                this.setLayout(flow);
-
-                cardSideText = new JTextArea(text);
-                cardSideText.setEnabled(false);
-                cardSideText.setDisabledTextColor(Color.BLACK);
-                cardSideText.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 14));
-                cardSideText.setLineWrap(true);
-                cardSideText.setWrapStyleWord(true);
-
-                cardSideText.setCaretPosition(0);
-
-                this.add(cardSideText);
-            }
-            
-            void updateText(String text){
-                cardSideText.setText(text);
             }
         }
     }
