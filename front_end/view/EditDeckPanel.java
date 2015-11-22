@@ -9,6 +9,7 @@ import javax.swing.BoxLayout;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
+import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -22,6 +23,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextPane;
+import javax.swing.Scrollable;
 import javax.swing.SwingConstants;
 import javax.swing.border.*;
 import javax.swing.border.LineBorder;
@@ -35,7 +37,7 @@ import model.PageType;
  * @author tiffanychao
  */
 public class EditDeckPanel extends JPanel {
-
+    private final Dimension flashCardPanelSize = new Dimension(225, 100);
     Deck deck;
     TitlePanel title;
     FlashCardsPanel flashCards;
@@ -64,14 +66,7 @@ public class EditDeckPanel extends JPanel {
         this.validate(); 
     }
     
-    
-    
-
-
-
-
 //// title and edit button top // 
-
   class TitlePanel extends JPanel { 
         JLabel text;
         TitlePanel (Deck deck) { 
@@ -80,16 +75,15 @@ public class EditDeckPanel extends JPanel {
             flow.setHgap(25); 
             flow.setVgap(20); 
             
-            this.text = new JLabel(deck.getEditTitle());  
+            this.text = new JLabel(deck.getEditTitle()); 
+            this.text.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 20));
             JButton edit = new JButton("edit"); 
             
             edit.addActionListener(new EditTitleListener());
             
             this.setLayout(flow);
             this.add(text);
-            this.add(edit);
-            
-            
+            this.add(edit);   
          }
         
         class EditTitleListener implements ActionListener {
@@ -99,19 +93,16 @@ public class EditDeckPanel extends JPanel {
                 String msg = "Edit Deck Title";
                 String newText = JOptionPane.showInputDialog(AskNoteView.instance(),
                         msg, TitlePanel.this.text.getText());
+
                 if (newText != null && !newText.equals("")) {
                     TitlePanel.this.text.setText(newText);
                     EditDeckPanel.this.deck.editTitle(newText);
                 }
-                
             }
         }
     }
 
-
-
-///////// Buttons  Bottom ////////
-    
+///////// Buttons  Bottom ////////   
     class ButtonPanel extends JPanel { 
          ButtonPanel () { 
             FlowLayout flow = new FlowLayout(); 
@@ -138,10 +129,6 @@ public class EditDeckPanel extends JPanel {
 
 /****************************** LISTENERS ********************************/
     
-    
-    
-    
-
     class SaveEditListener implements ActionListener {
 
         @Override
@@ -184,55 +171,87 @@ public class EditDeckPanel extends JPanel {
 
 
 /////////////// for flash cards///////////
-    class FlashCardsPanel extends JPanel {
+    class FlashCardsPanel extends JPanel implements Scrollable {
 
         FlashCardsPanel(Deck deck) {
-            //TODO: make the number of columns dynamic
-            GridLayout grid = new GridLayout(-1, 3);
-            grid.setVgap(20);
-            grid.setHgap(20);
-
-            this.setLayout(grid);
+            setLayout(new FlowLayout(FlowLayout.LEFT, 20, 20));
+            setPreferredSize(findPreferredSize(deck.getSize()));
             List<FlashCardPanel> cardPanels = new ArrayList<FlashCardPanel>();
 
             for (FlashCard card : deck.getEditCards()) {
-
                 cardPanels.add(new FlashCardPanel(card));
-
             }
 
             for (FlashCardPanel card : cardPanels) {
                 this.add(card);
             }
+        }
+        
+        private Dimension findPreferredSize(int numCards) {
+            // AskNoteView.width == 1000. should put this in a global constant 
+            // flashcardpanelsize.width = 225
+            // FlowLayout hgap = 8
+            // 225 * 4 = 900, 900 + 20 * 5 = 1000
+            int cols = 4;
+            int remainder = numCards % cols;
+            int rows;
+            if (remainder == 0) {
+                rows = numCards / cols;
+            } else {
+                rows = ((numCards - remainder) / cols) + 1;
+            }
+            return new Dimension(1000, flashCardPanelSize.height * rows + 20 * rows + 20);
+        }
 
-            this.setSize(new Dimension(200, 150));
+        @Override
+        public Dimension getPreferredScrollableViewportSize() {
+            // AskNoteView.height == 600. should put this in a global constant 
+            return new Dimension(getPreferredSize().width, 600);
+        }
 
+        @Override
+        public int getScrollableUnitIncrement(Rectangle visibleRect, int orientation, int direction) {
+            return 5;
+        }
 
+        @Override
+        public int getScrollableBlockIncrement(Rectangle visibleRect, int orientation, int direction) {
+            return 5;
+        }
+
+        @Override
+        public boolean getScrollableTracksViewportWidth() {
+            return true;
+        }
+
+        @Override
+        public boolean getScrollableTracksViewportHeight() {
+            return false;
         }
 
         class FlashCardPanel extends JPanel {
             FlashCard card;
             Boolean side1Shown = true;
-            CardTextPanel shownText;
+            JLabel shownText;
             
             FlashCardPanel(FlashCard card) {
                 this.card = card;
-                //BoxLayout box = new BoxLayout(this, BoxLayout.Y_AXIS);
-                this.setLayout(new BorderLayout());
-                this.setBackground(Color.WHITE);
+                this.setLayout(new BorderLayout(5, 5));
+                this.setPreferredSize(flashCardPanelSize);
+                this.setBackground(Color.WHITE);               
 
-
-                this.shownText = new CardTextPanel(card.getSide1());
+                this.shownText = new JLabel(card.getSide1(), SwingConstants.CENTER);
+                this.shownText.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 14));
                 FlashCardButtonPanel buttons = new FlashCardButtonPanel();
 
                 this.setBorder(new LineBorder(Color.BLACK, 1));
 
                 this.add(shownText, BorderLayout.CENTER);
                 this.add(buttons, BorderLayout.SOUTH);
-
-                //this.setPreferredSize(new Dimension(200, 100));
-
-
+            }
+            
+            void updateText(String text){
+                shownText.setText(text);
             }
             
             class FlashCardButtonPanel extends JPanel {
@@ -251,7 +270,6 @@ public class EditDeckPanel extends JPanel {
                     this.add(flip);
                     this.add(edit);
                     this.setBackground(Color.WHITE);
-
                 }
             }
 
@@ -263,14 +281,13 @@ public class EditDeckPanel extends JPanel {
             
                     if(cardPanel.side1Shown) {
                         cardPanel.side1Shown = false;
-                        cardPanel.shownText.updateText(cardPanel.card.getSide2());
+                        cardPanel.updateText(cardPanel.card.getSide2());
                     }
                     else {
                         cardPanel.side1Shown = true;
-                        cardPanel.shownText.updateText(cardPanel.card.getSide1());
+                        cardPanel.updateText(cardPanel.card.getSide1());
                     }
                 }
-
             }
             
             class EditCardListener implements ActionListener {
@@ -287,40 +304,5 @@ public class EditDeckPanel extends JPanel {
                 }
             }
         }
-
-        class CardTextPanel extends JPanel {
-            JTextArea cardSideText;
-            CardTextPanel(String text) {
-                this.setBackground(Color.WHITE);
-                FlowLayout flow = new FlowLayout();
-                flow.setAlignment(FlowLayout.CENTER);
-                this.setLayout(flow);
-
-
-
-                cardSideText = new JTextArea(text);
-                cardSideText.setEnabled(false);
-                cardSideText.setDisabledTextColor(Color.BLACK);
-                cardSideText.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 20));
-                cardSideText.setLineWrap(true);
-                cardSideText.setWrapStyleWord(true);
-
-                cardSideText.setCaretPosition(0);
-
-                this.add(cardSideText);
-
-
-            }
-            
-            void updateText(String text){
-                cardSideText.setText(text);
-            }
-
-        }
-
-        
-
-
-
     }
 }

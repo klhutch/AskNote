@@ -5,15 +5,16 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.List;
-import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.Scrollable;
 import javax.swing.SwingConstants;
 import javax.swing.border.LineBorder;
 import model.Deck;
@@ -23,6 +24,7 @@ import model.Deck;
  * @author tiffanychao
  */
 public class ViewDecksHelperPanel extends JPanel {
+    private final Dimension deckTitlePanelSize = new Dimension(100, 100);
     DeckTitlePanel selected = null;
     // should maintain references to decktitlepanels
     
@@ -30,19 +32,66 @@ public class ViewDecksHelperPanel extends JPanel {
         
         setLayout(new BorderLayout());
         
-        JPanel decksPanel = new JPanel();
-        decksPanel.setLayout(new FlowLayout());
-        decksPanel.setPreferredSize(new Dimension(450, 450));
-        
-        for (Deck deck : decks) {
-            DeckTitlePanel deckPanel = new DeckTitlePanel(deck);
-            decksPanel.add(deckPanel);
-            deckPanel.addMouseListener(new DeckSelectedListener());
-        }
+        JPanel decksPanel = new ScrollableDecksPanel(decks);
         
         JScrollPane scrollPanel = new JScrollPane(decksPanel);
         add(scrollPanel, BorderLayout.CENTER);
         validate();
+    }
+    
+    class ScrollableDecksPanel extends JPanel implements Scrollable {
+        
+        ScrollableDecksPanel(List<Deck> decks) {
+            setLayout(new FlowLayout(FlowLayout.LEFT));
+            setPreferredSize(findPreferredSize(decks.size()));
+            
+            for (Deck deck : decks) {
+            DeckTitlePanel deckPanel = new DeckTitlePanel(deck);
+            add(deckPanel);
+            addMouseListener(new DeckSelectedListener());
+            }
+        }
+        
+        private Dimension findPreferredSize(int numDecks) {
+            int cols = 4;
+            int remainder = numDecks % cols;
+            int rows;
+            if (remainder == 0) {
+                rows = numDecks / cols;
+            } else {
+                rows = ((numDecks - remainder) / cols) + 1;
+            }
+            // default hgap and vgap for FlowLayout is 5 pixels
+            return new Dimension(deckTitlePanelSize.width * cols + 5 * cols + 5,
+                    deckTitlePanelSize.height * rows + 5 * rows + 5);
+        }
+
+        @Override
+        public Dimension getPreferredScrollableViewportSize() {
+            // 600 is height of AskNoteView
+            return new Dimension(getPreferredSize().width, 600);
+        }
+
+        @Override
+        public int getScrollableUnitIncrement(Rectangle visibleRect, int orientation, int direction) {
+            return 5;
+        }
+
+        @Override
+        public int getScrollableBlockIncrement(Rectangle visibleRect, int orientation, int direction) {
+            return 5;
+        }
+
+        @Override
+        public boolean getScrollableTracksViewportWidth() {
+            return true;
+        }
+
+        @Override
+        public boolean getScrollableTracksViewportHeight() {
+            return false;
+        }
+        
     }
     
     class DeckTitlePanel extends JPanel {
@@ -57,7 +106,7 @@ public class ViewDecksHelperPanel extends JPanel {
             setOpaque(true);
             setBackground(Color.WHITE);
             setBorder(UNSELECTED);
-            setPreferredSize(new Dimension(100, 100));
+            setPreferredSize(deckTitlePanelSize);
             JLabel deckTitle = new JLabel(deck.getTitle(), SwingConstants.CENTER);
             add(deckTitle, BorderLayout.CENTER);
         }
