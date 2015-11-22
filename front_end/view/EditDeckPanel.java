@@ -136,6 +136,10 @@ public class EditDeckPanel extends JPanel {
             AskNoteModel.instance().setPreviousAsCurrent();
             //TODO add a confirmation dialog
             EditDeckPanel.this.deck.saveEdits();
+            
+            if(EditDeckPanel.this.deck.getIsNewAddition()){
+                AskNoteModel.instance().addDeck(EditDeckPanel.this.deck);
+            }
             AskNoteView.instance().updateView();
         }
         
