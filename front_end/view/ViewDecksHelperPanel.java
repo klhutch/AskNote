@@ -47,8 +47,8 @@ public class ViewDecksHelperPanel extends JPanel {
             
             for (Deck deck : decks) {
             DeckTitlePanel deckPanel = new DeckTitlePanel(deck);
-            deckPanel.addMouseListener(new DeckSelectedListener());
             add(deckPanel);
+            addMouseListener(new DeckSelectedListener());
             }
         }
         
