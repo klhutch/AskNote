@@ -170,7 +170,7 @@ public class QuizSelectPanel extends JPanel {
                 AskNoteModel model = AskNoteModel.instance();
                 Quiz toRemove = OneQuizPanel.this.quiz;
                         
-                String msg = "Are you sure you want to delete your quiz on  \"" + 
+                String msg = "Are you sure you want to end your quiz on  \"" + 
                         toRemove.getDeck().getTitle() + "\" with " + toRemove.getFriend()+"?";
                 int response = JOptionPane.showConfirmDialog(AskNoteView.instance(), msg,
                         "Confirm", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
