@@ -9,6 +9,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import model.FlashCard;
@@ -104,18 +105,32 @@ public class EditCardPanel extends JPanel {
         @Override
         public void actionPerformed(ActionEvent e) {
             //TODO add a confirmation dialog
+            
             FlashCard card = EditCardPanel.this.card;
             AskNoteModel model = AskNoteModel.instance();
             
-            if (card.getIsNewAddition()) {
-                model.getSelectedDeck().editRemoveCard(card);
+            
+             String msg = "All changes to the card will be discarded, are you sure you want to cancel?";
+                int response = JOptionPane.showConfirmDialog(EditCardPanel.this, msg,
+                        "Confirm", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
                 
-            }
-            model.setPreviousAsCurrent();
-            model.setSelectedFlashCard(null);
-            AskNoteView.instance().updateView();
+                if (response == JOptionPane.YES_OPTION) {
+                    
+                    model.setPreviousAsCurrent();
+                    model.setSelectedFlashCard(null);
+                    AskNoteView.instance().updateView();
+                }
+                
+                else if (response == JOptionPane.NO_OPTION) { 
+            
+                    if (card.getIsNewAddition()) {
+                    model.getSelectedDeck().editRemoveCard(card);
+                
+                }
+        }
         }
     }
+    
     
     class DeleteCardListener implements ActionListener {
 
@@ -124,10 +139,18 @@ public class EditCardPanel extends JPanel {
             AskNoteModel model = AskNoteModel.instance();
             model.getSelectedDeck().editRemoveCard(EditCardPanel.this.card);
             
-            model.setPreviousAsCurrent();
-            model.setSelectedFlashCard(null);
-            AskNoteView.instance().updateView();
+             String msg = "Are you sure you want to delete the card?";
+                int response = JOptionPane.showConfirmDialog(EditCardPanel.this, msg,
+                        "Confirm", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+                
+                if (response == JOptionPane.YES_OPTION) {
+                    
+                    model.setPreviousAsCurrent();
+                    model.setSelectedFlashCard(null);
+                    AskNoteView.instance().updateView();
+                }
         }
     }
     
-}
+   } 
+ 

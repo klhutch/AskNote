@@ -103,13 +103,23 @@ public class FriendsListPanel extends JPanel {
                 
                 int index = FriendsListPanel.this.friendList.getMinSelectionIndex();
                 
-                if (index >= 0) {
+                   
+                String msg = "Are you sure that you want to remove this friend?" ;
+                int response = JOptionPane.showConfirmDialog(FriendsListPanel.this, msg,
+                        "Confirm", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+                
+                if (response == JOptionPane.YES_OPTION) {
+                    if (index >= 0) {
                     String friend = FriendsListPanel.this.friends.get(index);
                     
-                    //TODO add a confirmation dialog
+                   
                     model.deleteFriend(friend);
                     AskNoteView.instance().updateView();
                 }
+                    
+              }
+                
+              
         }
     }
 
