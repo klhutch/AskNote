@@ -150,9 +150,20 @@ public class EditDeckPanel extends JPanel {
         @Override
         public void actionPerformed(ActionEvent e) {
             AskNoteModel.instance().setPreviousAsCurrent();
-            //TODO add a confirmation dialog
-            EditDeckPanel.this.deck.cancelEdits();
-            AskNoteView.instance().updateView();
+       
+              
+                
+                String msg = "All changes to the deck will be discarded, are you sure you want to cancel?";
+                int response = JOptionPane.showConfirmDialog(EditDeckPanel.this, msg,
+                        "Confirm", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+                
+                if (response == JOptionPane.YES_OPTION) {
+                     //TODO add a confirmation dialog
+                      EditDeckPanel.this.deck.cancelEdits();
+                      AskNoteView.instance().updateView();
+                }
+                
+           
         }
     }
     
