@@ -126,7 +126,7 @@ public class QuizWaitingPanel extends JPanel {
             flow.setHgap(25); 
             flow.setVgap(20); 
             
-            JButton end = new JButton("end quiz");  
+            JButton end = new JButton("cancel quiz request");  
             JButton okay = new JButton("okay"); 
             
             end.addActionListener(new EndQuizButtonListener());
