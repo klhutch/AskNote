@@ -67,9 +67,6 @@ public class HeaderPanel extends JPanel {
 
         this.setBorder(new MatteBorder(0, 0, 1, 0, Color.GRAY));
         this.validate();
-
-
-
     }
     
     public Boolean handlePageType(){
@@ -93,19 +90,35 @@ public class HeaderPanel extends JPanel {
         }
         if (page == PageType.EDIT_DECK) {
             //TODO add a confirmation dialog
-            model.getSelectedDeck().cancelEdits();
-            model.setSelectedDeck(null);
-            return true;
+            String msg = "All changes to the deck will be discarded, are you sure you want to go back?";
+            int response = JOptionPane.showConfirmDialog(AskNoteView.instance(), msg,
+                    "Confirm", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+
+            if (response == JOptionPane.YES_OPTION) {
+                model.getSelectedDeck().cancelEdits();
+                model.setSelectedDeck(null);
+                return true;
+            }
+            return false; 
+            
         }
         if (page == PageType.EDIT_CARD) {
             //TODO add a confirmation dialog
             FlashCard card = model.getSelectedFlashCard();
-            
-            if (card.getIsNewAddition()) {
+            String msg = "All changes to the card will be discarded, are you sure you want to go back?";
+            int response = JOptionPane.showConfirmDialog(AskNoteView.instance(), msg,
+                    "Confirm", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+
+            if (response == JOptionPane.YES_OPTION) {
+                if (card.getIsNewAddition()) {
                 model.getSelectedDeck().editRemoveCard(card);  
+                }
+                model.setSelectedFlashCard(null);
+                return true;
             }
-            model.setSelectedFlashCard(null);
-            return true;
+            
+            return false; 
+            
         }
         
         return true;

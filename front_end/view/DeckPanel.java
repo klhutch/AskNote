@@ -27,6 +27,8 @@ public class DeckPanel extends JPanel {
     public DeckPanel(List<Deck> decks) {
         
         // init top level panel
+        
+         
         setLayout(new BorderLayout());
             
         // init leftmost deck panel
@@ -34,17 +36,20 @@ public class DeckPanel extends JPanel {
 
         // init rightmost options panel
         JPanel optionPanel = new JPanel();
-        optionPanel.setLayout(new BoxLayout(optionPanel, BoxLayout.Y_AXIS));
         
-        JButton addButton = new JButton("Add Deck");
+        BoxLayout box = new BoxLayout(optionPanel, BoxLayout.Y_AXIS); 
+        optionPanel.setLayout(box);
+        
+        JButton addButton = new JButton("Add Deck");   
         JButton removeButton = new JButton("Remove Deck");
         JButton editButton = new JButton("Edit Deck");
+        
         
         addButton.addActionListener(new AddDeckButtonListener());
         removeButton.addActionListener(new RemoveDeckButtonListener());
         editButton.addActionListener(new EditDeckButtonListener());
         
-        optionPanel.add(addButton);
+        optionPanel.add(addButton); 
         optionPanel.add(removeButton);
         optionPanel.add(editButton);
         
