@@ -12,6 +12,9 @@ import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.net.MalformedURLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -52,7 +55,11 @@ public class QuizWaitingPanel extends JPanel {
                 model.deleteQuiz(toRemove);
                 model.setActiveQuiz(null);
                 model.setPreviousAsCurrent();
-                AskNoteView.instance().updateView();
+                try {
+                    AskNoteView.instance().updateView();
+                } catch (MalformedURLException ex) {
+                    Logger.getLogger(QuizWaitingPanel.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         
         }
@@ -147,7 +154,11 @@ public class QuizWaitingPanel extends JPanel {
             AskNoteModel model = AskNoteModel.instance();
             model.setPreviousAsCurrent();
             model.setActiveQuiz(null);
-            AskNoteView.instance().updateView();
+            try {
+                AskNoteView.instance().updateView();
+            } catch (MalformedURLException ex) {
+                Logger.getLogger(QuizWaitingPanel.class.getName()).log(Level.SEVERE, null, ex);
+            }
             
             
         }
@@ -176,7 +187,11 @@ public class QuizWaitingPanel extends JPanel {
                     model.deleteQuiz(toRemove);
                     model.setActiveQuiz(null);
                     model.setPreviousAsCurrent();
-                    AskNoteView.instance().updateView();
+                    try {
+                        AskNoteView.instance().updateView();
+                    } catch (MalformedURLException ex) {
+                        Logger.getLogger(QuizWaitingPanel.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                 }
             }
         }

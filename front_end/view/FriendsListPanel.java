@@ -8,8 +8,11 @@ package view;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.*;
 import model.*;
 
@@ -23,13 +26,15 @@ public class FriendsListPanel extends JPanel {
     JList friendList;
     List<String> friends;
     
-    public FriendsListPanel(List<String> friends) { 
+    public FriendsListPanel(List<String> friends) throws MalformedURLException { 
         this.friends = friends;
         BorderLayout border = new BorderLayout(); 
         
         JPanel left = new JPanel(); 
         left.setLayout(border);
-             
+        
+        Constants constant = new Constants();
+        
         GridLayout grid2 = new GridLayout(); 
         grid2.setColumns(2);
         grid2.setRows(-1); 
@@ -51,16 +56,12 @@ public class FriendsListPanel extends JPanel {
         
           
          
-        OptionPanel add = new OptionPanel("  ", "Add Friend");     
-        OptionPanel checkAll = new OptionPanel("  ", "Select all"); 
-        OptionPanel uncheckAll = new OptionPanel("  ", "Uncheck all");
-        OptionPanel delete = new OptionPanel("  ", "Delete"); 
+        OptionPanel add = new OptionPanel(constant.getImage("Add"), "Add Friend");     
+        OptionPanel delete = new OptionPanel(constant.getImage("Delete"), "Delete"); 
         
         List<OptionPanel> options = new ArrayList<>();
         options.add(add); 
         options.add(delete);
-        //options.add(checkAll); 
-        //options.add(uncheckAll);
         
         
         SelectionPanel right = new SelectionPanel(options); 
@@ -68,9 +69,7 @@ public class FriendsListPanel extends JPanel {
          
         add.button.addActionListener(new AddFriendListener());
         delete.button.addActionListener(new RemoveFriendsListener());
-        checkAll.button.addActionListener(new SelectAllListener());
-        uncheckAll.button.addActionListener(new UnselectAllListener());
-        
+
         left.add(friendList, BorderLayout.CENTER);
         JScrollPane scroll = new JScrollPane(left); 
         
@@ -89,7 +88,11 @@ public class FriendsListPanel extends JPanel {
 
             if (newText != null && !newText.equals("")) {
                 AskNoteModel.instance().addFriend(newText);
-                AskNoteView.instance().updateView();
+                try {
+                    AskNoteView.instance().updateView();
+                } catch (MalformedURLException ex) {
+                    Logger.getLogger(FriendsListPanel.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         }
     }
@@ -114,7 +117,11 @@ public class FriendsListPanel extends JPanel {
                     
                    
                     model.deleteFriend(friend);
-                    AskNoteView.instance().updateView();
+                        try {
+                            AskNoteView.instance().updateView();
+                        } catch (MalformedURLException ex) {
+                            Logger.getLogger(FriendsListPanel.class.getName()).log(Level.SEVERE, null, ex);
+                        }
                 }
                     
               }
@@ -144,10 +151,10 @@ public class FriendsListPanel extends JPanel {
     class OptionPanel  extends JPanel { 
            JButton button; 
            JLabel label; 
-        OptionPanel(String button, String label) { 
+        OptionPanel(ImageIcon icon, String label) { 
             FlowLayout flow = new FlowLayout(); 
             flow.setAlignment(FlowLayout.LEADING);
-            JButton bttn = new JButton(button); 
+            JButton bttn = new JButton(icon); 
             JLabel lbl = new JLabel(label); 
 
             Font font = new Font("SanSarif", Font.BOLD, 20); 

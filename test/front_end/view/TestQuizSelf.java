@@ -5,8 +5,11 @@
  */
 package front_end.view;
 
+import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFrame;
 import model.AskNoteModel;
 import model.Deck;
@@ -53,7 +56,11 @@ public class TestQuizSelf {
         model.setCurrentPage(PageType.QUIZ_DECK);
         model.setCurrentPage(PageType.QUIZ_SELF);
         
-        AskNoteView.instance().updateView();
+        try {
+            AskNoteView.instance().updateView();
+        } catch (MalformedURLException ex) {
+            Logger.getLogger(TestQuizSelf.class.getName()).log(Level.SEVERE, null, ex);
+        }
         frame.getContentPane().add (AskNoteView.instance());
 
         // Show the frame. 

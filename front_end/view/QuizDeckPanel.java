@@ -4,7 +4,10 @@ import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.net.MalformedURLException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.*;
 import model.AskNoteModel;
 import model.Deck;
@@ -59,13 +62,21 @@ public class QuizDeckPanel extends JPanel {
                     model.deleteQuiz(toRemove);
                     model.setActiveQuiz(null);
                     model.setPreviousAsCurrent();
-                    AskNoteView.instance().updateView();
+                    try {
+                        AskNoteView.instance().updateView();
+                    } catch (MalformedURLException ex) {
+                        Logger.getLogger(QuizDeckPanel.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                 }
             }
             else {
                 //Quizzing self
                 model.setPreviousAsCurrent();
-                AskNoteView.instance().updateView();
+                try {
+                    AskNoteView.instance().updateView();
+                } catch (MalformedURLException ex) {
+                    Logger.getLogger(QuizDeckPanel.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         }
     }
@@ -100,7 +111,11 @@ public class QuizDeckPanel extends JPanel {
                         model.setSelectedDeck(quizWith);
                         model.setCurrentPage(PageType.QUIZ_SELF);
                     }
-                    view.updateView();
+                    try {
+                        view.updateView();
+                    } catch (MalformedURLException ex) {
+                        Logger.getLogger(QuizDeckPanel.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                 }
             }
             //TODO - what should happen if nothing is selected?

@@ -10,8 +10,11 @@ import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.net.MalformedURLException;
 import java.util.List;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.ButtonGroup;
@@ -159,7 +162,11 @@ public class QuizSelectPanel extends JPanel {
                     model.setCurrentPage(PageType.QUIZ_TESTEE);
                 }
                 
-                AskNoteView.instance().updateView();
+                try {
+                    AskNoteView.instance().updateView();
+                } catch (MalformedURLException ex) {
+                    Logger.getLogger(QuizSelectPanel.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         }
         
@@ -178,7 +185,11 @@ public class QuizSelectPanel extends JPanel {
                 if (response == JOptionPane.YES_OPTION) {
                     model.deleteQuiz(toRemove);
                     model.setActiveQuiz(null);
-                    AskNoteView.instance().updateView();
+                    try {
+                        AskNoteView.instance().updateView();
+                    } catch (MalformedURLException ex) {
+                        Logger.getLogger(QuizSelectPanel.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                 }
             }
         }
@@ -247,7 +258,11 @@ public class QuizSelectPanel extends JPanel {
                     model.addQuiz(quiz);
                     model.setActiveQuiz(quiz);
                     model.setCurrentPage(PageType.QUIZ_DECK);
-                    AskNoteView.instance().updateView();
+                    try {
+                        AskNoteView.instance().updateView();
+                    } catch (MalformedURLException ex) {
+                        Logger.getLogger(QuizSelectPanel.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                 }
             }
             

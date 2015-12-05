@@ -3,7 +3,10 @@ package view;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.net.MalformedURLException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.*;
 import model.AskNoteModel;
 import model.PageType;
@@ -34,8 +37,16 @@ public class AskNoteView extends JPanel {
     private AskNoteView() { 
         this.setLayout(new BorderLayout()); 
         
-        this.header = new HeaderPanel("Home",0);   
-        this.appPanel = new HomePagePanel();
+        try {   
+            this.header = new HeaderPanel("Home",0);
+        } catch (MalformedURLException ex) {
+            Logger.getLogger(AskNoteView.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try {
+            this.appPanel = new HomePagePanel();
+        } catch (MalformedURLException ex) {
+            Logger.getLogger(AskNoteView.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
         this.add(header, BorderLayout.NORTH);
         this.add(appPanel, BorderLayout.CENTER);
@@ -46,7 +57,7 @@ public class AskNoteView extends JPanel {
     
     
     /** based on state of model, update current view **/
-    public void updateView() {
+    public void updateView() throws MalformedURLException {
         AskNoteModel model = AskNoteModel.instance();
         this.remove(appPanel);
         

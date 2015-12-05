@@ -5,6 +5,9 @@
  */
 package front_end.view;
 
+import java.net.MalformedURLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFrame;
 import view.HomePagePanel;
 
@@ -25,7 +28,11 @@ public class TestHomepage {
         // f.getContentPane().setBackground (Color.cyan); 
         frame.setSize (1000, 600);
 
-        frame.getContentPane().add(new HomePagePanel());
+        try {
+            frame.getContentPane().add(new HomePagePanel());
+        } catch (MalformedURLException ex) {
+            Logger.getLogger(TestHomepage.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
         // Show the frame. 
         frame.setVisible (true);

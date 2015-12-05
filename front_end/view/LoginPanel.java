@@ -8,6 +8,9 @@ package view;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.net.MalformedURLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.*;
 import model.AskNoteModel;
 import model.PageType;
@@ -59,7 +62,11 @@ public class LoginPanel extends JPanel{
             AskNoteModel model = AskNoteModel.instance();
             model.setCurrentPage(PageType.HOME);
             
-            AskNoteView.instance().updateView();
+            try {
+                AskNoteView.instance().updateView();
+            } catch (MalformedURLException ex) {
+                Logger.getLogger(LoginPanel.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     
     }

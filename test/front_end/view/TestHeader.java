@@ -5,6 +5,7 @@
  */
 package front_end.view;
 
+import java.net.MalformedURLException;
 import javax.swing.*;
 import view.*;
 
@@ -14,7 +15,7 @@ import view.*;
  */
 public class TestHeader {
 
-    public static void main (String[] argv) {
+    public static void main (String[] argv) throws MalformedURLException {
     JFrame f = new JFrame ();
     
 

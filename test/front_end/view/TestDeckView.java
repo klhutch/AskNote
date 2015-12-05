@@ -6,8 +6,11 @@ package front_end.view;
  */
 import java.awt.Dimension;
 import java.awt.EventQueue;
+import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFrame;
 import model.AskNoteModel;
 import model.Deck;
@@ -48,7 +51,11 @@ public class TestDeckView extends JFrame {
         model.setCurrentPage(PageType.DECK);
         
         AskNoteView view = AskNoteView.instance();
-        view.updateView();
+        try {
+            view.updateView();
+        } catch (MalformedURLException ex) {
+            Logger.getLogger(TestDeckView.class.getName()).log(Level.SEVERE, null, ex);
+        }
         getContentPane().add(view);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }

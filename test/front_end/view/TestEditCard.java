@@ -6,6 +6,7 @@
 package front_end.view;
 
 import java.awt.EventQueue;
+import java.net.MalformedURLException;
 import javax.swing.JDialog;
 import model.FlashCard;
 import javax.swing.JFrame;
@@ -16,7 +17,7 @@ import view.EditCardPanel;
  * @author tiffanychao
  */
 public class TestEditCard extends JDialog {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws MalformedURLException {
         JFrame frame = new JFrame("AskNote");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setResizable(true);

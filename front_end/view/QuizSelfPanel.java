@@ -8,10 +8,13 @@ package view;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.net.MalformedURLException;
 import javafx.scene.layout.Border;
 import javax.swing.*;
 import model.*;
 import java.util.Random; 
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -31,18 +34,22 @@ public class QuizSelfPanel extends JPanel{
         this.setLayout(border);
        
         if(!deck.isEmpty()) {
-            this.shownText =  new ShownTextPanel(deck.getCurrentCard().getSide1()); 
-            this.add(shownText, BorderLayout.CENTER); 
-            this.side1Shown = true;
-        
-            ButtonPanel buttons = new ButtonPanel(); 
-            EndButtonPanel end = new EndButtonPanel(); 
-
-            JPanel bottomPanel = new JPanel(); 
-            bottomPanel.add(buttons); 
-            bottomPanel.add(end); 
-
-            this.add(buttons, BorderLayout.SOUTH); 
+            try {
+                this.shownText =  new ShownTextPanel(deck.getCurrentCard().getSide1());
+                this.add(shownText, BorderLayout.CENTER);
+                this.side1Shown = true;
+                
+                ButtonPanel buttons = new ButtonPanel();
+                EndButtonPanel end = new EndButtonPanel();
+                
+                JPanel bottomPanel = new JPanel();
+                bottomPanel.add(buttons);
+                bottomPanel.add(end);
+                 
+                this.add(buttons, BorderLayout.SOUTH);
+            } catch (MalformedURLException ex) {
+                Logger.getLogger(QuizSelfPanel.class.getName()).log(Level.SEVERE, null, ex);
+            }
         
         }
         else {
@@ -100,12 +107,14 @@ public class QuizSelfPanel extends JPanel{
 
     
     class ButtonPanel extends JPanel { 
-         ButtonPanel () { 
+        Constants constant;
+         ButtonPanel () throws MalformedURLException { 
+             this.constant = new Constants();
             FlowLayout flow = new FlowLayout(); 
             flow.setAlignment(FlowLayout.CENTER);
-            JButton previousCard = new JButton("<"); 
-            JButton flip = new JButton("flip");
-            JButton nextCard = new JButton(">"); 
+            JButton previousCard = new JButton(constant.getImage("<")); 
+            JButton flip = new JButton(constant.getImage("Flip"));
+            JButton nextCard = new JButton(constant.getImage(">")); 
             
             flip.addActionListener(new FlipCardButtonListener());
             previousCard.addActionListener(new PreviousCardButtonListener());
@@ -180,7 +189,11 @@ public class QuizSelfPanel extends JPanel{
         public void actionPerformed(ActionEvent e) {
             AskNoteModel.instance().setSelectedDeck(null);
             AskNoteModel.instance().setPreviousAsCurrent();
-            AskNoteView.instance().updateView();
+            try {
+                AskNoteView.instance().updateView();
+            } catch (MalformedURLException ex) {
+                Logger.getLogger(QuizSelfPanel.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
         
     }

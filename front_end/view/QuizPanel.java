@@ -8,6 +8,9 @@ package view;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.net.MalformedURLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.*;
 import model.AskNoteModel;
 import model.PageType;
@@ -95,7 +98,11 @@ public class QuizPanel extends JPanel{
             model.setCurrentPage(PageType.QUIZ_DECK);
             
             
-            AskNoteView.instance().updateView();
+            try {
+                AskNoteView.instance().updateView();
+            } catch (MalformedURLException ex) {
+                Logger.getLogger(QuizPanel.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     
     }
@@ -110,7 +117,11 @@ public class QuizPanel extends JPanel{
             
             
             
-            AskNoteView.instance().updateView();
+            try {
+                AskNoteView.instance().updateView();
+            } catch (MalformedURLException ex) {
+                Logger.getLogger(QuizPanel.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     
     }

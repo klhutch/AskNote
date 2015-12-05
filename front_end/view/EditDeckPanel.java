@@ -12,8 +12,11 @@ import java.awt.GridLayout;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.BorderFactory;
 
 import javax.swing.JButton;
@@ -42,7 +45,7 @@ public class EditDeckPanel extends JPanel {
     TitlePanel title;
     FlashCardsPanel flashCards;
     
-    public EditDeckPanel(Deck deck) {
+    public EditDeckPanel(Deck deck) throws MalformedURLException {
         this.deck = deck;
         this.deck.startEdits();
         
@@ -69,7 +72,9 @@ public class EditDeckPanel extends JPanel {
 //// title and edit button top // 
   class TitlePanel extends JPanel { 
         JLabel text;
-        TitlePanel (Deck deck) { 
+        Constants constant;
+        TitlePanel (Deck deck) throws MalformedURLException { 
+            this.constant = new Constants();
             FlowLayout flow = new FlowLayout(); 
             flow.setAlignment(FlowLayout.CENTER);
             flow.setHgap(25); 
@@ -77,7 +82,7 @@ public class EditDeckPanel extends JPanel {
             
             this.text = new JLabel(deck.getEditTitle()); 
             this.text.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 18));
-            JButton edit = new JButton("edit"); 
+            JButton edit = new JButton(constant.getImage("Edit")); 
             
             edit.addActionListener(new EditTitleListener());
             
@@ -104,15 +109,17 @@ public class EditDeckPanel extends JPanel {
 
 ///////// Buttons  Bottom ////////   
     class ButtonPanel extends JPanel { 
-         ButtonPanel () { 
+         ButtonPanel () throws MalformedURLException { 
             FlowLayout flow = new FlowLayout(); 
             flow.setAlignment(FlowLayout.CENTER);
             flow.setHgap(25); 
             flow.setVgap(20); 
             
-            JButton add = new JButton("add");  
-            JButton save = new JButton("save"); 
-            JButton cancel = new JButton("cancel"); 
+            Constants constant = new Constants();
+            
+            JButton add = new JButton(constant.getImage("Add"));  
+            JButton save = new JButton(constant.getImage("Save")); 
+            JButton cancel = new JButton(constant.getImage("Cancel")); 
             
             add.addActionListener(new AddCardListener());
             save.addActionListener(new SaveEditListener());
@@ -140,7 +147,11 @@ public class EditDeckPanel extends JPanel {
             if(EditDeckPanel.this.deck.getIsNewAddition()){
                 AskNoteModel.instance().addDeck(EditDeckPanel.this.deck);
             }
-            AskNoteView.instance().updateView();
+            try {
+                AskNoteView.instance().updateView();
+            } catch (MalformedURLException ex) {
+                Logger.getLogger(EditDeckPanel.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
         
     }
@@ -160,7 +171,11 @@ public class EditDeckPanel extends JPanel {
                 if (response == JOptionPane.YES_OPTION) {
                      //TODO add a confirmation dialog
                       EditDeckPanel.this.deck.cancelEdits();
-                      AskNoteView.instance().updateView();
+                try {
+                    AskNoteView.instance().updateView();
+                } catch (MalformedURLException ex) {
+                    Logger.getLogger(EditDeckPanel.class.getName()).log(Level.SEVERE, null, ex);
+                }
                 }
                 
            
@@ -179,7 +194,11 @@ public class EditDeckPanel extends JPanel {
             
             model.setSelectedFlashCard(card);
             model.setCurrentPage(PageType.EDIT_CARD);
-            AskNoteView.instance().updateView();
+            try {
+                AskNoteView.instance().updateView();
+            } catch (MalformedURLException ex) {
+                Logger.getLogger(EditDeckPanel.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
         
     }
@@ -188,7 +207,7 @@ public class EditDeckPanel extends JPanel {
 /////////////// for flash cards///////////
     class FlashCardsPanel extends JPanel implements Scrollable {
 
-        FlashCardsPanel(Deck deck) {
+        FlashCardsPanel(Deck deck) throws MalformedURLException {
             setLayout(new FlowLayout(FlowLayout.LEFT, 20, 20));
             setPreferredSize(findPreferredSize(deck.getSize()));
             List<FlashCardPanel> cardPanels = new ArrayList<FlashCardPanel>();
@@ -249,7 +268,7 @@ public class EditDeckPanel extends JPanel {
             Boolean side1Shown = true;
             JLabel shownText;
             
-            FlashCardPanel(FlashCard card) {
+            FlashCardPanel(FlashCard card) throws MalformedURLException {
                 this.card = card;
                 this.setLayout(new BorderLayout(5, 5));
                 this.setPreferredSize(flashCardPanelSize);
@@ -271,12 +290,15 @@ public class EditDeckPanel extends JPanel {
             
             class FlashCardButtonPanel extends JPanel {
 
-                FlashCardButtonPanel() {
+                Constants constant;
+                
+                FlashCardButtonPanel() throws MalformedURLException {
+                    this.constant = new Constants();
                     FlowLayout flow = new FlowLayout();
                     flow.setAlignment(FlowLayout.CENTER);
 
-                    JButton edit = new JButton("edit");
-                    JButton flip = new JButton("flip");
+                    JButton edit = new JButton(constant.getImage("Edit"));
+                    JButton flip = new JButton(constant.getImage("Flip"));
                     
                     edit.addActionListener(new EditCardListener());
                     flip.addActionListener(new FlipCardListener());
@@ -315,7 +337,11 @@ public class EditDeckPanel extends JPanel {
 
                     model.setSelectedFlashCard(card);
                     model.setCurrentPage(PageType.EDIT_CARD);
-                    AskNoteView.instance().updateView();
+                    try {
+                        AskNoteView.instance().updateView();
+                    } catch (MalformedURLException ex) {
+                        Logger.getLogger(EditDeckPanel.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                 }
             }
         }

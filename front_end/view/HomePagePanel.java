@@ -7,8 +7,11 @@ package view;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.net.MalformedURLException;
 import java.util.List;
 import java.util.ArrayList; 
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.*;
 import model.*;
 
@@ -19,7 +22,7 @@ import model.*;
      */
 public class HomePagePanel extends JPanel{
     // takes nothing in 
-    public HomePagePanel() {     
+    public HomePagePanel() throws MalformedURLException {     
          
          
         // create nested JPanels, set layout managers
@@ -27,10 +30,11 @@ public class HomePagePanel extends JPanel{
        flow.setAlignment(FlowLayout.CENTER);     
        this.setLayout(flow);
         
-        
-        InnerPanel decks = new InnerPanel(" D " , "Decks");     
-        InnerPanel quiz = new InnerPanel(" Q " , "Quiz"); 
-        InnerPanel friends = new InnerPanel(" F ", "Friends");
+       Constants constant = new Constants(); 
+       
+        InnerPanel decks = new InnerPanel(constant.getImage("Deck"), "Decks");     
+        InnerPanel quiz = new InnerPanel(constant.getImage("Quiz"), "Quiz"); 
+        InnerPanel friends = new InnerPanel(constant.getImage("Friend"), "Friends");
         
         List<InnerPanel> options = new ArrayList<>();
         options.add(decks); 
@@ -61,11 +65,11 @@ public class HomePagePanel extends JPanel{
     class InnerPanel extends JPanel { 
         JButton button; 
         JLabel label; 
-        InnerPanel(String button, String label) { 
+        InnerPanel(ImageIcon icon, String label) { 
            
             FlowLayout flow = new FlowLayout(); 
             flow.setAlignment(FlowLayout.LEADING);
-            JButton bttn = new JButton(button); 
+            JButton bttn = new JButton(icon); 
             JLabel lbl = new JLabel(label); 
 
             Font font = new Font("SanSarif", Font.BOLD, 20); 
@@ -117,7 +121,11 @@ public class HomePagePanel extends JPanel{
             AskNoteModel model = AskNoteModel.instance();
             model.setCurrentPage(PageType.DECK);
             
-            AskNoteView.instance().updateView();
+            try {
+                AskNoteView.instance().updateView();
+            } catch (MalformedURLException ex) {
+                Logger.getLogger(HomePagePanel.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     
     }
@@ -129,7 +137,12 @@ public class HomePagePanel extends JPanel{
             AskNoteModel model = AskNoteModel.instance();
             model.setCurrentPage(PageType.QUIZ);
             
-            AskNoteView.instance().updateView();        }
+            try {
+                AskNoteView.instance().updateView();
+            } catch (MalformedURLException ex) {
+                Logger.getLogger(HomePagePanel.class.getName()).log(Level.SEVERE, null, ex);
+            }
+ }
     
     }
     
@@ -140,7 +153,11 @@ public class HomePagePanel extends JPanel{
             AskNoteModel model = AskNoteModel.instance();
             model.setCurrentPage(PageType.FRIENDS_LIST);
             
-            AskNoteView.instance().updateView();
+            try {
+                AskNoteView.instance().updateView();
+            } catch (MalformedURLException ex) {
+                Logger.getLogger(HomePagePanel.class.getName()).log(Level.SEVERE, null, ex);
+            }
             
         }
     

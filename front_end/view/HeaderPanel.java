@@ -8,6 +8,9 @@ package view;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.net.MalformedURLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.*;
 import javax.swing.border.MatteBorder;
 import model.AskNoteModel;
@@ -25,7 +28,10 @@ public class HeaderPanel extends JPanel {
     private JButton notification;
     private JLabel title;
     
-    public HeaderPanel(String str, int number) { 
+    Constants constant;
+    
+    public HeaderPanel(String str, int number) throws MalformedURLException { 
+        this.constant = new Constants();
         this.setLayout(new BorderLayout());
         
         FlowLayout flow = new FlowLayout();
@@ -43,8 +49,8 @@ public class HeaderPanel extends JPanel {
         title.setAlignmentX(java.awt.Component.CENTER_ALIGNMENT);
         title.setAlignmentY(java.awt.Component.CENTER_ALIGNMENT);
         
-        this.home = new JButton("Home"); 
-        this.back = new JButton("Back");
+        this.home = new JButton(constant.getImage("Home")); 
+        this.back = new JButton(constant.getImage("Back"));
         this.notification = new JButton("" + number);
 
         this.home.setVisible(false);
@@ -158,7 +164,11 @@ public class HeaderPanel extends JPanel {
                 model.wipePageHistory();
                 model.setCurrentPage(PageType.HOME);
 
-                AskNoteView.instance().updateView();
+                try {
+                    AskNoteView.instance().updateView();
+                } catch (MalformedURLException ex) {
+                    Logger.getLogger(HeaderPanel.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         }
 
@@ -172,7 +182,11 @@ public class HeaderPanel extends JPanel {
                 AskNoteModel model = AskNoteModel.instance();
                 model.setPreviousAsCurrent();
 
-                AskNoteView.instance().updateView();
+                try {
+                    AskNoteView.instance().updateView();
+                } catch (MalformedURLException ex) {
+                    Logger.getLogger(HeaderPanel.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         }
 

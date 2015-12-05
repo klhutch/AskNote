@@ -5,8 +5,11 @@
  */
 package front_end.view;
 
+import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFrame;
 import model.AskNoteModel;
 import model.PageType;
@@ -43,7 +46,11 @@ public class TestFriendsList {
         model.setFriends(friends);
         model.setCurrentPage(PageType.FRIENDS_LIST);
 
-        AskNoteView.instance().updateView();
+        try {
+            AskNoteView.instance().updateView();
+        } catch (MalformedURLException ex) {
+            Logger.getLogger(TestFriendsList.class.getName()).log(Level.SEVERE, null, ex);
+        }
         frame.add(AskNoteView.instance());
         frame.setVisible (true);
     }

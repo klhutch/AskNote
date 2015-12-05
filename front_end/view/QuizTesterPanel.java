@@ -9,6 +9,9 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.net.MalformedURLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 import model.*;
@@ -17,7 +20,7 @@ public class QuizTesterPanel extends JPanel{
     Quiz quiz;
     ResponsePanel responsePanel;
     
-    public QuizTesterPanel(Quiz quiz) {
+    public QuizTesterPanel(Quiz quiz) throws MalformedURLException {
         this.quiz = quiz;
         FlashCard card = quiz.getCurrentCard();
         String response = quiz.getResponse();
@@ -33,10 +36,12 @@ public class QuizTesterPanel extends JPanel{
                 cardPanel = new CardPanel(card.getSide2(), card.getSide1());
             }
 
+            Constants constant = new Constants();
+            
             this.responsePanel = new ResponsePanel(response);
 
-            JButton correctButton = new JButton("Correct");
-            JButton incorrectButton = new JButton("Incorrect");
+            JButton correctButton = new JButton(constant.getImage("Correct"));
+            JButton incorrectButton = new JButton(constant.getImage("Wrong"));
             
             correctButton.addActionListener(new CorrectButtonListener());
             incorrectButton.addActionListener(new IncorrectButtonListener());
@@ -70,7 +75,11 @@ public class QuizTesterPanel extends JPanel{
         this.quiz.setCorrect(correct);
         this.quiz.setWaitingOnResponse(true);
         
-        AskNoteView.instance().updateView();
+        try {
+            AskNoteView.instance().updateView();
+        } catch (MalformedURLException ex) {
+            Logger.getLogger(QuizTesterPanel.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
     }
 
@@ -80,13 +89,16 @@ public class QuizTesterPanel extends JPanel{
         JLabel title;
         JTextArea responseArea;
         
-        CardPanel(String shownSide, String reverseSide) {
+        Constants constant;
+        
+        CardPanel(String shownSide, String reverseSide) throws MalformedURLException {
             this.shownSide = shownSide;
             this.reverseSide = reverseSide;
+            this.constant = new Constants();
             
             //this.setLayout(new BorderLayout());
             this.title = new JLabel("Shown Side");
-            JButton flip = new JButton("flip");
+            JButton flip = new JButton(constant.getImage("Flip"));
             
             flip.addActionListener(new ActionListener() {
                 @Override

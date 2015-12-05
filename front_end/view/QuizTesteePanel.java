@@ -10,6 +10,9 @@ import java.awt.GridLayout;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.net.MalformedURLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -101,7 +104,11 @@ public class QuizTesteePanel extends JPanel {
             quiz.setWaitingOnResponse(true);
             model.setActiveQuiz(null);
             
-            AskNoteView.instance().updateView();
+            try {
+                AskNoteView.instance().updateView();
+            } catch (MalformedURLException ex) {
+                Logger.getLogger(QuizTesteePanel.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }
     

@@ -7,6 +7,9 @@ import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.net.MalformedURLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -23,8 +26,10 @@ public class EditCardPanel extends JPanel {
     SidePanel side1;
     SidePanel side2;
     FlashCard card;
+    Constants constant;
     
-    public EditCardPanel(FlashCard card) {
+    public EditCardPanel(FlashCard card) throws MalformedURLException {
+        this.constant = new Constants();
         this.card = card;
         this.setLayout(new BorderLayout());
         
@@ -32,9 +37,9 @@ public class EditCardPanel extends JPanel {
         this.side2 = new SidePanel(card.getSide2(), "Side 2");
         
         
-        JButton save = new JButton("Save");
-        JButton delete = new JButton("Delete Card");
-        JButton cancel = new JButton("Cancel");
+        JButton save = new JButton(constant.getImage("Save"));
+        JButton delete = new JButton(constant.getImage("Delete"));
+        JButton cancel = new JButton(constant.getImage("Cancel"));
         
         save.addActionListener(new SaveCardEditListener());
         cancel.addActionListener(new CancelCardEditListener());
@@ -96,7 +101,11 @@ public class EditCardPanel extends JPanel {
             
             AskNoteModel.instance().setPreviousAsCurrent();
             AskNoteModel.instance().setSelectedFlashCard(null);
-            AskNoteView.instance().updateView();
+            try {
+                AskNoteView.instance().updateView();
+            } catch (MalformedURLException ex) {
+                Logger.getLogger(EditCardPanel.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }
     
@@ -118,7 +127,11 @@ public class EditCardPanel extends JPanel {
                     
                     model.setPreviousAsCurrent();
                     model.setSelectedFlashCard(null);
+                try {
                     AskNoteView.instance().updateView();
+                } catch (MalformedURLException ex) {
+                    Logger.getLogger(EditCardPanel.class.getName()).log(Level.SEVERE, null, ex);
+                }
                 }
                 
                 else if (response == JOptionPane.NO_OPTION) { 
@@ -147,7 +160,11 @@ public class EditCardPanel extends JPanel {
                     
                     model.setPreviousAsCurrent();
                     model.setSelectedFlashCard(null);
+                try {
                     AskNoteView.instance().updateView();
+                } catch (MalformedURLException ex) {
+                    Logger.getLogger(EditCardPanel.class.getName()).log(Level.SEVERE, null, ex);
+                }
                 }
         }
     }
