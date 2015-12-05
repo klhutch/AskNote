@@ -118,7 +118,7 @@ public class QuizTesterPanel extends JPanel{
             
             
             
-            this.responseArea = new JTextArea(shownSide, 30, 40);
+            this.responseArea = new JTextArea(shownSide, 28, 40);
             responseArea.setEnabled(false);
             
             
@@ -130,7 +130,7 @@ public class QuizTesterPanel extends JPanel{
             JPanel north = new JPanel();
             north.add(title);
             north.add(flip);
-            north.setPreferredSize(new Dimension(500, 30));
+            north.setPreferredSize(new Dimension(500, 40));
             
             this.add(north, BorderLayout.NORTH);
             this.add(responseArea, BorderLayout.CENTER);
@@ -145,7 +145,7 @@ public class QuizTesterPanel extends JPanel{
             this.response = response;
             //this.setLayout(new BorderLayout());
             JLabel title = new JLabel("Response");
-            JTextArea responseArea = new JTextArea(response, 30, 40);
+            JTextArea responseArea = new JTextArea(response, 28, 40);
             responseArea.setEnabled(false);
 //            showText.setRows(10);
 //            showText.setMinimumSize(new Dimension(300, 300));
@@ -156,7 +156,7 @@ public class QuizTesterPanel extends JPanel{
             
             JPanel north = new JPanel();
             north.add(title);
-            north.setPreferredSize(new Dimension(500, 30));
+            north.setPreferredSize(new Dimension(500, 40));
             
             this.add(north, BorderLayout.NORTH);
             this.add(responseArea, BorderLayout.CENTER);
