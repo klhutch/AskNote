@@ -20,13 +20,17 @@ import model.Quiz;
  */
 public class QuizDeckPanel extends JPanel {
     ViewDecksHelperPanel decksPanel;
-    public QuizDeckPanel(List<Deck> decks) {
-        
+    Constants constant; 
+    public QuizDeckPanel(List<Deck> decks) throws MalformedURLException {
+        this.constant = new Constants(); 
         setLayout(new BorderLayout());
 
         decksPanel = new ViewDecksHelperPanel(decks);
         JButton confirm = new JButton("Confirm");
         JButton cancel = new JButton("Cancel");
+        
+        confirm.setFont(constant.getFont("Label"));
+        cancel.setFont(constant.getFont("Label"));
         
         confirm.addActionListener(new ConfirmDeckListener());
         cancel.addActionListener(new RemoveQuizListener());

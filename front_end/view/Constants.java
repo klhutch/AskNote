@@ -16,24 +16,25 @@ import javax.swing.*;
  * @author farahalshammari
  */
 public class Constants {
-   public ImageIcon ideck;
-   public ImageIcon iwrong;
-   public ImageIcon icorrect;
-   public ImageIcon iadd;
-   public ImageIcon iback;
-   public ImageIcon ihome;
-   public ImageIcon ifriend;
-   public ImageIcon idelete;
-   public ImageIcon iedit;
-   public ImageIcon iquiz;
-   public ImageIcon iflip;
-   public ImageIcon inext;
-   public ImageIcon ibefore;
-   public ImageIcon isave;
-   public ImageIcon icancel;
-   public Font titleFont; 
-   public Font labelFont; 
-   public Font regFont; 
+    ImageIcon ideck;
+    ImageIcon iwrong;
+    ImageIcon icorrect;
+    ImageIcon iadd;
+    ImageIcon iback;
+    ImageIcon ihome;
+    ImageIcon ifriend;
+    ImageIcon idelete;
+    ImageIcon iedit;
+    ImageIcon iquiz;
+    ImageIcon iflip;
+    ImageIcon inext;
+    ImageIcon ibefore;
+    ImageIcon isave;
+    ImageIcon icancel;
+    Font titleFont; 
+    Font labelFont; 
+    Font largerFont; 
+    Font regFont; 
    
     public Constants() throws MalformedURLException {
             this.ideck = new ImageIcon(new URL("http://i65.tinypic.com/2u3xlqd.png")); 
@@ -51,8 +52,9 @@ public class Constants {
             this.inext = new ImageIcon(new URL("http://i65.tinypic.com/t55cgy.png"));
             this.isave = new ImageIcon(new URL("http://i65.tinypic.com/v4mqvt.png")); 
             this.icancel = new ImageIcon(new URL("http://i65.tinypic.com/2d8ozmg.png"));
-            this.labelFont = new Font("SanSarif", Font.BOLD, 13); 
-            this.titleFont = new Font("SanSarif", Font.BOLD, 14); 
+            this.labelFont = new Font("SanSarif", Font.BOLD, 14); 
+            this.titleFont = new Font("SanSarif", Font.BOLD, 20); 
+            this.largerFont = new Font("SanSarif", Font.BOLD, 30); 
             this.regFont = new Font("SanSarif", Font.PLAIN, 12); 
     }
     
@@ -118,6 +120,9 @@ public class Constants {
         }
         if (str.equals("Title")) { 
             return this.titleFont; 
+        }
+        if (str.equals("Larger")) { 
+            return this.largerFont; 
         }
         else { 
             return this.regFont; 

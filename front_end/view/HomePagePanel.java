@@ -65,18 +65,18 @@ public class HomePagePanel extends JPanel{
     class InnerPanel extends JPanel { 
         JButton button; 
         JLabel label; 
-        InnerPanel(ImageIcon icon, String label) { 
+        Constants constant; 
+        InnerPanel(ImageIcon icon, String label) throws MalformedURLException { 
            
             FlowLayout flow = new FlowLayout(); 
             flow.setAlignment(FlowLayout.LEADING);
             JButton bttn = new JButton(icon); 
             JLabel lbl = new JLabel(label); 
+            this.constant = new Constants(); 
+            Font font = constant.labelFont; 
 
-            Font font = new Font("SanSarif", Font.BOLD, 20); 
-
-            lbl.setFont(font);
-            bttn.setFont(font);
-            
+            lbl.setFont(constant.getFont("Label"));
+          
             this.button = bttn; 
             this.label = lbl; 
 

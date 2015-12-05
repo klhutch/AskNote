@@ -5,7 +5,6 @@
  */
 package view;
 import java.awt.BorderLayout;
-import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
@@ -28,9 +27,11 @@ import model.Quiz;
 public class QuizTesteePanel extends JPanel {
     Quiz quiz;
     ResponsePanel responsePanel;
+    Constants constant; 
     
-    public QuizTesteePanel(Quiz quiz) {
+    public QuizTesteePanel(Quiz quiz) throws MalformedURLException {
         this.quiz = quiz;
+        this.constant = new Constants(); 
         String shownSide = quiz.getShownSide();
         this.setLayout(new BorderLayout());
         
@@ -38,6 +39,7 @@ public class QuizTesteePanel extends JPanel {
         this.responsePanel = new ResponsePanel();
         
         JButton sendButton = new JButton("Send");
+        sendButton.setFont(constant.getFont("Label"));
         sendButton.addActionListener(new SendResponseButtonListener());
         
         JPanel center = new JPanel();
@@ -55,15 +57,18 @@ public class QuizTesteePanel extends JPanel {
     
     class CardPanel extends JPanel {
         String shownSide;
-        
-        CardPanel(String shownSide) {
+        Constants constant;
+        CardPanel(String shownSide) throws MalformedURLException {
             this.shownSide = shownSide;
-            //this.setLayout(new BorderLayout());
+            this.constant = new Constants(); 
+            
             JLabel shown = new JLabel("Shown Side");
             JTextArea showText = new JTextArea(shownSide, 30, 40);
+            
+            shown.setFont(constant.getFont("Label"));
+            showText.setFont(constant.getFont("Regular"));
             showText.setEnabled(false);
-//            showText.setRows(10);
-//            showText.setMinimumSize(new Dimension(300, 300));
+            
             showText.setAlignmentX(JTextArea.CENTER_ALIGNMENT);
             showText.setAlignmentY(JTextArea.CENTER_ALIGNMENT);
             
@@ -76,14 +81,14 @@ public class QuizTesteePanel extends JPanel {
     
     class ResponsePanel extends JPanel {
         JTextArea responseArea;
-        ResponsePanel() {
-            //this.setLayout(new BorderLayout());
+        Constants constant;
+        
+        ResponsePanel() throws MalformedURLException {
+            this.constant = new Constants(); 
             JLabel otherSide = new JLabel("What's On The Other Side?");
+            otherSide.setFont(constant.getFont("Label"));
             this.responseArea = new JTextArea(30, 40);
             responseArea.setEnabled(true);
-            
-//            responseArea.setRows(10);
-//            responseArea.setPreferredSize(new Dimension(300, 300));
             
             responseArea.setBorder(new LineBorder(Color.BLACK, 1));
             this.add(otherSide);

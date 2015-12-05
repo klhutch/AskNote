@@ -19,6 +19,7 @@ import model.*;
 public class QuizTesterPanel extends JPanel{
     Quiz quiz;
     ResponsePanel responsePanel;
+    Constants constant;
     
     public QuizTesterPanel(Quiz quiz) throws MalformedURLException {
         this.quiz = quiz;
@@ -36,7 +37,7 @@ public class QuizTesterPanel extends JPanel{
                 cardPanel = new CardPanel(card.getSide2(), card.getSide1());
             }
 
-            Constants constant = new Constants();
+            this.constant = new Constants();
             
             this.responsePanel = new ResponsePanel(response);
 
@@ -87,8 +88,7 @@ public class QuizTesterPanel extends JPanel{
         String shownSide;
         String reverseSide;
         JLabel title;
-        JTextArea responseArea;
-        
+        JTextArea responseArea;        
         Constants constant;
         
         CardPanel(String shownSide, String reverseSide) throws MalformedURLException {
@@ -98,6 +98,7 @@ public class QuizTesterPanel extends JPanel{
             
             //this.setLayout(new BorderLayout());
             this.title = new JLabel("Shown Side");
+            title.setFont(constant.getFont("Label"));
             JButton flip = new JButton(constant.getImage("Flip"));
             
             flip.addActionListener(new ActionListener() {
@@ -127,6 +128,8 @@ public class QuizTesterPanel extends JPanel{
             
             responseArea.setBorder(new LineBorder(Color.BLACK, 1));
             
+            responseArea.setFont(constant.getFont("Regular"));
+            
             JPanel north = new JPanel();
             north.add(title);
             north.add(flip);
@@ -140,15 +143,17 @@ public class QuizTesterPanel extends JPanel{
     
     class ResponsePanel extends JPanel {
         String response;
-        
-        ResponsePanel(String response) {
+        Constants constant; 
+        ResponsePanel(String response) throws MalformedURLException {
             this.response = response;
+            this.constant = new Constants(); 
             //this.setLayout(new BorderLayout());
             JLabel title = new JLabel("Response");
+            title.setFont(constant.getFont("Label"));
+            
             JTextArea responseArea = new JTextArea(response, 28, 40);
+            responseArea.setFont(constant.getFont("Regular"));
             responseArea.setEnabled(false);
-//            showText.setRows(10);
-//            showText.setMinimumSize(new Dimension(300, 300));
             responseArea.setAlignmentX(JTextArea.CENTER_ALIGNMENT);
             responseArea.setAlignmentY(JTextArea.CENTER_ALIGNMENT);
             

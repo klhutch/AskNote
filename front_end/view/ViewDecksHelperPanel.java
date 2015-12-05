@@ -6,10 +6,9 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Rectangle;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.net.MalformedURLException;
 import java.util.List;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -28,7 +27,7 @@ public class ViewDecksHelperPanel extends JPanel {
     DeckTitlePanel selected = null;
     // should maintain references to decktitlepanels
     
-    public ViewDecksHelperPanel(List<Deck> decks) {
+    public ViewDecksHelperPanel(List<Deck> decks) throws MalformedURLException {
         this.setBackground(Color.WHITE);
         setLayout(new BorderLayout());
         
@@ -42,7 +41,7 @@ public class ViewDecksHelperPanel extends JPanel {
     
     class ScrollableDecksPanel extends JPanel implements Scrollable {
         
-        ScrollableDecksPanel(List<Deck> decks) {
+        ScrollableDecksPanel(List<Deck> decks) throws MalformedURLException {
             setLayout(new FlowLayout(FlowLayout.LEFT));
             setPreferredSize(findPreferredSize(decks.size()));
             this.setBackground(Color.WHITE);
@@ -102,16 +101,19 @@ public class ViewDecksHelperPanel extends JPanel {
         final LineBorder SELECTED = new LineBorder(Color.GREEN, 2);
         final LineBorder UNSELECTED = new LineBorder(Color.BLACK, 1);
         Deck deck;
+        Constants constant; 
         
-        DeckTitlePanel(Deck deck) {
+        DeckTitlePanel(Deck deck) throws MalformedURLException {
             this.deck = deck;
-            
+            this.constant = new Constants(); 
             setLayout(new BorderLayout());
             setOpaque(true);
             setBackground(Color.WHITE);
             setBorder(UNSELECTED);
             setPreferredSize(deckTitlePanelSize);
             JLabel deckTitle = new JLabel(deck.getTitle(), SwingConstants.CENTER);
+            deckTitle.setFont(constant.getFont("Label"));
+            
             add(deckTitle, BorderLayout.CENTER);
         }
         

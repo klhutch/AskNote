@@ -46,6 +46,7 @@ public class HeaderPanel extends JPanel {
         east.setSize(homeBack.getSize());
         
         title = new JLabel(str, SwingConstants.CENTER);
+        this.title.setFont(constant.getFont("Title"));
         title.setAlignmentX(java.awt.Component.CENTER_ALIGNMENT);
         title.setAlignmentY(java.awt.Component.CENTER_ALIGNMENT);
         
@@ -69,7 +70,7 @@ public class HeaderPanel extends JPanel {
         this.add(homeBack, BorderLayout.WEST);
         this.add(title, BorderLayout.CENTER);
         this.add(Box.createRigidArea(homeBack.getSize()), BorderLayout.EAST);
-        this.setPreferredSize(new Dimension(500, 40));
+        this.setPreferredSize(new Dimension(500, 50));
 
         this.setBorder(new MatteBorder(0, 0, 1, 0, Color.GRAY));
         this.validate();

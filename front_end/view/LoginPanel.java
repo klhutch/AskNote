@@ -19,6 +19,9 @@ import model.PageType;
  *
  * @author Maha Alkhairy
  */
+
+
+// This file is not used
 public class LoginPanel extends JPanel{
     public LoginPanel() { 
         

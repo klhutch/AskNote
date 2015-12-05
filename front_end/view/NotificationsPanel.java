@@ -10,6 +10,8 @@ import javax.swing.JPanel;
  *
  * @author normal
  */
+
+// this file is not used 
 public class NotificationsPanel extends JPanel {
     
 }

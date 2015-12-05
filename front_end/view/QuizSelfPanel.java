@@ -9,10 +9,8 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.net.MalformedURLException;
-import javafx.scene.layout.Border;
 import javax.swing.*;
 import model.*;
-import java.util.Random; 
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -26,9 +24,12 @@ public class QuizSelfPanel extends JPanel{
       Deck deck;
       Boolean side1Shown;
       ShownTextPanel shownText;
+      Constants constant; 
       
-    public QuizSelfPanel(Deck deck) { 
+      
+    public QuizSelfPanel(Deck deck) throws MalformedURLException { 
         this.deck = deck; 
+        this.constant = new Constants(); 
         
         BorderLayout border = new BorderLayout(); 
         this.setLayout(border);
@@ -54,10 +55,12 @@ public class QuizSelfPanel extends JPanel{
         }
         else {
             JLabel noCards = new JLabel("No Cards in this Deck", SwingConstants.CENTER);
+            noCards.setFont(constant.getFont("Large")); 
             noCards.setVerticalAlignment(SwingConstants.CENTER);
             this.add(noCards, BorderLayout.CENTER);
             
             JButton okay = new JButton("okay");
+            okay.setFont(constant.getFont("Label"));
             okay.addActionListener(new EndQuizButtonListener());
             
             JPanel south = new JPanel();
@@ -82,13 +85,16 @@ public class QuizSelfPanel extends JPanel{
     
     class ShownTextPanel extends JPanel {
         JLabel shownText;
+        Constants constant; 
         
-        ShownTextPanel (String text) {
+        ShownTextPanel (String text) throws MalformedURLException {
+           this.constant = new Constants(); 
             
            FlowLayout flow = new FlowLayout(); 
            flow.setAlignment(FlowLayout.CENTER);
            flow.setVgap(200); 
-            this.shownText = new JLabel(text); 
+           this.shownText = new JLabel(text); 
+           shownText.setFont(constant.getFont("Regular"));
             
             this.setBackground(Color.white);
 
@@ -128,11 +134,14 @@ public class QuizSelfPanel extends JPanel{
     }
 
     class EndButtonPanel extends JPanel { 
-         EndButtonPanel () { 
+         EndButtonPanel () throws MalformedURLException { 
             FlowLayout flow = new FlowLayout(); 
             flow.setAlignment(FlowLayout.CENTER);
             JButton end = new JButton("end");
+            Constants constant = new Constants(); 
             
+            end.setFont(constant.getFont("Label"));
+           
             end.addActionListener(new EndQuizButtonListener());
 
             this.setLayout(flow);

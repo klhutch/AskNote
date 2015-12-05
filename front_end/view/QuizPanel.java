@@ -20,7 +20,7 @@ import model.PageType;
  * @author Maha Alkhairy
  */
 public class QuizPanel extends JPanel{
-    public QuizPanel() { 
+    public QuizPanel() throws MalformedURLException { 
        FlowLayout flow = new FlowLayout(); 
        flow.setAlignment(FlowLayout.CENTER);
        flow.setVgap(200);
@@ -35,12 +35,13 @@ public class QuizPanel extends JPanel{
     }
     
     class TextPanel extends JPanel { 
-        TextPanel() {
+        TextPanel() throws MalformedURLException {
             FlowLayout flow = new FlowLayout();
             flow.setAlignment(FlowLayout.CENTER);
+            Constants constant = new Constants(); 
 
             JLabel quiz = new JLabel("Quiz"); 
-            quiz.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 40));
+            quiz.setFont(constant.getFont("Larger"));
 
             this.setMaximumSize(new Dimension(300, 70));
             
@@ -56,14 +57,20 @@ public class QuizPanel extends JPanel{
     }
     
     class ButtonPanel extends JPanel { 
-         ButtonPanel () { 
+         ButtonPanel () throws MalformedURLException { 
             FlowLayout flow = new FlowLayout(); 
             flow.setAlignment(FlowLayout.CENTER);
             flow.setHgap(25); 
             flow.setVgap(20); 
             
+            Constants constant = new Constants(); 
+
+            
             JButton self = new JButton("self");
             JButton friends = new JButton("friends"); 
+            
+            self.setFont(constant.getFont("Label")); 
+            friends.setFont(constant.getFont("Label"));
             
             self.addActionListener(new QuizSelfButtonListener());
             friends.addActionListener(new QuizFriendsButtonListener());
@@ -76,7 +83,7 @@ public class QuizPanel extends JPanel{
     }
     
     class CombinedButtonTextPanel extends JPanel { 
-        CombinedButtonTextPanel () { 
+        CombinedButtonTextPanel () throws MalformedURLException { 
             
             BoxLayout box = new BoxLayout(this, BoxLayout.Y_AXIS); 
             this.setLayout(box);

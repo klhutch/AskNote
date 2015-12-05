@@ -17,14 +17,11 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
-import javax.swing.ButtonGroup;
 import javax.swing.JButton;
-import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JRadioButton;
 import javax.swing.ListSelectionModel;
 import javax.swing.border.LineBorder;
 import javax.swing.border.MatteBorder;
@@ -40,7 +37,7 @@ public class QuizSelectPanel extends JPanel {
     private QuizListPanel quizzesPanel;
     private QuizFriendPanel friendsPanel;
     
-    public QuizSelectPanel(List<Quiz> quizzes, List<String> friends) {
+    public QuizSelectPanel(List<Quiz> quizzes, List<String> friends) throws MalformedURLException {
         this.quizzesPanel = new QuizListPanel(quizzes);
         this.friendsPanel = new QuizFriendPanel(friends);
                   
@@ -70,11 +67,14 @@ public class QuizSelectPanel extends JPanel {
     
     class QuizListPanel extends JPanel {
         List<OneQuizPanel> activeQuizzes = new ArrayList();
+        Constants constant; 
         
-        QuizListPanel(List<Quiz> quizzes) {
+        QuizListPanel(List<Quiz> quizzes) throws MalformedURLException {
             
             this.setBorder(new MatteBorder(0, 0, 0, 1, Color.BLACK));
             this.setLayout(new BorderLayout());
+            
+            this.constant = new Constants(); 
             
             JPanel center = new JPanel();
             
@@ -90,14 +90,18 @@ public class QuizSelectPanel extends JPanel {
                 }
             }
             else {
-                center.add(new JLabel("No Active Quizzes"));
+                JLabel noActive = new JLabel("No Active Quizzes"); 
+                noActive.setFont(constant.getFont("Label"));
+                center.add(noActive);
             }
             
             //center.setBackground(Color.WHITE);
             this.add(center, BorderLayout.CENTER);
             
             JPanel top = new JPanel();
-            top.add(new JLabel("Current"));
+            JLabel current = new JLabel("Current"); 
+            current.setFont(constant.getFont("Label")); 
+            top.add(current);
             
             this.add(top, BorderLayout.NORTH);
             this.validate();
@@ -106,9 +110,11 @@ public class QuizSelectPanel extends JPanel {
     
     class OneQuizPanel extends JPanel {
         Quiz quiz;
+        Constants constant; 
         
-        OneQuizPanel(Quiz quiz) {
+        OneQuizPanel(Quiz quiz) throws MalformedURLException {
             this.quiz = quiz;
+            this.constant = new Constants(); 
             
             this.setLayout(new GridLayout(1, 3));
             
@@ -116,13 +122,18 @@ public class QuizSelectPanel extends JPanel {
             this.setPreferredSize(new Dimension(100, 70));
             
             JButton cont = new JButton("Continue");
+            cont.setFont(constant.getFont("Label"));
             JButton end = new JButton("End");
+            end.setFont(constant.getFont("Label"));
             
             cont.addActionListener(new ContinueQuizListener());
             end.addActionListener(new RemoveQuizListener());
             
             JLabel friendName = new JLabel(quiz.getFriend());
             JLabel deckTitle = new JLabel(quiz.getDeck().getTitle());
+            
+            friendName.setFont(constant.getFont("Label"));
+            deckTitle.setFont(constant.getFont("Label")); 
             
             JPanel buttonPanel = new JPanel();
             buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.Y_AXIS));
@@ -202,9 +213,12 @@ public class QuizSelectPanel extends JPanel {
     class QuizFriendPanel extends JPanel {
         List<String> friends;
         JList friendList; 
+        Constants constant; 
         
-        QuizFriendPanel(List<String> friends) {
+        QuizFriendPanel(List<String> friends) throws MalformedURLException {
             this.friends = friends;
+            this.constant = new Constants(); 
+            
             
             this.setLayout(new BorderLayout());
             
@@ -214,17 +228,22 @@ public class QuizSelectPanel extends JPanel {
             
             
             JButton confirm = new JButton("Confirm");
+            confirm.setFont(constant.getFont("Label")); 
             confirm.addActionListener(new NewQuizListener());
+            
             
             
             if (friends.size() > 0) {
                 friendList = new JList(friends.toArray());
                 friendList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+                friendList.setFont(constant.getFont("Regular")); 
                 
             }
             else {
                 String[] friendArray = {"No Friends Added"};
                 friendList = new JList(friendArray);
+                friendList.setFont(constant.getFont("Regular"));
+                
             }
             
             inner.add(friendList, BorderLayout.CENTER);
@@ -235,7 +254,10 @@ public class QuizSelectPanel extends JPanel {
             this.add(inner, BorderLayout.CENTER);
             
             JPanel top = new JPanel();
-            top.add(new JLabel("New"));
+            JLabel newB = new JLabel("New");
+            newB.setFont(constant.getFont("Label"));
+            
+            top.add(newB);
             
             this.add(top, BorderLayout.NORTH);
             this.validate();

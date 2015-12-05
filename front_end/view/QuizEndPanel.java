@@ -6,19 +6,22 @@
 package view;
 
 import java.awt.*;
+import java.net.MalformedURLException;
 import javax.swing.*;
 
 /**
  *
  * @author Maha Alkhairy
  */
+
+// Not used 
 public class QuizEndPanel extends JPanel {
-    public QuizEndPanel () { 
+    public QuizEndPanel () throws MalformedURLException { 
        FlowLayout flow = new FlowLayout(); 
        flow.setAlignment(FlowLayout.CENTER);
        flow.setVgap(200);
        CombinedButtonTextPanel innerPanel = new CombinedButtonTextPanel(); 
-       
+   
        this.setLayout(flow);
        this.add(innerPanel); 
        
@@ -28,11 +31,12 @@ public class QuizEndPanel extends JPanel {
     }
     
     class TextPanel extends JPanel { 
-        TextPanel() {
+        TextPanel() throws MalformedURLException {
+       Constants constant = new Constants(); 
         FlowLayout flow = new FlowLayout();
         flow.setAlignment(FlowLayout.CENTER);
         JLabel complete = new JLabel("complete"); 
-        complete.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 40));
+        complete.setFont(constant.getFont("Larger"));
         this.setMaximumSize(new Dimension(300, 70));
         flow.setVgap(10);
         this.setLayout(flow);
@@ -61,7 +65,7 @@ public class QuizEndPanel extends JPanel {
     }
     
     class CombinedButtonTextPanel extends JPanel { 
-        CombinedButtonTextPanel () { 
+        CombinedButtonTextPanel () throws MalformedURLException { 
             
             BoxLayout box = new BoxLayout(this, BoxLayout.Y_AXIS); 
             this.setLayout(box);

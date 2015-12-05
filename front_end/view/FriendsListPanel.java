@@ -25,15 +25,16 @@ import model.*;
 public class FriendsListPanel extends JPanel {
     JList friendList;
     List<String> friends;
+    Constants constant; 
     
     public FriendsListPanel(List<String> friends) throws MalformedURLException { 
         this.friends = friends;
+        this.constant = new Constants(); 
         BorderLayout border = new BorderLayout(); 
         
         JPanel left = new JPanel(); 
         left.setLayout(border);
         
-        Constants constant = new Constants();
         
         GridLayout grid2 = new GridLayout(); 
         grid2.setColumns(2);
@@ -45,6 +46,7 @@ public class FriendsListPanel extends JPanel {
          if (friends.size() > 0) {
                 this.friendList = new JList(friends.toArray());
                 this.friendList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+                friendList.setFont(constant.getFont("Regular"));
                 
             }
             else {
@@ -133,16 +135,15 @@ public class FriendsListPanel extends JPanel {
     class OptionPanel  extends JPanel { 
            JButton button; 
            JLabel label; 
-        OptionPanel(ImageIcon icon, String label) { 
+           Constants constant; 
+        OptionPanel(ImageIcon icon, String label) throws MalformedURLException { 
             FlowLayout flow = new FlowLayout(); 
             flow.setAlignment(FlowLayout.LEADING);
             JButton bttn = new JButton(icon); 
             JLabel lbl = new JLabel(label); 
-
-            Font font = new Font("SanSarif", Font.BOLD, 20); 
-
-            lbl.setFont(font);
-            bttn.setFont(font);
+            this.constant = new Constants(); 
+            
+            lbl.setFont(constant.getFont("Label"));
              
             this.button = bttn; 
             
@@ -163,7 +164,6 @@ public class FriendsListPanel extends JPanel {
      * @author Maha Alkhairy
      */
     class SelectionPanel extends JPanel{
-        // takes nothing in 
         SelectionPanel(List<OptionPanel> panels) {        
 
             
