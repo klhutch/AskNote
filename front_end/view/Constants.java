@@ -5,6 +5,7 @@
  */
 package view;
 
+import java.awt.Font;
 import java.net.*;
 import java.util.*;
 import javax.swing.*;
@@ -30,7 +31,10 @@ public class Constants {
    public ImageIcon ibefore;
    public ImageIcon isave;
    public ImageIcon icancel;
-    
+   public Font titleFont; 
+   public Font labelFont; 
+   public Font regFont; 
+   
     public Constants() throws MalformedURLException {
             this.ideck = new ImageIcon(new URL("http://i65.tinypic.com/2u3xlqd.png")); 
             this.ihome = new ImageIcon(new URL("http://i68.tinypic.com/qs59ut.png"));       
@@ -47,6 +51,9 @@ public class Constants {
             this.inext = new ImageIcon(new URL("http://i65.tinypic.com/t55cgy.png"));
             this.isave = new ImageIcon(new URL("http://i65.tinypic.com/v4mqvt.png")); 
             this.icancel = new ImageIcon(new URL("http://i65.tinypic.com/2d8ozmg.png"));
+            this.labelFont = new Font("SanSarif", Font.BOLD, 13); 
+            this.titleFont = new Font("SanSarif", Font.BOLD, 14); 
+            this.regFont = new Font("SanSarif", Font.PLAIN, 12); 
     }
     
     public ImageIcon getImage(String str) {
@@ -103,5 +110,17 @@ public class Constants {
             return this.idelete;
         }
         
+    }
+    
+    public Font getFont(String str) { 
+        if (str.equals("Label")) { 
+            return this.labelFont; 
+        }
+        if (str.equals("Title")) { 
+            return this.titleFont; 
+        }
+        else { 
+            return this.regFont; 
+        }
     }
 }

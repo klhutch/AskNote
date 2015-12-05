@@ -3,12 +3,7 @@ package view;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.GridLayout;
-import javax.swing.BoxLayout;
-import java.awt.Dimension;
 import java.awt.FlowLayout;
-import java.awt.GridLayout;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -17,18 +12,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.BorderFactory;
-
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.JTextArea;
-import javax.swing.JTextPane;
 import javax.swing.Scrollable;
 import javax.swing.SwingConstants;
-import javax.swing.border.*;
 import javax.swing.border.LineBorder;
 import model.AskNoteModel;
 import model.Deck;
@@ -81,7 +71,7 @@ public class EditDeckPanel extends JPanel {
             flow.setVgap(20); 
             
             this.text = new JLabel(deck.getEditTitle()); 
-            this.text.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 18));
+            this.text.setFont(constant.getFont("Title"));
             JButton edit = new JButton(constant.getImage("Edit")); 
             
             edit.addActionListener(new EditTitleListener());
@@ -267,15 +257,17 @@ public class EditDeckPanel extends JPanel {
             FlashCard card;
             Boolean side1Shown = true;
             JLabel shownText;
+            Constants constant; 
             
             FlashCardPanel(FlashCard card) throws MalformedURLException {
                 this.card = card;
                 this.setLayout(new BorderLayout(5, 5));
                 this.setPreferredSize(flashCardPanelSize);
-                this.setBackground(Color.WHITE);               
+                this.setBackground(Color.WHITE);        
+                this.constant = new Constants(); 
 
                 this.shownText = new JLabel(card.getSide1(), SwingConstants.CENTER);
-                this.shownText.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 14));
+                this.shownText.setFont(constant.getFont("Regular"));
                 FlashCardButtonPanel buttons = new FlashCardButtonPanel();
 
                 this.setBorder(new LineBorder(Color.BLACK, 1));

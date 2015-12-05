@@ -8,7 +8,6 @@ package view;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
-import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.net.MalformedURLException;
@@ -35,8 +34,6 @@ public class DeckPanel extends JPanel {
     public DeckPanel(List<Deck> decks) throws MalformedURLException {
         
         // init top level panel
-        
-         
         setLayout(new BorderLayout());
             
         // init leftmost deck panel
@@ -47,14 +44,8 @@ public class DeckPanel extends JPanel {
         
         BoxLayout box = new BoxLayout(oPanel, BoxLayout.Y_AXIS); 
         oPanel.setLayout(box);
-        
-//        JButton addButton = new JButton("Add Deck");   
-//        JButton removeButton = new JButton("Remove Deck");
-//        JButton editButton = new JButton("Edit Deck");
-        
+               
         Constants constant = new Constants();
-        
-      
         
         OptionPanel add = new OptionPanel(constant.getImage("Add"), "Add Deck");     
         OptionPanel delete = new OptionPanel(constant.getImage("Delete"), "Remove Deck");
@@ -77,17 +68,17 @@ public class DeckPanel extends JPanel {
     class OptionPanel  extends JPanel { 
            JButton button; 
            JLabel label; 
-        OptionPanel(ImageIcon icon, String label) { 
+           
+        OptionPanel(ImageIcon icon, String label) throws MalformedURLException { 
             FlowLayout flow = new FlowLayout(); 
             flow.setAlignment(FlowLayout.LEADING);
             JButton bttn = new JButton(icon); 
             JLabel lbl = new JLabel(label); 
 
-            Font font = new Font("SanSarif", Font.BOLD, 20); 
-
-            lbl.setFont(font);
-            bttn.setFont(font);
-             
+            Constants constants = new Constants(); 
+            
+            lbl.setFont(constants.getFont("Label"));
+           
             this.button = bttn; 
             
             flow.setHgap(25);

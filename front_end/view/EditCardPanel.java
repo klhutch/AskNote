@@ -3,7 +3,6 @@ package view;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -66,9 +65,12 @@ public class EditCardPanel extends JPanel {
     class SidePanel extends JPanel {
         JTextArea text;
         
-        SidePanel(String str, String side) {
+        SidePanel(String str, String side) throws MalformedURLException {
             //this.setLayout(new BorderLayout());
+            Constants constants = new Constants(); 
+            
             JLabel title = new JLabel(side);
+            title.setFont(constants.labelFont);
             this.text = new JTextArea(str, 30, 40);
             this.text.setEnabled(true);
             

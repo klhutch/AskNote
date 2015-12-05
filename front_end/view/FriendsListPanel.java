@@ -42,16 +42,15 @@ public class FriendsListPanel extends JPanel {
         this.setLayout(grid2);
         
         
-        
-                                    
          if (friends.size() > 0) {
                 this.friendList = new JList(friends.toArray());
-                this.friendList.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+                this.friendList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
                 
             }
             else {
                 String[] friendArray = {"No Friends Added"};
                 this.friendList = new JList(friendArray);
+                this.friendList.setFont(constant.getFont("Regular"));
             }
         
           
@@ -130,24 +129,7 @@ public class FriendsListPanel extends JPanel {
         }
     }
 
-    class SelectAllListener implements ActionListener {
-
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            
-        }
-
-    }
-
-    class UnselectAllListener implements ActionListener{
-
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            
-        }
-
-    }
-   
+    
     class OptionPanel  extends JPanel { 
            JButton button; 
            JLabel label; 
